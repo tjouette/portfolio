@@ -124,13 +124,12 @@
   .dd-thumb {
     width: 100%; aspect-ratio: 3/2;
     background: var(--s2); overflow: hidden;
-    display: block; position: relative;
+    display: flex; align-items: center; justify-content: center;
   }
   .dd-thumb img {
-    position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover; object-position: center;
-    display: block;
+    display: block; flex-shrink: 0;
   }
   .dd-info { padding: .35rem .42rem .48rem; }
   .dd-num { font-family: var(--fm); font-size: .52rem; color: var(--txm); display: block; }
@@ -296,15 +295,13 @@
     width: 100%; aspect-ratio: 4/3;
     background: var(--s2); overflow: hidden;
     border-bottom: 1px solid var(--bdr);
-    display: block; /* pas flex, évite le centrage d'emoji résiduel */
-    position: relative;
+    display: flex; align-items: center; justify-content: center;
   }
   .car-thumb img {
-    position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover; object-position: center;
+    display: block; flex-shrink: 0;
     transition: transform .5s;
-    display: block;
   }
   .car-card:hover .car-thumb img { transform: scale(1.05); }
   .car-info { padding: 1.05rem 1.15rem 1.2rem; }
@@ -735,21 +732,107 @@
       └── iris.jpg
 */
 const ITEMS=[
+  ,
   {
-    id:'dessins-industriels', num:'01', special:false,
-    minia:'images/dessins-industriels_minia.jpg',
-    title:'Dessins industriels', type:'Dessin Industriel',
-    date:'Juillet 2025', location:'Paris, France',
-    tags:['Fusion 360','Stage RATP'], emoji:'📐',
-    cover:'images/dessins-industriels-1.jpg',
-    images:['images/dessins-industriels-1.jpg','images/dessins-industriels-2.jpg'],
+    id:'sudoku', num:'01', special:false,
+    minia:'images/sudoku_minia.jpg',
+    title:"Résolution d'un Sudoku", type:'Algorithmique Python',
+    date:'2024', location:'CUPGE · Université Paris-Cité',
+    tags:['Python','Backtracking','Contraintes'], emoji:'🔢',
+    cover:'images/sudoku.jpg',
+    images:['images/sudoku.jpg'],
     carousel:false,
-    desc:`Lors de mon stage à la RATP, j'ai passé une journée aux côtés des dessinateurs-projeteurs qui m'ont initié à Fusion 360. Motivé par cette découverte, j'ai appris à utiliser ce logiciel de façon autonome.
+    desc:`Projet réalisé en 2024 dans le cadre de la CUPGE (Université Paris-Cité). Le délai imparti était d'un mois ; je l'ai rendu en une semaine. Le projet a reçu les félicitations du jury.
 
-Vous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dessin de coupe d'une clé Allen avec toutes les cotes et annotations techniques requises.`
+Développement d'un programme de résolution automatique de grilles de Sudoku en Python explorant les stratégies de satisfaction de contraintes (CSP). L'implémentation repose sur un algorithme de backtracking avec propagation de contraintes qui réduit l'espace de recherche avant de tester les combinaisons.`
   },
+  ,
   {
-    id:'extension-chrome', num:'02', special:false,
+    id:'modelisation-3d', num:'02', special:false,
+    minia:'images/modelisation-3d_minia.jpg',
+    title:'Modélisation 3D', type:'Création Personnelle',
+    date:'2024–2026', location:'Projet personnel',
+    tags:['Blender'], emoji:'🧊',
+    cover:'images/modelisation-3d-1.jpg',
+    images:['images/modelisation-3d-1.jpg','images/modelisation-3d-2.jpg','images/modelisation-3d-3.jpg','images/modelisation-3d-4.jpg','images/modelisation-3d-5.jpg','images/modelisation-3d-6.jpg','images/modelisation-3d-7.jpg'],
+    carousel:true,
+    desc:`La modélisation 3D est avant tout un exutoire créatif, pas un projet académique. Depuis 2024, je modélise sur Blender dans mes temps libres — scènes, objets, personnages — pour le plaisir de créer et d'explorer les possibilités du logiciel.
+
+Ces créations témoignent d'une progression continue : maîtrise du modélisme polygonal, des matériaux, de l'éclairage et du rendu. Chaque scène est une occasion d'expérimenter.`
+  },
+  ,
+  {
+    id:'eurospace-center', num:'03', special:false,
+    minia:'images/eurospace-center_minia.jpg',
+    title:'EuroSpace Center', type:'Expérience · Formation',
+    date:'2016', location:'Transinne, Belgique',
+    tags:['Aérospatiale','Astronautique','Fusée'], emoji:'🚀',
+    cover:'images/eurospace-center.jpg',
+    images:['images/eurospace-center.jpg'],
+    carousel:false,
+    desc:`En 2016, j'ai participé à une semaine de "colonie spatiale" à l'EuroSpace Center de Transinne, en Belgique — le plus grand centre spatial éducatif d'Europe.
+
+Cette semaine était une introduction intensive au métier d'astronaute : simulations de missions, initiation aux sciences spatiales et, point fort de l'expérience, construction et lancement d'une petite fusée fonctionnant avec un moteur à poudre (explosion). Cette expérience a été un déclencheur de ma passion pour l'aérospatiale, bien avant mon entrée en cycle ingénieur.`
+  },
+  ,
+  {
+    id:'vehicule-motorise', num:'04', special:false,
+    minia:'images/vehicule-motorise_minia.jpg',
+    title:'Véhicule électrique miniature', type:'Projet Personnel',
+    date:'2024', location:'Projet personnel',
+    tags:['Mécanique','Électronique','Fabrication'], emoji:'🚗',
+    cover:'images/vehicule-motorise.jpg',
+    images:['images/vehicule-motorise.jpg'],
+    carousel:false,
+    desc:`Dans le cadre d'un projet personnel en 2024, j'ai conçu et réalisé un petit véhicule électrique avec des moyens très limités.
+
+J'ai dû sélectionner les composants électroniques et mécaniques en fonction de contraintes budgétaires strictes, fabriquer les éléments mécaniques et assurer l'intégration électronique. Ce projet m'a appris à faire des choix techniques dans un environnement contraint, et à trouver des solutions créatives sans disposer d'un atelier équipé.`
+  },
+  ,
+  {
+    id:'iris', num:'05', special:false,
+    minia:'images/iris_minia.jpg',
+    title:'IRIS — IA Locale', type:'Intelligence Artificielle',
+    date:'2025', location:'Projet personnel',
+    tags:['Python','PHI-2','RAG','IA Locale'], emoji:'🤖',
+    cover:'images/iris.jpg',
+    images:['images/iris.jpg'],
+    carousel:false,
+    desc:`Durant un projet personnel, j'ai développé IRIS, une intelligence artificielle locale pré-entraînée sur le modèle PHI-2, que j'ai remodelee pour en faire une bibliothèque de cours personnelle.
+
+IRIS est capable de se référencer à l'ensemble de mes cours au format PDF et d'identifier le cours pertinent en le situant par rapport à mes cours passés. Elle fonctionne entièrement en local, sans connexion internet, ce qui garantit la confidentialité des données. IRIS a pour vocation d'être un véritable assistant de révision intelligent, ancré dans mon propre parcours académique.`
+  },
+  ,
+  {
+    id:'architecture-systeme', num:'06', special:false,
+    minia:'images/architecture-systeme_minia.jpg',
+    title:'Projet Architecture Système', type:'UE Ingénierie Système',
+    date:'2025', location:'EIDD, Paris',
+    tags:['Architecture Système','Diagrammes','Modélisation 3D','Ingénierie'], emoji:'⚙️',
+    cover:'images/architecture-systeme.jpg',
+    images:['images/architecture-systeme.jpg'],
+    carousel:false,
+    desc:`Dans le cadre de l'UE Architecture Système à l'EIDD, projet consistant à inventer un système et à le porter de A à Z d'un point de vue théorique : définition des besoins, conception de l'architecture et modélisation complète.
+
+Le travail a inclus la rédaction du scénario opérationnel, la réalisation des diagrammes d'états, de contexte, des interactions fonctionnelles, ainsi que l'analyse des exigences système. Pour appuyer la présentation, j'ai également réalisé une modélisation 3D du système sous Blender.`
+  },
+  ,
+  {
+    id:'fiche-technique', num:'07', special:false,
+    minia:'images/fiche-technique_minia.jpg',
+    title:'Fiche Technique', type:'Documentation Technique',
+    date:'Octobre 2024', location:'EIDD, Paris',
+    tags:['Tech Repair','Électronique','Documentation'], emoji:'📄',
+    cover:'images/fiche-technique.jpg',
+    images:['images/fiche-technique.jpg'],
+    carousel:false,
+    desc:`Dans le cadre de l'UE Tech Repair à l'EIDD, réalisation d'une fiche technique complète d'un sèche-cheveux : analyse du fonctionnement, démontage, identification des composants et schéma de principe.
+
+Ce projet a renforcé ma capacité à analyser et documenter un système électronique existant.`
+  },
+  ,
+  {
+    id:'extension-chrome', num:'08', special:false,
     minia:'images/extension-chrome_minia.jpg',
     title:'Extension Google Chrome', type:'Développement Web',
     date:'Décembre 2025', location:'Projet personnel',
@@ -762,95 +845,17 @@ Vous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dess
 Ce projet m'a permis de me familiariser avec les APIs Chrome, la communication entre scripts de contenu et d'arrière-plan, ainsi que la gestion du stockage via chrome.storage.`
   },
   {
-    id:'vehicule-motorise', num:'03', special:false,
-    minia:'images/vehicule-motorise_minia.jpg',
-    title:'Véhicule électrique miniature', type:'Projet Personnel',
-    date:'2024', location:'Projet personnel',
-    tags:['Mécanique','Électronique','Fabrication'], emoji:'🚗',
-    cover:'images/vehicule-motorise.jpg',
-    images:['images/vehicule-motorise.jpg'],
+    id:'dessins-industriels', num:'09', special:false,
+    minia:'images/dessins-industriels_minia.jpg',
+    title:'Dessins industriels', type:'Dessin Industriel',
+    date:'Juillet 2025', location:'Paris, France',
+    tags:['Fusion 360','Stage RATP'], emoji:'📐',
+    cover:'images/dessins-industriels-1.jpg',
+    images:['images/dessins-industriels-1.jpg','images/dessins-industriels-2.jpg'],
     carousel:false,
-    desc:`Dans le cadre d'un projet personnel en 2024, j'ai conçu et réalisé un petit véhicule électrique avec des moyens très limités.
+    desc:`Lors de mon stage à la RATP, j'ai passé une journée aux côtés des dessinateurs-projeteurs qui m'ont initié à Fusion 360. Motivé par cette découverte, j'ai appris à utiliser ce logiciel de façon autonome.
 
-J'ai dû sélectionner les composants électroniques et mécaniques en fonction de contraintes budgétaires strictes, fabriquer les éléments mécaniques et assurer l'intégration électronique. Ce projet m'a appris à faire des choix techniques dans un environnement contraint, et à trouver des solutions créatives sans disposer d'un atelier équipé.`
-  },
-  {
-    id:'fiche-technique', num:'04', special:false,
-    minia:'images/fiche-technique_minia.jpg',
-    title:'Fiche Technique', type:'Documentation Technique',
-    date:'Octobre 2024', location:'EIDD, Paris',
-    tags:['Tech Repair','Électronique','Documentation'], emoji:'📄',
-    cover:'images/fiche-technique.jpg',
-    images:['images/fiche-technique.jpg'],
-    carousel:false,
-    desc:`Dans le cadre de l'UE Tech Repair à l'EIDD, réalisation d'une fiche technique complète d'un sèche-cheveux : analyse du fonctionnement, démontage, identification des composants et schéma de principe.
-
-Ce projet a renforcé ma capacité à analyser et documenter un système électronique existant.`
-  },
-  {
-    id:'sudoku', num:'05', special:false,
-    minia:'images/sudoku_minia.jpg',
-    title:"Résolution d'un Sudoku", type:'Algorithmique Python',
-    date:'2024', location:'CUPGE · Université Paris-Cité',
-    tags:['Python','Backtracking','Contraintes'], emoji:'🔢',
-    cover:'images/sudoku.jpg',
-    images:['images/sudoku.jpg'],
-    carousel:false,
-    desc:`Projet réalisé en 2024 dans le cadre de la CUPGE (Université Paris-Cité). Le délai imparti était d'un mois ; je l'ai rendu en une semaine. Le projet a reçu les félicitations du jury.
-
-Développement d'un programme de résolution automatique de grilles de Sudoku en Python explorant les stratégies de satisfaction de contraintes (CSP). L'implémentation repose sur un algorithme de backtracking avec propagation de contraintes qui réduit l'espace de recherche avant de tester les combinaisons.`
-  },
-  {
-    id:'modelisation-3d', num:'06', special:false,
-    minia:'images/modelisation-3d_minia.jpg',
-    title:'Modélisation 3D', type:'Création Personnelle',
-    date:'2024–2026', location:'Projet personnel',
-    tags:['Blender'], emoji:'🧊',
-    cover:'images/modelisation-3d-1.jpg',
-    images:['images/modelisation-3d-1.jpg','images/modelisation-3d-2.jpg','images/modelisation-3d-3.jpg','images/modelisation-3d-4.jpg','images/modelisation-3d-5.jpg','images/modelisation-3d-6.jpg','images/modelisation-3d-7.jpg'],
-    carousel:true,
-    desc:`La modélisation 3D est avant tout un exutoire créatif, pas un projet académique. Depuis 2024, je modélise sur Blender dans mes temps libres — scènes, objets, personnages — pour le plaisir de créer et d'explorer les possibilités du logiciel.
-
-Ces créations témoignent d'une progression continue : maîtrise du modélisme polygonal, des matériaux, de l'éclairage et du rendu. Chaque scène est une occasion d'expérimenter.`
-  },
-  {
-    id:'eurospace-center', num:'07', special:true,
-    minia:'images/eurospace-center_minia.jpg',
-    title:'EuroSpace Center', type:'Expérience · Formation',
-    date:'2016', location:'Transinne, Belgique',
-    tags:['Aérospatiale','Astronautique','Fusée'], emoji:'🚀',
-    cover:'images/eurospace-center.jpg',
-    images:['images/eurospace-center.jpg'],
-    carousel:false,
-    desc:`En 2016, j'ai participé à une semaine de "colonie spatiale" à l'EuroSpace Center de Transinne, en Belgique — le plus grand centre spatial éducatif d'Europe.
-
-Cette semaine était une introduction intensive au métier d'astronaute : simulations de missions, initiation aux sciences spatiales et, point fort de l'expérience, construction et lancement d'une petite fusée fonctionnant avec un moteur à poudre (explosion). Cette expérience a été un déclencheur de ma passion pour l'aérospatiale, bien avant mon entrée en cycle ingénieur.`
-  },
-  {
-    id:'architecture-systeme', num:'08', special:false,
-    minia:'images/architecture-systeme_minia.jpg',
-    title:'Projet Architecture Système', type:'UE Ingénierie Système',
-    date:'2025', location:'EIDD, Paris',
-    tags:['Architecture Système','Diagrammes','Modélisation 3D','Ingénierie'], emoji:'⚙️',
-    cover:'images/architecture-systeme.jpg',
-    images:['images/architecture-systeme.jpg'],
-    carousel:false,
-    desc:`Dans le cadre de l'UE Architecture Système à l'EIDD, projet consistant à inventer un système et à le porter de A à Z d'un point de vue théorique : définition des besoins, conception de l'architecture et modélisation complète.
-
-Le travail a inclus la rédaction du scénario opérationnel, la réalisation des diagrammes d'états, de contexte, des interactions fonctionnelles, ainsi que l'analyse des exigences système. Pour appuyer la présentation, j'ai également réalisé une modélisation 3D du système sous Blender.`
-  },
-  {
-    id:'iris', num:'09', special:false,
-    minia:'images/iris_minia.jpg',
-    title:'IRIS — IA Locale', type:'Intelligence Artificielle',
-    date:'2025', location:'Projet personnel',
-    tags:['Python','PHI-2','RAG','IA Locale'], emoji:'🤖',
-    cover:'images/iris.jpg',
-    images:['images/iris.jpg'],
-    carousel:false,
-    desc:`Durant un projet personnel, j'ai développé IRIS, une intelligence artificielle locale pré-entraînée sur le modèle PHI-2, que j'ai remodelee pour en faire une bibliothèque de cours personnelle.
-
-IRIS est capable de se référencer à l'ensemble de mes cours au format PDF et d'identifier le cours pertinent en le situant par rapport à mes cours passés. Elle fonctionne entièrement en local, sans connexion internet, ce qui garantit la confidentialité des données. IRIS a pour vocation d'être un véritable assistant de révision intelligent, ancré dans mon propre parcours académique.`
+Vous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dessin de coupe d'une clé Allen avec toutes les cotes et annotations techniques requises.`
   }
 ];
 
