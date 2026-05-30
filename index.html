@@ -13,16 +13,16 @@
   <style>
   /* ── VARIABLES ───────────────────────── */
   :root {
-    --bg:    #FDFCF8;
-    --s1:    #FFFFFF;
-    --s2:    #F8F5EF;
-    --bdr:   #E8E3D9;
-    --bdr2:  #EFEBE3;
-    --tx:    #2A2620;
-    --tx2:   #6E6358;
-    --txm:   #AFA89E;
-    --acc:   #B87840;
-    --acc2:  #F6EEE1;
+    --bg:    #2E2D2A;
+    --s1:    #252421;
+    --s2:    #333230;
+    --bdr:   #3E3C39;
+    --bdr2:  #454340;
+    --tx:    #E8E4DC;
+    --tx2:   #A09890;
+    --txm:   #6A6460;
+    --acc:   #6B9AB8;
+    --acc2:  #253040;
     --nav-h: 66px;
     --fd:    'STIX Two Text', 'Times New Roman', serif;
     --f:     'STIX Two Text', 'Times New Roman', serif;
@@ -89,7 +89,7 @@
     transition: background .4s, border-color .4s;
   }
   #navbar.scrolled {
-    background: rgba(253,252,248,.94);
+    background: rgba(37,36,33,.95);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border-color: var(--bdr2);
   }
@@ -115,7 +115,7 @@
     padding: .9rem; display: grid; grid-template-columns: repeat(4,1fr); gap: .5rem;
     opacity: 0; pointer-events: none;
     transition: opacity .2s, transform .2s;
-    box-shadow: 0 6px 28px rgba(42,38,32,.07); z-index: 400;
+    box-shadow: 0 6px 28px rgba(0,0,0,.25); z-index: 400;
   }
   .nav-has-dd:hover .dd-panel { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
 
@@ -142,7 +142,7 @@
 
   .mob-menu {
     display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
-    background: rgba(253,252,248,.97); backdrop-filter: blur(20px);
+    background: rgba(37,36,33,.97); backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--bdr); padding: 1.8rem 6%;
     z-index: 299; flex-direction: column; gap: 1.4rem;
   }
@@ -240,11 +240,11 @@
   }
   .xp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--acc); transform: scaleY(0); transform-origin: bottom; transition: transform .35s cubic-bezier(.4,0,.2,1); }
   .xp-card.xp-visible { opacity: 1; transform: translateY(0); }
-  .xp-card.xp-visible:hover { border-color: rgba(184,120,64,.35); box-shadow: 0 10px 36px rgba(42,38,32,.07); }
+  .xp-card.xp-visible:hover { border-color: rgba(53,78,93,.35); box-shadow: 0 10px 36px rgba(0,0,0,.25); }
   .xp-card.xp-visible:hover::before { transform: scaleY(1); }
   .xp-badge { display: inline-block; font-family: var(--fm); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; padding: .14rem .55rem; border-radius: 3px; margin-bottom: .8rem; }
   .xp-badge.current { background: #EFF7EF; color: #4A7A4A; border: 1px solid #C0D9C0; }
-  .xp-badge.stage { background: var(--acc2); color: var(--acc); border: 1px solid #E8D0B0; }
+  .xp-badge.stage { background: var(--acc2); color: var(--acc); border: 1px solid #B8CAD5; }
   .xp-org { font-family: var(--fm); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); margin-bottom: .35rem; }
   .xp-role { font-family: var(--fd); font-size: 1.02rem; font-weight: 700; color: var(--tx); line-height: 1.3; margin-bottom: .5rem; }
   .xp-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
@@ -258,12 +258,12 @@
   #competences { background: var(--s2); }
   .sk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(252px,1fr)); gap: 1.2rem; }
   .sk-box { border: 1px solid var(--bdr); border-radius: var(--r); padding: 1.55rem; background: var(--s1); transition: border-color .3s, box-shadow .3s; }
-  .sk-box:hover { border-color: rgba(184,120,64,.3); box-shadow: 0 4px 18px rgba(42,38,32,.05); }
+  .sk-box:hover { border-color: rgba(53,78,93,.3); box-shadow: 0 4px 18px rgba(0,0,0,.2); }
   .sk-title { font-family: var(--fm); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--acc); margin-bottom: 1.05rem; display: flex; align-items: center; gap: .6rem; }
   .sk-title::after { content: ''; flex: 1; height: 1px; background: var(--bdr); }
   .tag-cloud { display: flex; flex-wrap: wrap; gap: .38rem; }
   .tag { font-size: .76rem; color: var(--tx2); background: var(--s2); border: 1px solid var(--bdr); padding: .22rem .62rem; border-radius: 4px; transition: color .2s, border-color .2s, background .2s; }
-  .tag:hover { color: var(--acc); border-color: rgba(184,120,64,.35); background: var(--acc2); }
+  .tag:hover { color: var(--acc); border-color: rgba(53,78,93,.35); background: var(--acc2); }
   .lang-list { display: flex; flex-direction: column; gap: .55rem; }
   .lang-row { display: flex; justify-content: space-between; align-items: center; padding: .42rem 0; border-bottom: 1px solid var(--bdr2); }
   .lang-row:last-child { border-bottom: none; }
@@ -282,7 +282,7 @@
   .car-viewport::-webkit-scrollbar { display: none; }
   .car-track { display: flex; gap: 1.2rem; }
   .car-card { min-width: calc(33.333% - .8rem); scroll-snap-align: start; flex-shrink: 0; border: 1px solid var(--bdr); border-radius: var(--r); overflow: hidden; background: var(--bg); cursor: pointer; transition: border-color .3s, box-shadow .3s, transform .3s; }
-  .car-card:hover { border-color: rgba(184,120,64,.35); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(42,38,32,.08); }
+  .car-card:hover { border-color: rgba(53,78,93,.35); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.3); }
   .car-thumb { width: 100%; aspect-ratio: 4/3; background: var(--s2); overflow: hidden; border-bottom: 1px solid var(--bdr); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--txm); }
   .car-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
   .car-card:hover .car-thumb img { transform: scale(1.05); }
@@ -302,7 +302,7 @@
   .contact-sub { font-size: .98rem; color: var(--tx2); line-height: 1.85; margin-bottom: 2.5rem; }
   .c-links { display: flex; flex-wrap: wrap; gap: .75rem; }
   .c-link { display: flex; align-items: center; gap: .5rem; font-size: .84rem; text-decoration: none; color: var(--tx2); border: 1px solid var(--bdr); padding: .7rem 1.4rem; border-radius: 9px; background: var(--s1); transition: color .2s, border-color .2s, transform .2s, box-shadow .2s; }
-  .c-link:hover { color: var(--acc); border-color: rgba(184,120,64,.4); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(42,38,32,.06); }
+  .c-link:hover { color: var(--acc); border-color: rgba(53,78,93,.4); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.25); }
 
   /* ── FOOTER ──────────────────────────── */
   footer { border-top: 1px solid var(--bdr); padding: 1.7rem 6%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--bg); }
@@ -321,7 +321,7 @@
   .pd-mi-label { font-family: var(--fm); font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: var(--txm); display: block; margin-bottom: .18rem; }
   .pd-mi-val { font-size: .88rem; color: var(--tx); }
   .pd-tags { display: flex; flex-wrap: wrap; gap: .38rem; margin-bottom: 1.8rem; }
-  .pd-tag { font-family: var(--fm); font-size: .6rem; letter-spacing: .07em; text-transform: uppercase; color: var(--acc); background: var(--acc2); border: 1px solid #E5C99A; padding: .18rem .55rem; border-radius: 4px; }
+  .pd-tag { font-family: var(--fm); font-size: .6rem; letter-spacing: .07em; text-transform: uppercase; color: var(--acc); background: var(--acc2); border: 1px solid #B8CAD5; padding: .18rem .55rem; border-radius: 4px; }
   .pd-desc { font-size: 1rem; color: var(--tx2); line-height: 1.88; margin-bottom: 2.8rem; }
   .pd-desc p { margin-bottom: 1rem; }
   .pd-imgs { display: flex; flex-direction: column; gap: 1.4rem; }
@@ -368,9 +368,47 @@
     .tl-item{grid-template-columns:75px 14px 1fr;gap:0 .9rem}
     .tl-date{font-size:.6rem}
   }
+
+
+  /* ── CAROUSEL PAGE DÉTAIL (modélisation 3D) ── */
+  .pd-carousel { position: relative; margin-bottom: 2.8rem; }
+  .pd-car-vp {
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; scrollbar-width: none;
+    -ms-overflow-style: none; border-radius: 9px;
+    border: 1px solid var(--bdr);
+  }
+  .pd-car-vp::-webkit-scrollbar { display: none; }
+  .pd-car-track { display: flex; }
+  .pd-car-slide {
+    min-width: 100%; scroll-snap-align: start; flex-shrink: 0;
+    background: var(--s2); aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .pd-car-slide img { width: 100%; height: 100%; object-fit: cover; }
+  .pd-car-nav {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; margin-top: .9rem;
+  }
+  .pd-car-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid var(--bdr); background: var(--s1);
+    color: var(--tx2); font-size: .9rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .2s, color .2s;
+  }
+  .pd-car-btn:hover:not(:disabled) { border-color: var(--acc); color: var(--acc); }
+  .pd-car-btn:disabled { opacity: .3; cursor: default; }
+  .pd-car-dots { display: flex; gap: .45rem; }
+  .pd-car-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--bdr); transition: background .2s;
+  }
+  .pd-car-dot.active { background: var(--acc); }
   </style>
 </head>
-<body>
+<body class="dark">
 
 <!-- ══ LOADER ══════════════════════════ -->
 <div id="loader">
@@ -399,7 +437,7 @@
     </li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="cv.pdf" class="nav-cv" download>CV ↓</a>
+  <a href="CV_Teo_JOUETTE.pdf" class="nav-cv" download>CV ↓</a>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
@@ -423,7 +461,7 @@
       <div class="h-bottom">
         <p class="h-desc">Futur ingénieur formé à l'<strong>École d'Ingénieurs Denis Diderot</strong>, spécialité Génie Physique. Passionné par l'<strong>aérospatiale</strong>, le traitement du signal et la <strong>transition écologique</strong>.</p>
         <div class="h-actions">
-          <a href="cv.pdf" class="btn-warm" download>Télécharger CV</a>
+          <a href="CV_Teo_JOUETTE.pdf" class="btn-warm" download>Télécharger CV</a>
           <a href="https://www.linkedin.com/in/teo-jouette/" class="btn-soft" target="_blank" rel="noopener">LinkedIn →</a>
         </div>
       </div>
@@ -435,20 +473,25 @@
     <div class="s-head reveal"><span class="s-label">01 · Profil</span><div class="s-rule"></div></div>
     <div class="about-grid">
       <div class="about-body">
-        <h2 class="s-title reveal">Curiosité, rigueur &amp; impact.</h2>
-        <p class="reveal d1">Je m'appelle <strong>Téo Jouette</strong>, étudiant en 2ème année du cycle ingénieur à l'<strong>École d'Ingénieurs Denis Diderot (EIDD)</strong>, spécialité Génie Physique. Mon parcours m'a forgé une culture scientifique solide à l'interface de la physique, de l'informatique et de l'ingénierie système.</p>
-        <p class="reveal d2">Je m'oriente vers l'<strong>aérospatiale</strong>, le <strong>traitement du signal</strong> et la <strong>transition écologique</strong>. J'ai contribué à la simulation orbitale du nano-satellite <strong>IGOSat</strong> (APC / CNES) et découvert la maintenance industrielle aux ateliers de la <strong>RATP Ligne 1</strong>.</p>
-        <p class="reveal d3">En dehors des cours, je modélise en 3D sur <strong>Blender</strong> et <strong>Fusion 360</strong>, et j'aime relever des défis de programmation.</p>
+        <h2 class="s-title reveal">Curiosité, rigueur &amp; exigence.</h2>
+        <p class="reveal d1">Je m'appelle <strong>Téo Jouette</strong>, étudiant en 2ème année du cycle ingénieur à l'<strong>École d'Ingénieurs Denis Diderot (EIDD)</strong>, spécialité Génie Physique, issu d'une Classe Universitaire Préparatoire aux Grandes Écoles (Université Paris-Cité). Mon parcours généraliste m'a forgé une culture scientifique solide à l'interface de la physique, de l'informatique et de l'ingénierie système.</p>
+        <p class="reveal d2">Je m'oriente vers l'<strong>aérospatiale</strong>, le <strong>traitement du signal</strong> et la <strong>transition écologique</strong>. Durant mes expériences professionnelles, j'ai contribué à plusieurs niveaux sur le projet du nano-satellite <strong>IGOSat</strong> (Laboratoire APC / CNES) et découvert la maintenance industrielle aux ateliers de la <strong>RATP Ligne 1</strong>.</p>
+        <p class="reveal d3">En dehors de mon parcours académique, je modélise en 3D principalement sur <strong>Blender</strong>, et je cultive une curiosité active pour les disciplines qui me sont encore peu familières.</p>
         <div class="about-stats reveal d2">
           <div class="stat"><div class="stat-v">EIDD</div><div class="stat-k">École · Paris</div></div>
           <div class="stat"><div class="stat-v">2A</div><div class="stat-k">Cycle ingénieur</div></div>
           <div class="stat"><div class="stat-v">3+</div><div class="stat-k">Expériences pro</div></div>
-          <div class="stat"><div class="stat-v">7</div><div class="stat-k">Réalisations</div></div>
+          <div class="stat"><div class="stat-v">9</div><div class="stat-k">Projets</div></div>
         </div>
       </div>
       <div class="reveal d2">
         <div class="photo-card">
-          <div class="photo-area"><div class="photo-placeholder"><div class="ico">🖼</div><p>Votre photo ici</p></div></div>
+          <div class="photo-area">
+            <img src="photo.jpg" alt="Téo Jouette"
+                 style="width:100%;height:100%;object-fit:cover;object-position:top"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="photo-placeholder" style="display:none"><div class="ico">🖼</div><p>photo.jpg manquant</p></div>
+          </div>
           <div class="photo-cap"><p><strong>Téo Jouette</strong><br>Ingénieur · Paris, France<br>Disponible pour stages</p></div>
         </div>
       </div>
@@ -467,7 +510,7 @@
       <div class="tl-item reveal d1">
         <div class="tl-date">2022 – 2024</div>
         <div class="tl-axis"><div class="tl-dot"></div><div class="tl-conn"></div></div>
-        <div class="tl-body"><div class="tl-school">Université Paris-Cité</div><div class="tl-degree">CUPGE — Classe Universitaire Préparatoire aux Grandes Écoles</div><div class="tl-loc">Paris, France</div></div>
+        <div class="tl-body"><div class="tl-school">Université Paris-Cité</div><div class="tl-degree">CUPGE — Classe Universitaire Préparatoire aux Grandes Écoles — Mention Assez Bien</div><div class="tl-loc">Paris, France</div></div>
       </div>
       <div class="tl-item reveal d2">
         <div class="tl-date">2022</div>
@@ -481,18 +524,32 @@
     <div class="s-head reveal"><span class="s-label">03 · Expériences</span><div class="s-rule"></div></div>
     <h2 class="s-title reveal">Expériences professionnelles</h2>
     <div class="xp-grid">
+
       <div class="xp-card">
         <span class="xp-badge current">En cours</span>
-        <div class="xp-org">EIDD · APC · CNES</div>
-        <div class="xp-role">Stage — Simulation Mission Satellite IGOSat</div>
+        <div class="xp-org">Laboratoire APC · CNES</div>
+        <div class="xp-role">Stage — Bilan de liaison &amp; télémétrie, IGOSat</div>
         <div class="xp-meta"><span>Mai – Juin 2026</span><span>Paris, France</span></div>
         <div class="xp-div"></div>
         <ul class="xp-ul">
-          <li>Stage sur le projet IGOSat, nano-satellite de l'APC (Astroparticule et Cosmologie) et du CNES.</li>
-          <li>Coordination d'une équipe de 3 étudiants pour la mise à jour, validation et documentation d'un outil de simulation orbitale et énergétique.</li>
-          <li>Contribution directe aux évolutions du code et campagnes de tests.</li>
+          <li>Stage sur le nano-satellite IGOSat (Laboratoire APC / CNES), axé télécommunications et électromagnétisme.</li>
+          <li>Réalisation d'un bilan de liaison et d'un bilan de télémétrie pour la mission.</li>
         </ul>
       </div>
+
+      <div class="xp-card">
+        <span class="xp-badge stage">Projet ingénieur</span>
+        <div class="xp-org">EIDD · Laboratoire APC · CNES</div>
+        <div class="xp-role">Chef de coordination — Simulation orbitale &amp; bilan d'énergie, IGOSat</div>
+        <div class="xp-meta"><span>2025</span><span>Paris, France</span></div>
+        <div class="xp-div"></div>
+        <ul class="xp-ul">
+          <li>Chef de coordination d'une équipe de 3 étudiants sur le nano-satellite IGOSat.</li>
+          <li>Étude et proposition d'une mise à jour de l'outil de simulation orbitale existant.</li>
+          <li>Réalisation d'un bilan d'énergie complet du satellite ; validation et documentation technique.</li>
+        </ul>
+      </div>
+
       <div class="xp-card">
         <span class="xp-badge stage">Stage</span>
         <div class="xp-org">Groupe RATP</div>
@@ -505,6 +562,7 @@
           <li>Découverte des procédures de maintenance industrielle en milieu ferroviaire.</li>
         </ul>
       </div>
+
     </div>
   </section>
 
@@ -514,19 +572,54 @@
     <div class="sk-grid">
       <div class="sk-box reveal">
         <div class="sk-title">Physique</div>
-        <div class="tag-cloud"><span class="tag">Traitement du signal & image</span><span class="tag">MATLAB / Octave</span><span class="tag">Télécommunications (CST)</span><span class="tag">Dispositifs LASER</span><span class="tag">Optique & Imagerie</span><span class="tag">Électromagnétisme</span><span class="tag">Électronique</span><span class="tag">Physique Quantique</span><span class="tag">Thermodynamique</span><span class="tag">Mécanique</span><span class="tag">Chimie (org. & analytique)</span><span class="tag">LaTeX</span></div>
+        <div class="tag-cloud">
+          <span class="tag">Traitement du signal &amp; image</span>
+          <span class="tag">MATLAB / Octave / Scilab</span>
+          <span class="tag">Télécommunications (CST)</span>
+          <span class="tag">Électromagnétisme</span>
+          <span class="tag">Dispositifs LASER</span>
+          <span class="tag">Dispositifs Semi-conducteurs</span>
+          <span class="tag">Optique &amp; Imagerie</span>
+          <span class="tag">Électronique</span>
+          <span class="tag">Physique Quantique</span>
+          <span class="tag">Thermodynamique</span>
+          <span class="tag">Mécanique</span>
+          <span class="tag">Chimie (org. &amp; analytique)</span>
+          <span class="tag">Automatique</span>
+          <span class="tag">Bruits</span>
+          <span class="tag">LaTeX</span>
+        </div>
       </div>
       <div class="sk-box reveal d1">
         <div class="sk-title">Informatique</div>
-        <div class="tag-cloud"><span class="tag">Python</span><span class="tag">C</span><span class="tag">VHDL</span><span class="tag">JavaScript</span><span class="tag">HTML / CSS</span><span class="tag">Algorithmique</span><span class="tag">Régression Symbolique</span></div>
+        <div class="tag-cloud">
+          <span class="tag">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">VHDL</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML / CSS</span>
+          <span class="tag">Algorithmique</span>
+          <span class="tag">Régression Symbolique</span>
+        </div>
       </div>
       <div class="sk-box reveal d2">
         <div class="sk-title">Ingénierie</div>
-        <div class="tag-cloud"><span class="tag">Management Projet</span><span class="tag">GANTT & PERT</span><span class="tag">Architecture Système</span><span class="tag">Démarche Qualité</span><span class="tag">Hygiène & Sécurité</span></div>
+        <div class="tag-cloud">
+          <span class="tag">Management Projet</span>
+          <span class="tag">GANTT &amp; PERT</span>
+          <span class="tag">Architecture Système</span>
+          <span class="tag">Démarche Qualité</span>
+          <span class="tag">Hygiène &amp; Sécurité</span>
+        </div>
       </div>
       <div class="sk-box reveal d1">
         <div class="sk-title">Modélisation 3D</div>
-        <div class="tag-cloud"><span class="tag">Blender</span><span class="tag">Fusion 360</span><span class="tag">FreeCAD</span><span class="tag">CST Studio</span></div>
+        <div class="tag-cloud">
+          <span class="tag">Blender</span>
+          <span class="tag">Fusion 360</span>
+          <span class="tag">FreeCAD</span>
+          <span class="tag">CST Studio</span>
+        </div>
       </div>
       <div class="sk-box reveal d2">
         <div class="sk-title">Langues</div>
@@ -543,10 +636,10 @@
   <section id="portfolio">
     <div class="s-head reveal"><span class="s-label">05 · Portfolio</span><div class="s-rule"></div></div>
     <div class="car-header reveal">
-      <h2 class="s-title" style="margin-bottom:0">Réalisations</h2>
+      <h2 class="s-title" style="margin-bottom:0">Projets</h2>
       <div class="car-controls">
         <button class="car-btn" id="carPrev" disabled aria-label="Précédent">←</button>
-        <span class="car-counter" id="carCounter">1 / 7</span>
+        <span class="car-counter" id="carCounter">1 / 9</span>
         <button class="car-btn" id="carNext" aria-label="Suivant">→</button>
       </div>
     </div>
@@ -601,30 +694,146 @@
 })();
 
 /* ── DONNÉES PORTFOLIO ───────────────── */
+/*
+  IMAGES LOCALES — structure du dossier GitHub :
+  /
+  ├── index.html
+  ├── photo.jpg
+  ├── CV_Teo_JOUETTE.pdf
+  └── images/
+      ├── dessins-industriels-1.jpg
+      ├── dessins-industriels-2.jpg
+      ├── extension-chrome-1.jpg
+      ├── extension-chrome-2.jpg
+      ├── vehicule-motorise.jpg
+      ├── fiche-technique.jpg
+      ├── sudoku.jpg
+      ├── modelisation-3d-1.jpg  (à modelisation-3d-7.jpg)
+      ├── eurospace-center.jpg
+      ├── architecture-systeme.jpg
+      └── iris.jpg
+*/
 const ITEMS=[
-  {id:'dessins-industriels',num:'01',special:false,title:'Dessins industriels',type:'Dessin Industriel',date:'Juillet 2025',location:'Paris, France',tags:['Fusion 360','CAO','Stage RATP'],emoji:'📐',
-   cover:'https://static.wixstatic.com/media/ebbc295c-b91d-4417-9b7e-ea89e5135ce9/v1/fill/w_1024,h_724,al_c/ebbc295c-b91d-4417-9b7e-ea89e5135ce9',
-   images:['https://static.wixstatic.com/media/300176_1642a0d167bd4d89be13a85583691108~mv2.jpg/v1/fit/w_1024,h_523,q_90,enc_avif,quality_auto/300176_1642a0d167bd4d89be13a85583691108~mv2.jpg','https://static.wixstatic.com/media/300176_924a6eb7c74e4d18939bdd4e4ed65304~mv2.jpg/v1/fit/w_1440,h_1019,q_90,enc_avif,quality_auto/300176_924a6eb7c74e4d18939bdd4e4ed65304~mv2.jpg'],
-   desc:`Lors de mon stage à la RATP, j'ai passé une journée aux côtés des dessinateurs-projeteurs qui m'ont initié à Fusion 360. Motivé par cette découverte, j'ai appris à utiliser ce logiciel de façon autonome.\n\nVous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dessin de coupe d'une clé Allen avec toutes les cotes et annotations techniques requises.`},
-  {id:'extension-chrome',num:'02',special:false,title:'Extension Google Chrome',type:'Développement Web',date:'Décembre 2025',location:'Projet personnel',tags:['JavaScript','HTML/CSS','Chrome API'],emoji:'🧩',
-   cover:'https://static.wixstatic.com/media/300176_49fbd9cccfe24df3922cfbf6cc56af3d~mv2.png/v1/fit/w_640,h_400,q_90,enc_avif,quality_auto/300176_49fbd9cccfe24df3922cfbf6cc56af3d~mv2.png',
-   images:['https://static.wixstatic.com/media/300176_49fbd9cccfe24df3922cfbf6cc56af3d~mv2.png/v1/fit/w_640,h_400,q_90,enc_avif,quality_auto/300176_49fbd9cccfe24df3922cfbf6cc56af3d~mv2.png','https://static.wixstatic.com/media/300176_b215113a34624cf9a8ba93f66c482b72~mv2.jpg/v1/fit/w_640,h_400,q_90,enc_avif,quality_auto/300176_b215113a34624cf9a8ba93f66c482b72~mv2.jpg'],
-   desc:`Développement de plusieurs extensions Google Chrome de manière indépendante, répondant à des besoins concrets rencontrés lors de la navigation web.\n\nCe projet m'a permis de me familiariser avec les APIs Chrome, la communication entre scripts de contenu et d'arrière-plan, ainsi que la gestion du stockage via chrome.storage.`},
-  {id:'vehicule-motorise',num:'03',special:false,title:'Véhicule motorisé',type:'Projet Mécanique',date:'2024',location:'EIDD, Paris',tags:['Mécanique','Électronique','Conception'],emoji:'🚗',cover:null,images:[],
-   desc:`Conception et réalisation d'un véhicule motorisé dans le cadre d'un projet pédagogique pluridisciplinaire combinant mécanique, électronique et gestion de projet.\n\nLa démarche a inclus la rédaction d'un cahier des charges, la sélection des composants, la fabrication des éléments mécaniques, l'intégration électronique et les essais de validation.`},
-  {id:'fiche-technique',num:'04',special:false,title:'Fiche Technique',type:'Documentation Technique',date:'Octobre 2024',location:'EIDD, Paris',tags:['Tech Repair','Électronique','Documentation','LaTeX'],emoji:'📄',
-   cover:'https://static.wixstatic.com/media/300176_ae15fcdc38b4425481b3bcaa69d0228f~mv2.jpg/v1/fit/w_893,h_500,q_90,enc_avif,quality_auto/300176_ae15fcdc38b4425481b3bcaa69d0228f~mv2.jpg',
-   images:['https://static.wixstatic.com/media/300176_ae15fcdc38b4425481b3bcaa69d0228f~mv2.jpg/v1/fit/w_893,h_500,q_90,enc_avif,quality_auto/300176_ae15fcdc38b4425481b3bcaa69d0228f~mv2.jpg','https://static.wixstatic.com/media/0ea2131d-60e2-407e-bc16-24e12aaa7194/v1/fill/w_893,h_1263,al_c/0ea2131d-60e2-407e-bc16-24e12aaa7194'],
-   desc:`Dans le cadre de l'UE Tech Repair à l'EIDD, réalisation d'une fiche technique complète d'un sèche-cheveux : analyse du fonctionnement, démontage, identification des composants et schéma de principe.\n\nCe projet a renforcé ma capacité à analyser et documenter un système électronique existant.`},
-  {id:'sudoku',num:'05',special:false,title:"Résolution d'un Sudoku",type:'Algorithmique Python',date:'2024',location:'Projet personnel',tags:['Python','Backtracking','Contraintes'],emoji:'🔢',cover:null,images:[],
-   desc:`Développement d'un programme de résolution automatique de grilles de Sudoku en Python, explorant des stratégies algorithmiques de satisfaction de contraintes.\n\nL'implémentation principale repose sur un algorithme de backtracking avec propagation de contraintes qui réduit l'espace de recherche avant de tester les combinaisons.`},
-  {id:'modelisation-3d',num:'06',special:false,title:'Modélisation 3D',type:'Modélisation 3D',date:'2024–2025',location:'Projet personnel',tags:['Blender','Fusion 360','FreeCAD','Rendu'],emoji:'🧊',cover:null,images:[],
-   desc:`Travaux de modélisation 3D avec différents logiciels : Blender pour la modélisation artistique et le rendu ; Fusion 360 pour la CAO et la conception de pièces mécaniques ; FreeCAD pour des projets open-source.\n\nCes travaux m'ont permis de développer un sens aigu de la géométrie 3D et des contraintes de fabrication numérique.`},
-  {id:'eurospace-center',num:'07',special:true,title:'EuroSpace Center',type:'Expérience · Formation',date:'À compléter',location:'Transinne, Belgique',tags:['Aérospatiale','Sciences spatiales','Formation'],emoji:'🚀',cover:null,images:[],
-   desc:`Participation au EuroSpace Center de Transinne en Belgique, le plus grand centre spatial éducatif d'Europe, dédié à la découverte des sciences et technologies spatiales.\n\nCette expérience a renforcé ma passion pour l'exploration spatiale et m'a permis de découvrir les missions, technologies embarquées et défis de l'ingénierie aérospatiale. [Complétez avec les détails de votre participation.]`}
+  {
+    id:'dessins-industriels', num:'01', special:false,
+    minia:'images/dessins-industriels_minia.jpg',
+    title:'Dessins industriels', type:'Dessin Industriel',
+    date:'Juillet 2025', location:'Paris, France',
+    tags:['Fusion 360','Stage RATP'], emoji:'📐',
+    cover:'images/dessins-industriels-1.jpg',
+    images:['images/dessins-industriels-1.jpg','images/dessins-industriels-2.jpg'],
+    carousel:false,
+    desc:`Lors de mon stage à la RATP, j'ai passé une journée aux côtés des dessinateurs-projeteurs qui m'ont initié à Fusion 360. Motivé par cette découverte, j'ai appris à utiliser ce logiciel de façon autonome.
+
+Vous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dessin de coupe d'une clé Allen avec toutes les cotes et annotations techniques requises.`
+  },
+  {
+    id:'extension-chrome', num:'02', special:false,
+    minia:'images/extension-chrome_minia.jpg',
+    title:'Extension Google Chrome', type:'Développement Web',
+    date:'Décembre 2025', location:'Projet personnel',
+    tags:['JavaScript','HTML/CSS','Chrome API'], emoji:'🧩',
+    cover:'images/extension-chrome-1.jpg',
+    images:['images/extension-chrome-1.jpg','images/extension-chrome-2.jpg'],
+    carousel:false,
+    desc:`Développement de plusieurs extensions Google Chrome de manière indépendante, répondant à des besoins concrets rencontrés lors de la navigation web.
+
+Ce projet m'a permis de me familiariser avec les APIs Chrome, la communication entre scripts de contenu et d'arrière-plan, ainsi que la gestion du stockage via chrome.storage.`
+  },
+  {
+    id:'vehicule-motorise', num:'03', special:false,
+    minia:'images/vehicule-motorise_minia.jpg',
+    title:'Véhicule électrique miniature', type:'Projet Personnel',
+    date:'2024', location:'Projet personnel',
+    tags:['Mécanique','Électronique','Fabrication'], emoji:'🚗',
+    cover:'images/vehicule-motorise.jpg',
+    images:['images/vehicule-motorise.jpg'],
+    carousel:false,
+    desc:`Dans le cadre d'un projet personnel en 2024, j'ai conçu et réalisé un petit véhicule électrique avec des moyens très limités.
+
+J'ai dû sélectionner les composants électroniques et mécaniques en fonction de contraintes budgétaires strictes, fabriquer les éléments mécaniques et assurer l'intégration électronique. Ce projet m'a appris à faire des choix techniques dans un environnement contraint, et à trouver des solutions créatives sans disposer d'un atelier équipé.`
+  },
+  {
+    id:'fiche-technique', num:'04', special:false,
+    minia:'images/fiche-technique_minia.jpg',
+    title:'Fiche Technique', type:'Documentation Technique',
+    date:'Octobre 2024', location:'EIDD, Paris',
+    tags:['Tech Repair','Électronique','Documentation'], emoji:'📄',
+    cover:'images/fiche-technique.jpg',
+    images:['images/fiche-technique.jpg'],
+    carousel:false,
+    desc:`Dans le cadre de l'UE Tech Repair à l'EIDD, réalisation d'une fiche technique complète d'un sèche-cheveux : analyse du fonctionnement, démontage, identification des composants et schéma de principe.
+
+Ce projet a renforcé ma capacité à analyser et documenter un système électronique existant.`
+  },
+  {
+    id:'sudoku', num:'05', special:false,
+    minia:'images/sudoku_minia.jpg',
+    title:"Résolution d'un Sudoku", type:'Algorithmique Python',
+    date:'2024', location:'CUPGE · Université Paris-Cité',
+    tags:['Python','Backtracking','Contraintes'], emoji:'🔢',
+    cover:'images/sudoku.jpg',
+    images:['images/sudoku.jpg'],
+    carousel:false,
+    desc:`Projet réalisé en 2024 dans le cadre de la CUPGE (Université Paris-Cité). Le délai imparti était d'un mois ; je l'ai rendu en une semaine. Le projet a reçu les félicitations du jury.
+
+Développement d'un programme de résolution automatique de grilles de Sudoku en Python explorant les stratégies de satisfaction de contraintes (CSP). L'implémentation repose sur un algorithme de backtracking avec propagation de contraintes qui réduit l'espace de recherche avant de tester les combinaisons.`
+  },
+  {
+    id:'modelisation-3d', num:'06', special:false,
+    minia:'images/modelisation-3d_minia.jpg',
+    title:'Modélisation 3D', type:'Création Personnelle',
+    date:'2024–2026', location:'Projet personnel',
+    tags:['Blender'], emoji:'🧊',
+    cover:'images/modelisation-3d-1.jpg',
+    images:['images/modelisation-3d-1.jpg','images/modelisation-3d-2.jpg','images/modelisation-3d-3.jpg','images/modelisation-3d-4.jpg','images/modelisation-3d-5.jpg','images/modelisation-3d-6.jpg','images/modelisation-3d-7.jpg'],
+    carousel:true,
+    desc:`La modélisation 3D est avant tout un exutoire créatif, pas un projet académique. Depuis 2024, je modélise sur Blender dans mes temps libres — scènes, objets, personnages — pour le plaisir de créer et d'explorer les possibilités du logiciel.
+
+Ces créations témoignent d'une progression continue : maîtrise du modélisme polygonal, des matériaux, de l'éclairage et du rendu. Chaque scène est une occasion d'expérimenter.`
+  },
+  {
+    id:'eurospace-center', num:'07', special:true,
+    minia:'images/eurospace-center_minia.jpg',
+    title:'EuroSpace Center', type:'Expérience · Formation',
+    date:'2016', location:'Transinne, Belgique',
+    tags:['Aérospatiale','Astronautique','Fusée'], emoji:'🚀',
+    cover:'images/eurospace-center.jpg',
+    images:['images/eurospace-center.jpg'],
+    carousel:false,
+    desc:`En 2016, j'ai participé à une semaine de "colonie spatiale" à l'EuroSpace Center de Transinne, en Belgique — le plus grand centre spatial éducatif d'Europe.
+
+Cette semaine était une introduction intensive au métier d'astronaute : simulations de missions, initiation aux sciences spatiales et, point fort de l'expérience, construction et lancement d'une petite fusée fonctionnant avec un moteur à poudre (explosion). Cette expérience a été un déclencheur de ma passion pour l'aérospatiale, bien avant mon entrée en cycle ingénieur.`
+  },
+  {
+    id:'architecture-systeme', num:'08', special:false,
+    minia:'images/architecture-systeme_minia.jpg',
+    title:'Projet Architecture Système', type:'UE Ingénierie Système',
+    date:'2025', location:'EIDD, Paris',
+    tags:['Architecture Système','Diagrammes','Modélisation 3D','Ingénierie'], emoji:'⚙️',
+    cover:'images/architecture-systeme.jpg',
+    images:['images/architecture-systeme.jpg'],
+    carousel:false,
+    desc:`Dans le cadre de l'UE Architecture Système à l'EIDD, projet consistant à inventer un système et à le porter de A à Z d'un point de vue théorique : définition des besoins, conception de l'architecture et modélisation complète.
+
+Le travail a inclus la rédaction du scénario opérationnel, la réalisation des diagrammes d'états, de contexte, des interactions fonctionnelles, ainsi que l'analyse des exigences système. Pour appuyer la présentation, j'ai également réalisé une modélisation 3D du système sous Blender.`
+  },
+  {
+    id:'iris', num:'09', special:false,
+    minia:'images/iris_minia.jpg',
+    title:'IRIS — IA Locale', type:'Intelligence Artificielle',
+    date:'2025', location:'Projet personnel',
+    tags:['Python','PHI-2','RAG','IA Locale'], emoji:'🤖',
+    cover:'images/iris.jpg',
+    images:['images/iris.jpg'],
+    carousel:false,
+    desc:`Durant un projet personnel, j'ai développé IRIS, une intelligence artificielle locale pré-entraînée sur le modèle PHI-2, que j'ai remodelee pour en faire une bibliothèque de cours personnelle.
+
+IRIS est capable de se référencer à l'ensemble de mes cours au format PDF et d'identifier le cours pertinent en le situant par rapport à mes cours passés. Elle fonctionne entièrement en local, sans connexion internet, ce qui garantit la confidentialité des données. IRIS a pour vocation d'être un véritable assistant de révision intelligent, ancré dans mon propre parcours académique.`
+  }
 ];
 
-const total=ITEMS.length;
+const total=ITEMS.length; // 9
 
 /* Render carousel + dropdown */
 const carTrack=document.getElementById('carTrack');
@@ -633,12 +842,12 @@ const mobSub=document.getElementById('mobSub');
 ITEMS.forEach(item=>{
   const card=document.createElement('div');
   card.className='car-card'+(item.special?' car-special':'');
-  card.innerHTML=`<div class="car-thumb">${item.cover?`<img src="${item.cover}" alt="${item.title}" loading="lazy" onerror="this.parentElement.innerHTML='${item.emoji}'">`:`${item.emoji}`}</div><div class="car-info"><span class="car-num">${item.num} ·</span><div class="car-name">${item.title}</div><div class="car-meta">${item.type} · ${item.date}</div><span class="car-more">→</span></div>`;
+  card.innerHTML=`<div class="car-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.outerHTML='<span style=\"font-size:2rem;color:var(--txm)\">${item.emoji}</span>'"></div><div class="car-info"><span class="car-num">${item.num} ·</span><div class="car-name">${item.title}</div><div class="car-meta">${item.type} · ${item.date}</div><span class="car-more">→</span></div>`;
   card.addEventListener('click',()=>openItem(item.id));
   carTrack.appendChild(card);
   const ddItem=document.createElement('div');
   ddItem.className='dd-item';
-  ddItem.innerHTML=`<div class="dd-thumb">${item.cover?`<img src="${item.cover}" alt="${item.title}" loading="lazy" onerror="this.parentElement.innerHTML='${item.emoji}'">`:`${item.emoji}`}</div><div class="dd-info"><span class="dd-num">${item.num}</span><span class="dd-name">${item.title}</span></div>`;
+  ddItem.innerHTML=`<div class="dd-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.outerHTML='<span style=\"font-size:1.3rem;color:var(--txm)\">${item.emoji}</span>'"></div><div class="dd-info"><span class="dd-num">${item.num}</span><span class="dd-name">${item.title}</span></div>`;
   ddItem.addEventListener('click',()=>openItem(item.id));
   ddPanel.appendChild(ddItem);
   const a=document.createElement('a');
@@ -660,14 +869,67 @@ carVP.addEventListener('scroll',updateCtrl);
 window.addEventListener('resize',updateCtrl);
 
 /* Router */
+function buildImgsHTML(item) {
+  if (!item.images.length) {
+    return `<div class="pd-img"><div class="pd-img-empty"><div class="ico">${item.emoji}</div><p>Images à ajouter</p></div></div>`;
+  }
+  if (item.carousel && item.images.length > 1) {
+    const slides = item.images.map((src,i) =>
+      `<div class="pd-car-slide"><img src="${src}" alt="${item.title} ${i+1}" loading="lazy"
+        onerror="this.style.display='none'"></div>`
+    ).join('');
+    const dots = item.images.map((_,i) =>
+      `<span class="pd-car-dot${i===0?' active':''}"></span>`
+    ).join('');
+    return `<div class="pd-carousel">
+      <div class="pd-car-vp" id="pdCarVP">
+        <div class="pd-car-track">${slides}</div>
+      </div>
+      <div class="pd-car-nav">
+        <button class="pd-car-btn" id="pdCarPrev" disabled>←</button>
+        <div class="pd-car-dots" id="pdCarDots">${dots}</div>
+        <button class="pd-car-btn" id="pdCarNext">→</button>
+      </div>
+    </div>`;
+  }
+  return item.images.map(src =>
+    `<div class="pd-img"><img src="${src}" alt="${item.title}" loading="lazy"
+      onerror="this.parentElement.innerHTML='<div class=pd-img-empty><div class=ico>${item.emoji}</div><p>Image non disponible</p></div>'"></div>`
+  ).join('');
+}
+
+function initPdCarousel() {
+  const vp   = document.getElementById('pdCarVP');
+  const prev = document.getElementById('pdCarPrev');
+  const next = document.getElementById('pdCarNext');
+  const dots = document.querySelectorAll('#pdCarDots .pd-car-dot');
+  if (!vp || !prev || !next) return;
+  const n = dots.length;
+  function update() {
+    const idx = Math.round(vp.scrollLeft / vp.offsetWidth);
+    prev.disabled = idx === 0;
+    next.disabled = idx === n - 1;
+    dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+  }
+  prev.addEventListener('click', () => vp.scrollBy({ left: -vp.offsetWidth, behavior:'smooth' }));
+  next.addEventListener('click', () => vp.scrollBy({ left:  vp.offsetWidth, behavior:'smooth' }));
+  vp.addEventListener('scroll', update);
+}
+
 function openItem(id){
   const idx=ITEMS.findIndex(p=>p.id===id);const item=ITEMS[idx];if(!item)return;
   const descHTML=item.desc.split('\n\n').map(p=>`<p>${p}</p>`).join('');
-  const imgsHTML=item.images.length?item.images.map(src=>`<div class="pd-img"><img src="${src}" alt="${item.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=pd-img-empty><div class=ico>${item.emoji}</div><p>Image non disponible</p></div>'"></div>`).join(''):`<div class="pd-img"><div class="pd-img-empty"><div class="ico">${item.emoji}</div><p>Images à ajouter</p></div></div>`;
+  const imgsHTML=buildImgsHTML(item);
   document.getElementById('pdContent').innerHTML=`<button class="back-btn" onclick="showMain('portfolio')">← Retour au portfolio</button><p class="pd-crumb">Portfolio <span>/ ${item.title}</span></p><h1 class="pd-title">${item.title}</h1><div class="pd-meta"><div class="pd-mi"><span class="pd-mi-label">Type</span><span class="pd-mi-val">${item.type}</span></div><div class="pd-mi"><span class="pd-mi-label">Date</span><span class="pd-mi-val">${item.date}</span></div>${item.location?`<div class="pd-mi"><span class="pd-mi-label">Lieu</span><span class="pd-mi-val">${item.location}</span></div>`:''}</div><div class="pd-tags">${item.tags.map(t=>`<span class="pd-tag">${t}</span>`).join('')}</div><div class="pd-desc">${descHTML}</div><div class="pd-imgs">${imgsHTML}</div><div class="pd-nav"><button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx-1+total)%total].id}')" ${idx===0?'disabled':''}>← Précédent</button><button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx+1)%total].id}')" ${idx===total-1?'disabled':''}>Suivant →</button></div>`;
   const main=document.getElementById('view-main'),proj=document.getElementById('view-project');
   main.classList.add('fade-out');
-  setTimeout(()=>{main.style.display='none';main.classList.remove('fade-out');proj.style.display='block';proj.classList.add('fade-in');window.scrollTo({top:0,behavior:'instant'});setTimeout(()=>proj.classList.remove('fade-in'),400);history.pushState({item:id},'',`#portfolio-${id}`)},250);
+  setTimeout(()=>{
+    main.style.display='none';main.classList.remove('fade-out');
+    proj.style.display='block';proj.classList.add('fade-in');
+    window.scrollTo({top:0,behavior:'instant'});
+    setTimeout(()=>{ proj.classList.remove('fade-in'); initPdCarousel(); },400);
+    history.pushState({item:id},'',`#portfolio-${id}`);
+  },250);
 }
 function showMain(section){
   const main=document.getElementById('view-main'),proj=document.getElementById('view-project');
@@ -695,7 +957,20 @@ const xpCards=document.querySelectorAll('.xp-card');
 const xpObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const idx=Array.from(xpCards).indexOf(e.target);setTimeout(()=>e.target.classList.add('xp-visible'),idx*160);xpObs.unobserve(e.target)})},{threshold:.18,rootMargin:'0px 0px -60px 0px'});
 xpCards.forEach(c=>xpObs.observe(c));
 
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(!t)return;e.preventDefault();t.scrollIntoView({behavior:'smooth'})}));
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const href = a.getAttribute('href');
+  const target = document.querySelector(href);
+  if (!target) return;
+  e.preventDefault();
+  const proj = document.getElementById('view-project');
+  if (proj && proj.style.display !== 'none') {
+    // On est sur une page projet — revenir au main puis scroller
+    showMain(href.replace('#', ''));
+  } else {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+}));
+
 </script>
 </body>
 </html>
