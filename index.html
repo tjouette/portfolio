@@ -983,19 +983,23 @@ const xpCards=document.querySelectorAll('.xp-card');
 const xpObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const idx=Array.from(xpCards).indexOf(e.target);setTimeout(()=>e.target.classList.add('xp-visible'),idx*160);xpObs.unobserve(e.target)})},{threshold:.18,rootMargin:'0px 0px -60px 0px'});
 xpCards.forEach(c=>xpObs.observe(c));
 
-document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
-  const href = a.getAttribute('href');
-  const target = document.querySelector(href);
-  if (!target) return;
-  e.preventDefault();
-  const proj = document.getElementById('view-project');
-  if (proj && proj.style.display !== 'none') {
-    // On est sur une page projet — revenir au main puis scroller
-    showMain(href.replace('#', ''));
-  } else {
-    target.scrollIntoView({ behavior: 'smooth' });
-  }
-}));
+/* Smooth scroll ancres — ne s'applique QU'aux vrais liens de section */
+document.querySelectorAll('.nav-links a[href^="#"], .mob-menu a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    // Ignorer les liens portfolio-* qui n'ont pas de section dans le DOM
+    if (href.startsWith('#portfolio')) return;
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    const proj = document.getElementById('view-project');
+    if (proj && proj.style.display !== 'none') {
+      showMain(href.replace('#', ''));
+    } else {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
 
 </script>
 </body>
