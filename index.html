@@ -861,62 +861,29 @@ Vous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dess
 
 const total=ITEMS.length; // 9
 
-/* Render carousel + dropdown */
-const carTrack=document.getElementById('carTrack');
-const ddPanel=document.getElementById('ddPanel');
-const mobSub=document.getElementById('mobSub');
-ITEMS.forEach(item=>{
-  const card=document.createElement('div');
-  card.className='car-card'+(item.special?' car-special':'');
-  card.innerHTML=`<div class="car-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.style.opacity='0'"></div><div class="car-info"><span class="car-num">${item.num} ·</span><div class="car-name">${item.title}</div><div class="car-meta">${item.type} · ${item.date}</div><span class="car-more">→</span></div>`;
-  card.addEventListener('click',()=>openItem(item.id));
-  carTrack.appendChild(card);
-  const ddItem=document.createElement('div');
-  ddItem.className='dd-item';
-  ddItem.innerHTML=`<div class="dd-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.style.opacity='0'"></div><div class="dd-info"><span class="dd-num">${item.num}</span><span class="dd-name">${item.title}</span></div>`;
-  ddItem.addEventListener('click',()=>openItem(item.id));
-  ddPanel.appendChild(ddItem);
-  const a=document.createElement('a');
-  a.textContent=`${item.num}. ${item.title}`;
-  a.addEventListener('click',()=>{closeMob();openItem(item.id)});
-  mobSub.appendChild(a);
-});
-
-/* Carousel */
-const carVP=document.getElementById('carVP');
-const carPrev=document.getElementById('carPrev');
-const carNext=document.getElementById('carNext');
-const counter=document.getElementById('carCounter');
-function getStep(){const c=carTrack.children[0];return c?c.offsetWidth+19:320}
-function updateCtrl(){const max=carVP.scrollWidth-carVP.offsetWidth;carPrev.disabled=carVP.scrollLeft<8;carNext.disabled=carVP.scrollLeft>=max-8;const idx=Math.round(carVP.scrollLeft/getStep());counter.textContent=`${Math.min(idx+1,total)} / ${total}`;}
-carPrev.addEventListener('click',()=>carVP.scrollBy({left:-getStep(),behavior:'smooth'}));
-carNext.addEventListener('click',()=>carVP.scrollBy({left:getStep(),behavior:'smooth'}));
-carVP.addEventListener('scroll',updateCtrl);
-window.addEventListener('resize',updateCtrl);
-
-/* Router */
+/* Fonctions globales appelées depuis le HTML */
+function closeMob(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobMenu').classList.remove('open');
+}
 function buildImgsHTML(item) {
   if (!item.images.length) {
     return `<div class="pd-img"><div class="pd-img-empty"><div class="ico">${item.emoji}</div><p>Images à ajouter</p></div></div>`;
   }
   if (item.carousel && item.images.length > 1) {
     const slides = item.images.map((src,i) =>
-      `<div class="pd-car-slide"><img src="${src}" alt="${item.title} ${i+1}" loading="lazy"
-        onerror="this.style.display='none'"></div>`
+      `<div class="pd-car-slide"><img src="${src}" alt="${item.title} ${i+1}" loading="lazy" onerror="this.style.display='none'"></div>`
     ).join('');
     const dots = item.images.map((_,i) =>
       `<span class="pd-car-dot${i===0?' active':''}"></span>`
     ).join('');
     return `<div class="pd-carousel">
-      <div class="pd-car-vp" id="pdCarVP">
-        <div class="pd-car-track">${slides}</div>
-      </div>
+      <div class="pd-car-vp" id="pdCarVP"><div class="pd-car-track">${slides}</div></div>
       <div class="pd-car-nav">
         <button class="pd-car-btn" id="pdCarPrev" disabled>←</button>
         <div class="pd-car-dots" id="pdCarDots">${dots}</div>
         <button class="pd-car-btn" id="pdCarNext">→</button>
-      </div>
-    </div>`;
+      </div></div>`;
   }
   return item.images.map(src =>
     `<div class="pd-img"><img src="${src}" alt="${item.title}" loading="lazy"
@@ -925,81 +892,152 @@ function buildImgsHTML(item) {
 }
 
 function initPdCarousel() {
-  const vp   = document.getElementById('pdCarVP');
-  const prev = document.getElementById('pdCarPrev');
-  const next = document.getElementById('pdCarNext');
-  const dots = document.querySelectorAll('#pdCarDots .pd-car-dot');
-  if (!vp || !prev || !next) return;
-  const n = dots.length;
-  function update() {
-    const idx = Math.round(vp.scrollLeft / vp.offsetWidth);
-    prev.disabled = idx === 0;
-    next.disabled = idx === n - 1;
-    dots.forEach((d,i) => d.classList.toggle('active', i === idx));
-  }
-  prev.addEventListener('click', () => vp.scrollBy({ left: -vp.offsetWidth, behavior:'smooth' }));
-  next.addEventListener('click', () => vp.scrollBy({ left:  vp.offsetWidth, behavior:'smooth' }));
-  vp.addEventListener('scroll', update);
+  const vp=document.getElementById('pdCarVP'),prev=document.getElementById('pdCarPrev'),next=document.getElementById('pdCarNext');
+  const dots=document.querySelectorAll('#pdCarDots .pd-car-dot');
+  if(!vp||!prev||!next)return;
+  const n=dots.length;
+  function update(){const idx=Math.round(vp.scrollLeft/vp.offsetWidth);prev.disabled=idx===0;next.disabled=idx===n-1;dots.forEach((d,i)=>d.classList.toggle('active',i===idx));}
+  prev.addEventListener('click',()=>vp.scrollBy({left:-vp.offsetWidth,behavior:'smooth'}));
+  next.addEventListener('click',()=>vp.scrollBy({left:vp.offsetWidth,behavior:'smooth'}));
+  vp.addEventListener('scroll',update);
 }
 
 function openItem(id){
-  const idx=ITEMS.findIndex(p=>p.id===id);const item=ITEMS[idx];if(!item)return;
+  const idx=ITEMS.findIndex(p=>p.id===id);
+  const item=ITEMS[idx];
+  if(!item)return;
   const descHTML=item.desc.split('\n\n').map(p=>`<p>${p}</p>`).join('');
   const imgsHTML=buildImgsHTML(item);
-  document.getElementById('pdContent').innerHTML=`<button class="back-btn" onclick="showMain('portfolio')">← Retour au portfolio</button><p class="pd-crumb">Portfolio <span>/ ${item.title}</span></p><h1 class="pd-title">${item.title}</h1><div class="pd-meta"><div class="pd-mi"><span class="pd-mi-label">Type</span><span class="pd-mi-val">${item.type}</span></div><div class="pd-mi"><span class="pd-mi-label">Date</span><span class="pd-mi-val">${item.date}</span></div>${item.location?`<div class="pd-mi"><span class="pd-mi-label">Lieu</span><span class="pd-mi-val">${item.location}</span></div>`:''}</div><div class="pd-tags">${item.tags.map(t=>`<span class="pd-tag">${t}</span>`).join('')}</div><div class="pd-desc">${descHTML}</div><div class="pd-imgs">${imgsHTML}</div><div class="pd-nav"><button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx-1+total)%total].id}')" ${idx===0?'disabled':''}>← Précédent</button><button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx+1)%total].id}')" ${idx===total-1?'disabled':''}>Suivant →</button></div>`;
+  document.getElementById('pdContent').innerHTML=`
+    <button class="back-btn" onclick="showMain('portfolio')">← Retour au portfolio</button>
+    <p class="pd-crumb">Portfolio <span>/ ${item.title}</span></p>
+    <h1 class="pd-title">${item.title}</h1>
+    <div class="pd-meta">
+      <div class="pd-mi"><span class="pd-mi-label">Type</span><span class="pd-mi-val">${item.type}</span></div>
+      <div class="pd-mi"><span class="pd-mi-label">Date</span><span class="pd-mi-val">${item.date}</span></div>
+      ${item.location?`<div class="pd-mi"><span class="pd-mi-label">Lieu</span><span class="pd-mi-val">${item.location}</span></div>`:''}
+    </div>
+    <div class="pd-tags">${item.tags.map(t=>`<span class="pd-tag">${t}</span>`).join('')}</div>
+    <div class="pd-desc">${descHTML}</div>
+    <div class="pd-imgs">${imgsHTML}</div>
+    <div class="pd-nav">
+      <button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx-1+total)%total].id}')" ${idx===0?'disabled':''}>← Précédent</button>
+      <button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx+1)%total].id}')" ${idx===total-1?'disabled':''}>Suivant →</button>
+    </div>`;
   const main=document.getElementById('view-main'),proj=document.getElementById('view-project');
   main.classList.add('fade-out');
   setTimeout(()=>{
     main.style.display='none';main.classList.remove('fade-out');
     proj.style.display='block';proj.classList.add('fade-in');
     window.scrollTo({top:0,behavior:'instant'});
-    setTimeout(()=>{ proj.classList.remove('fade-in'); initPdCarousel(); },400);
+    setTimeout(()=>{proj.classList.remove('fade-in');initPdCarousel();},400);
     history.pushState({item:id},'',`#portfolio-${id}`);
   },250);
 }
+
 function showMain(section){
   const main=document.getElementById('view-main'),proj=document.getElementById('view-project');
   proj.style.display='none';main.style.display='block';main.classList.add('fade-in');
   setTimeout(()=>main.classList.remove('fade-in'),400);
   history.pushState({},'','#'+(section||''));
-  if(section)setTimeout(()=>{const el=document.getElementById(section);if(el)el.scrollIntoView({behavior:'smooth'})},50);
+  if(section)setTimeout(()=>{const el=document.getElementById(section);if(el)el.scrollIntoView({behavior:'smooth'});},50);
   else window.scrollTo({top:0,behavior:'instant'});
 }
-window.addEventListener('popstate',e=>{if(e.state&&e.state.item)openItem(e.state.item);else if(document.getElementById('view-project').style.display!=='none')showMain()});
 
-/* Nav */
-const navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>50);const y=window.scrollY+120;document.querySelectorAll('section[id]').forEach(sec=>{const link=document.querySelector(`.nav-links a[href="#${sec.id}"]`);if(link)link.classList.toggle('active',y>=sec.offsetTop&&y<sec.offsetTop+sec.offsetHeight)})});
-const hamburger=document.getElementById('hamburger'),mobMenu=document.getElementById('mobMenu');
-hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobMenu.classList.toggle('open')});
-function closeMob(){hamburger.classList.remove('open');mobMenu.classList.remove('open')}
-
-/* Scroll reveal */
-const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');ro.unobserve(e.target)})},{threshold:.07,rootMargin:'0px 0px -50px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-/* Experience stagger */
-const xpCards=document.querySelectorAll('.xp-card');
-const xpObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const idx=Array.from(xpCards).indexOf(e.target);setTimeout(()=>e.target.classList.add('xp-visible'),idx*160);xpObs.unobserve(e.target)})},{threshold:.18,rootMargin:'0px 0px -60px 0px'});
-xpCards.forEach(c=>xpObs.observe(c));
-
-/* Smooth scroll ancres — ne s'applique QU'aux vrais liens de section */
-document.querySelectorAll('.nav-links a[href^="#"], .mob-menu a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const href = a.getAttribute('href');
-    // Ignorer les liens portfolio-* qui n'ont pas de section dans le DOM
-    if (href.startsWith('#portfolio')) return;
-    const target = document.querySelector(href);
-    if (!target) return;
-    e.preventDefault();
-    const proj = document.getElementById('view-project');
-    if (proj && proj.style.display !== 'none') {
-      showMain(href.replace('#', ''));
-    } else {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+window.addEventListener('popstate',e=>{
+  if(e.state&&e.state.item)openItem(e.state.item);
+  else if(document.getElementById('view-project').style.display!=='none')showMain();
 });
+
+/* ── INIT AU CHARGEMENT ───────────────────────────── */
+document.addEventListener('DOMContentLoaded', function() {
+
+  /* Render carousel + dropdown */
+  const carTrack=document.getElementById('carTrack');
+  const ddPanel=document.getElementById('ddPanel');
+  const mobSub=document.getElementById('mobSub');
+
+  ITEMS.forEach(function(item){
+    /* --- Card carrousel avec détection scroll vs clic --- */
+    const card=document.createElement('div');
+    card.className='car-card'+(item.special?' car-special':'');
+    card.innerHTML=`<div class="car-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.style.opacity='0'"></div><div class="car-info"><span class="car-num">${item.num} ·</span><div class="car-name">${item.title}</div><div class="car-meta">${item.type} · ${item.date}</div><span class="car-more">→</span></div>`;
+
+    let startX=0, moved=false;
+    card.addEventListener('mousedown', e=>{ startX=e.clientX; moved=false; });
+    card.addEventListener('mousemove', e=>{ if(Math.abs(e.clientX-startX)>6) moved=true; });
+    card.addEventListener('mouseup',   ()=>{ if(!moved) openItem(item.id); });
+    card.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; moved=false; },{passive:true});
+    card.addEventListener('touchmove',  e=>{ if(Math.abs(e.touches[0].clientX-startX)>8) moved=true; },{passive:true});
+    card.addEventListener('touchend',   ()=>{ if(!moved) openItem(item.id); });
+    carTrack.appendChild(card);
+
+    /* --- Dropdown item --- */
+    const ddItem=document.createElement('div');
+    ddItem.className='dd-item';
+    ddItem.innerHTML=`<div class="dd-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.style.opacity='0'"></div><div class="dd-info"><span class="dd-num">${item.num}</span><span class="dd-name">${item.title}</span></div>`;
+    ddItem.addEventListener('click', function(){ openItem(item.id); });
+    ddPanel.appendChild(ddItem);
+
+    /* --- Menu mobile --- */
+    const a=document.createElement('a');
+    a.textContent=`${item.num}. ${item.title}`;
+    a.style.cursor='pointer';
+    a.addEventListener('click', function(){ closeMob(); openItem(item.id); });
+    mobSub.appendChild(a);
+  });
+
+  /* Carousel controls */
+  const carVP=document.getElementById('carVP');
+  const carPrev=document.getElementById('carPrev');
+  const carNext=document.getElementById('carNext');
+  const counter=document.getElementById('carCounter');
+  function getStep(){const c=carTrack.children[0];return c?c.offsetWidth+19:320;}
+  function updateCtrl(){const max=carVP.scrollWidth-carVP.offsetWidth;carPrev.disabled=carVP.scrollLeft<8;carNext.disabled=carVP.scrollLeft>=max-8;const idx=Math.round(carVP.scrollLeft/getStep());counter.textContent=`${Math.min(idx+1,total)} / ${total}`;}
+  carPrev.addEventListener('click',()=>carVP.scrollBy({left:-getStep(),behavior:'smooth'}));
+  carNext.addEventListener('click',()=>carVP.scrollBy({left:getStep(),behavior:'smooth'}));
+  carVP.addEventListener('scroll',updateCtrl);
+  window.addEventListener('resize',updateCtrl);
+
+  /* Nav scroll + active */
+  const navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>{
+    navbar.classList.toggle('scrolled',window.scrollY>50);
+    const y=window.scrollY+120;
+    document.querySelectorAll('section[id]').forEach(sec=>{
+      const link=document.querySelector(`.nav-links a[href="#${sec.id}"]`);
+      if(link)link.classList.toggle('active',y>=sec.offsetTop&&y<sec.offsetTop+sec.offsetHeight);
+    });
+  });
+
+  /* Hamburger */
+  const hamburger=document.getElementById('hamburger'),mobMenu=document.getElementById('mobMenu');
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobMenu.classList.toggle('open');});
+  /* Scroll reveal */
+  const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');ro.unobserve(e.target);});},{threshold:.07,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+  /* Experience stagger */
+  const xpCards=document.querySelectorAll('.xp-card');
+  const xpObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const i=Array.from(xpCards).indexOf(e.target);setTimeout(()=>e.target.classList.add('xp-visible'),i*160);xpObs.unobserve(e.target);});},{threshold:.18,rootMargin:'0px 0px -60px 0px'});
+  xpCards.forEach(c=>xpObs.observe(c));
+
+  /* Smooth scroll nav (section uniquement) */
+  document.querySelectorAll('.nav-links a[href^="#"], .mob-menu a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const href=a.getAttribute('href');
+      if(href.startsWith('#portfolio'))return;
+      const target=document.querySelector(href);
+      if(!target)return;
+      e.preventDefault();
+      const proj=document.getElementById('view-project');
+      if(proj&&proj.style.display!=='none') showMain(href.replace('#',''));
+      else target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+}); // fin DOMContentLoaded
+
 
 </script>
 </body>
