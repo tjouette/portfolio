@@ -99,7 +99,7 @@
   }
   .cs-float { animation: csbob 6.5s ease-in-out infinite; }
   @keyframes csbob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
-  #cubesat svg { width: 100%; height: auto; overflow: visible; transition: transform .4s ease-out; filter: drop-shadow(0 14px 22px var(--shadow)); }
+  #cubesat svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 14px 22px var(--shadow)); }
 
   .cs-part {
     opacity: 0; transform-box: fill-box; transform-origin: center;
@@ -129,7 +129,7 @@
   .cs-label { margin-top: .9rem; text-align: center; }
   .cs-stage { display: block; font-family: var(--fm); font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: var(--tx2); min-height: 1.6em; }
   .cs-bar { height: 2px; background: var(--bdr); border-radius: 2px; margin: .45rem auto .35rem; width: 76%; overflow: hidden; }
-  .cs-bar i { display: block; height: 100%; width: 0; background: var(--acc); transition: width .25s linear; }
+  .cs-bar i { display: block; height: 100%; width: 0; background: var(--acc); }
   .cs-pct { font-family: var(--fm); font-size: .56rem; letter-spacing: .1em; color: var(--txm); }
 
   @media (min-width: 1180px) {
@@ -1030,12 +1030,12 @@ const mobSub=document.getElementById('mobSub');
 ITEMS.forEach(item=>{
   const card=document.createElement('div');
   card.className='car-card'+(item.special?' car-special':'');
-  card.innerHTML=`<div class="car-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.outerHTML='<span style=\"font-size:2rem;color:var(--txm)\">${item.emoji}</span>'"></div><div class="car-info"><span class="car-num">${item.num} ·</span><div class="car-name">${item.title}</div><div class="car-meta">${item.type} · ${item.date}</div><span class="car-more">→</span></div>`;
+  card.innerHTML=`<div class="car-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.remove()"></div><div class="car-info"><span class="car-num">${item.num} ·</span><div class="car-name">${item.title}</div><div class="car-meta">${item.type} · ${item.date}</div><span class="car-more">→</span></div>`;
   card.addEventListener('click',()=>openItem(item.id));
   carTrack.appendChild(card);
   const ddItem=document.createElement('div');
   ddItem.className='dd-item';
-  ddItem.innerHTML=`<div class="dd-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.outerHTML='<span style=\"font-size:1.3rem;color:var(--txm)\">${item.emoji}</span>'"></div><div class="dd-info"><span class="dd-num">${item.num}</span><span class="dd-name">${item.title}</span></div>`;
+  ddItem.innerHTML=`<div class="dd-thumb"><img src="${item.minia}" alt="${item.title}" loading="lazy" onerror="this.remove()"></div><div class="dd-info"><span class="dd-num">${item.num}</span><span class="dd-name">${item.title}</span></div>`;
   ddItem.addEventListener('click',()=>openItem(item.id));
   ddPanel.appendChild(ddItem);
   const a=document.createElement('a');
@@ -1059,7 +1059,7 @@ window.addEventListener('resize',updateCtrl);
 /* Router */
 function buildImgsHTML(item) {
   if (!item.images.length) {
-    return `<div class="pd-img"><div class="pd-img-empty"><div class="ico">${item.emoji}</div><p>Images à ajouter</p></div></div>`;
+    return `<div class="pd-img"><div class="pd-img-empty"><p>Images à ajouter</p></div></div>`;
   }
   if (item.carousel && item.images.length > 1) {
     const slides = item.images.map((src,i) =>
@@ -1082,7 +1082,7 @@ function buildImgsHTML(item) {
   }
   return item.images.map(src =>
     `<div class="pd-img"><img src="${src}" alt="${item.title}" loading="lazy"
-      onerror="this.parentElement.innerHTML='<div class=pd-img-empty><div class=ico>${item.emoji}</div><p>Image non disponible</p></div>'"></div>`
+      onerror="this.parentElement.innerHTML='<div class=pd-img-empty><p>Image non disponible</p></div>'"></div>`
   ).join('');
 }
 
@@ -1220,18 +1220,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
 
   const lerp = (a,b,t) => a + (b-a)*t;
   const smooth = t => t<=0 ? 0 : t>=1 ? 1 : t*t*(3-2*t);
-
-  function apply(i, j, t){
-    const A = T[i], B = T[Math.min(j, T.length-1)];
-    KEYS.forEach(k => {
-      const c = A[k].map((v,x) => Math.round(lerp(v, B[k][x], t)));
-      root.style.setProperty('--'+k, `rgb(${c[0]},${c[1]},${c[2]})`);
-    });
-    const s = A.shadow.map((v,x) => lerp(v, B.shadow[x], t));
-    root.style.setProperty('--shadow', `rgba(${Math.round(s[0])},${Math.round(s[1])},${Math.round(s[2])},${s[3].toFixed(2)})`);
-    starfield.style.opacity = lerp(A.stars,  B.stars,  t).toFixed(2);
-    cloudsEl.style.opacity  = lerp(A.clouds, B.clouds, t).toFixed(2);
-  }
+  const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Étoiles générées en box-shadow */
   function genStars(n){
@@ -1244,84 +1233,133 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
   document.getElementById('stars1').style.boxShadow = genStars(70);
   document.getElementById('stars2').style.boxShadow = genStars(45);
 
-  /* Soleil qui se couche, lune qui se lève (progression globale P) */
-  function celestial(P, vh){
-    const sp = smooth(P/0.5);
-    sun.style.transform = `translate3d(0, ${lerp(vh*0.13, vh*0.95, sp).toFixed(1)}px, 0)`;
-    sun.style.opacity = (1 - smooth((P-0.34)/0.2)).toFixed(2);
-    const mp = smooth((P-0.5)/0.4);
-    moon.style.transform = `translate3d(0, ${lerp(vh*1.02, vh*0.12, mp).toFixed(1)}px, 0)`;
-    moon.style.opacity = smooth((P-0.52)/0.16).toFixed(2);
+  /* ── Lissage : état CIBLE / état COURANT ──
+     La molette fait avancer le scroll par à-coups (~100 px par cran),
+     ce qui rendait le décor saccadé. Le scroll ne fait plus que poser
+     un état CIBLE ; une boucle requestAnimationFrame fait converger
+     l'état COURANT vers la cible par amortissement exponentiel, donc
+     tout (ciel, soleil, lune, satellite) glisse en douceur. */
+  const N_COLS = KEYS.length * 3;
+  const EPS = [];
+  for (let x = 0; x < N_COLS; x++) EPS.push(.5); // canaux rgb
+  EPS.push(.5, .5, .5, .004);                    // ombre rgb + alpha
+  EPS.push(.003, .003);                          // étoiles, nuages
+  EPS.push(.5, .003, .5, .003);                  // soleil y/op., lune y/op.
+  EPS.push(.0015);                               // progression P
+
+  function buildTarget(i, j, t, P){
+    const A = T[i], B = T[Math.min(j, T.length-1)];
+    const v = [];
+    KEYS.forEach(k => { for (let x = 0; x < 3; x++) v.push(lerp(A[k][x], B[k][x], t)); });
+    for (let x = 0; x < 4; x++) v.push(lerp(A.shadow[x], B.shadow[x], t));
+    v.push(lerp(A.stars,  B.stars,  t));
+    v.push(lerp(A.clouds, B.clouds, t));
+    const vh = innerHeight;
+    v.push(lerp(vh*0.13, vh*0.95, smooth(P/0.5)));       // soleil y
+    v.push(1 - smooth((P-0.34)/0.2));                    // soleil opacité
+    v.push(lerp(vh*1.02, vh*0.12, smooth((P-0.5)/0.4))); // lune y
+    v.push(smooth((P-0.52)/0.16));                       // lune opacité
+    v.push(P);
+    return v;
   }
 
-  /* Assemblage du CubeSat étape par étape */
+  /* N'écrit une variable CSS que si sa valeur a vraiment changé,
+     pour limiter les recalculs de style. */
+  const lastVars = {};
+  function setVar(k, val){
+    if (lastVars[k] !== val){ lastVars[k] = val; root.style.setProperty(k, val); }
+  }
+
+  function render(v){
+    let n = 0;
+    KEYS.forEach(k => {
+      setVar('--'+k, `rgb(${Math.round(v[n])},${Math.round(v[n+1])},${Math.round(v[n+2])})`);
+      n += 3;
+    });
+    setVar('--shadow', `rgba(${Math.round(v[n])},${Math.round(v[n+1])},${Math.round(v[n+2])},${v[n+3].toFixed(3)})`);
+    n += 4;
+    starfield.style.opacity = v[n++].toFixed(3);
+    cloudsEl.style.opacity  = v[n++].toFixed(3);
+    sun.style.transform  = `translate3d(0,${v[n++].toFixed(2)}px,0)`;
+    sun.style.opacity    = Math.min(1, Math.max(0, v[n++])).toFixed(3);
+    moon.style.transform = `translate3d(0,${v[n++].toFixed(2)}px,0)`;
+    moon.style.opacity   = Math.min(1, Math.max(0, v[n++])).toFixed(3);
+    const P = v[n];
+    csSvg.style.transform = `rotate(${lerp(-3, 4, P).toFixed(2)}deg)`;
+    csBarFill.style.width = (P*100).toFixed(1) + '%';
+    csPct.textContent = Math.round(P*100) + '%';
+  }
+
+  /* Assemblage du CubeSat : étapes discrètes (transitions CSS) */
   const CS_PARTS = [
     ['csRails', 0],   ['csFaceL', .10], ['csFaceT', .13], ['csFaceR', .16],
     ['csCellsL', .30],['csCellsR', .35],['csWingL', .50], ['csWingR', .56],
     ['csAnt', .72],   ['csSig', .86]
   ].map(([id,th]) => [document.getElementById(id), th]);
 
-  function cubesat(P){
+  function cubesatStages(P){
     CS_PARTS.forEach(([el,th]) => el.classList.toggle('on', P >= th));
-    csBarFill.style.width = (P*100).toFixed(0) + '%';
-    csPct.textContent = Math.round(P*100) + '%';
     csStage.textContent =
       P < .10 ? 'STRUCTURE — 1U' :
       P < .30 ? 'INTÉGRATION PANNEAUX' :
       P < .50 ? 'CELLULES SOLAIRES' :
       P < .72 ? 'DÉPLOIEMENT PANNEAUX' :
       P < .86 ? 'ANTENNES UHF' : 'EN ORBITE ✓';
-    csSvg.style.transform = `rotate(${lerp(-3, 4, P).toFixed(2)}deg)`;
   }
 
-  let projectOpen = false, ticking = false;
+  let projectOpen = false, target = null, cur = null, rafId = null, lastT = 0;
 
-  function update(){
-    ticking = false;
-    if (projectOpen) return;
-    const vh = innerHeight, sy = scrollY;
-    const ref = sy + vh*0.45;
-    const tops = SECTIONS.map(s => s.offsetTop);
-    let i = 0;
-    while (i < tops.length-1 && ref >= tops[i+1]) i++;
-    let t = 0;
-    if (i < tops.length-1){
-      const local = (ref - tops[i]) / Math.max(1, tops[i+1] - tops[i]);
-      /* la transition se joue sur la fin de chaque section,
-         près de la frontière entre deux sections */
-      t = smooth((local - 0.55) / 0.42);
+  function computeTarget(){
+    if (projectOpen){
+      target = buildTarget(5, 5, 0, 1);
+    } else {
+      const vh = innerHeight, sy = scrollY;
+      const ref = sy + vh*0.45;
+      const tops = SECTIONS.map(s => s.offsetTop);
+      let i = 0;
+      while (i < tops.length-1 && ref >= tops[i+1]) i++;
+      let t = 0;
+      if (i < tops.length-1){
+        const local = (ref - tops[i]) / Math.max(1, tops[i+1] - tops[i]);
+        /* la transition de couleurs se joue près de la frontière
+           entre deux sections */
+        t = smooth((local - 0.55) / 0.42);
+      }
+      const doc = document.documentElement.scrollHeight - vh;
+      const P = doc > 0 ? Math.min(1, Math.max(0, sy/doc)) : 0;
+      target = buildTarget(i, i+1, t, P);
+      cubesatStages(P);
     }
-    apply(i, i+1, t);
-    const doc = document.documentElement.scrollHeight - vh;
-    const P = doc > 0 ? Math.min(1, Math.max(0, sy/doc)) : 0;
-    celestial(P, vh);
-    cubesat(P);
+    if (rafId === null){ lastT = performance.now(); rafId = requestAnimationFrame(step); }
   }
 
-  function onScroll(){
-    if (!ticking){ ticking = true; requestAnimationFrame(update); }
+  function step(now){
+    rafId = null;
+    if (!cur || REDUCE){ cur = target.slice(); render(cur); return; }
+    const dt = Math.min(.05, Math.max(.001, (now - lastT)/1000));
+    lastT = now;
+    const k = 1 - Math.exp(-9*dt); // indépendant du framerate
+    let done = true;
+    for (let x = 0; x < cur.length; x++){
+      cur[x] += (target[x] - cur[x]) * k;
+      if (Math.abs(target[x] - cur[x]) > EPS[x]) done = false;
+    }
+    if (done) cur = target.slice();
+    render(cur);
+    if (!done) rafId = requestAnimationFrame(step);
   }
-  window.addEventListener('scroll', onScroll, { passive:true });
-  window.addEventListener('resize', onScroll);
+
+  window.addEventListener('scroll', computeTarget, { passive:true });
+  window.addEventListener('resize', computeTarget);
 
   /* Vue projet : thème nuit fixe, CubeSat masqué */
   window.__themeProject = function(on){
     projectOpen = on;
-    if (on){
-      apply(5, 5, 0);
-      cube.style.display = 'none';
-      sun.style.opacity = 0;
-      moon.style.opacity = .9;
-      moon.style.transform = `translate3d(0, ${(innerHeight*0.14).toFixed(1)}px, 0)`;
-      starfield.style.opacity = .9;
-      cloudsEl.style.opacity = 0;
-    } else {
-      cube.style.display = '';
-      update();
-    }
+    cube.style.display = on ? 'none' : '';
+    computeTarget();
   };
 
-  update();
+  computeTarget();
 })();
 
 </script>
