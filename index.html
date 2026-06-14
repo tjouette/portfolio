@@ -48,19 +48,19 @@
     position: fixed; inset: 0; z-index: -1;
     background: linear-gradient(180deg, var(--sky1), var(--sky2));
   }
+  /* Lueur intégrée au dégradé (compositée avec le transform) plutôt qu'en
+     box-shadow : aucun repaint au déplacement → mouvement parfaitement lisse. */
   .sun, .moon {
     position: absolute; border-radius: 50%;
-    will-change: transform, opacity;
+    will-change: transform, opacity; transform: translateZ(0); backface-visibility: hidden;
   }
   .sun {
-    left: 70vw; top: 0; width: 92px; height: 92px;
-    background: radial-gradient(circle at 38% 35%, #FFF7E0, #FFD98A 58%, rgba(255,217,138,0) 75%);
-    box-shadow: 0 0 90px 36px rgba(255,205,110,.38);
+    left: 67vw; top: -44px; width: 180px; height: 180px;
+    background: radial-gradient(circle at 50% 50%, #FFF6DE 0%, #FFDC8E 29%, rgba(255,212,124,.38) 48%, rgba(255,212,124,0) 70%);
   }
   .moon {
-    left: 76vw; top: 0; width: 64px; height: 64px; opacity: 0;
-    background: radial-gradient(circle at 36% 34%, #FBFDFF, #C9D4E6 62%, #9FAEC9 100%);
-    box-shadow: 0 0 60px 22px rgba(190,210,255,.22), inset -10px -8px 18px rgba(110,130,170,.45);
+    left: 72vw; top: -43px; width: 150px; height: 150px; opacity: 0;
+    background: radial-gradient(circle at 42% 39%, #FBFDFF 0%, #DBE5F4 24%, #C6D2E6 33%, rgba(180,200,235,.24) 50%, rgba(180,200,235,0) 72%);
   }
   #clouds { position: absolute; inset: 0; will-change: opacity; transform: translateZ(0); }
   .cloud {
@@ -68,7 +68,7 @@
     background: radial-gradient(ellipse at 50% 55%, rgba(255,255,255,.75), rgba(255,255,255,0) 70%);
     filter: blur(6px);
   }
-  .cloud.c1 { top: 16vh; left: -10vw; animation: drift 95s linear infinite; }
+  .cloud.c1 { top: 16vh; left: -0vw; animation: drift 95s linear infinite; }
   .cloud.c2 { top: 34vh; left: 30vw; width: 480px; opacity: .7; animation: drift 130s linear infinite reverse; }
   .cloud.c3 { top: 8vh;  left: 60vw; width: 280px; opacity: .55; animation: drift 110s linear infinite; }
   @keyframes drift { from { transform: translateX(-12vw); } to { transform: translateX(112vw); } }
@@ -80,6 +80,11 @@
   .stars { position: absolute; top: 0; left: 0; width: 2px; height: 2px; border-radius: 50%; }
   .stars.s2 { animation: twinkle 3.4s ease-in-out infinite; }
   @keyframes twinkle { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+  .dipper { position: absolute; top: 11vh; left: 8vw; width: clamp(210px, 21vw, 350px); height: auto; }
+  .dipper .glow { fill: rgba(255,255,255,.28); }
+  .dipper circle:not(.glow) { fill: #FFFFFF; }
+  .dipper .dipper-stars circle:not(.glow) { animation: twinkle 4s ease-in-out infinite; }
+
   .shooting {
     position: absolute; top: 16%; left: 68%; width: 120px; height: 1.5px;
     background: linear-gradient(90deg, rgba(255,255,255,.95), transparent);
@@ -146,37 +151,33 @@
     .cs-float, .cloud, .shooting, .h-scroll-line::after { animation: none; }
   }
 
-  /* ── LOADER + RIDEAU DE NUAGES ────────── */
-  /* L'écran de chargement (ciel + nom) reste fixe. À la fin, un rideau
-     de nuages MONTE depuis le bas, recouvre l'écran, puis poursuit sa
-     course vers le haut — en partant, il laisse place à la page. */
+  /* ── LOADER + TRANSITION NUAGES ───────── */
+  /* Écran blanc avec le nom. À la fin, de grands nuages vectoriels
+     s'empilent DIRECTEMENT sur le contenu (pas de fond uniforme), en
+     grossissant et en fonçant (clair → nuit) jusqu'à tout recouvrir,
+     puis se retirent pour révéler la page. */
   #loader {
     position: fixed; inset: 0; z-index: 9999;
-    background: linear-gradient(180deg, #BCD4EA 0%, #CFE0EF 45%, #EAD9C2 100%);
+    background: #FFFFFF;
     display: flex; align-items: center; justify-content: center;
+    transition: opacity .9s ease;
   }
+  #loader.fade { opacity: 0; }
   #loader.hide { display: none; }
   .l-wrap { text-align: center; line-height: 1; position: relative; z-index: 2; }
 
-  /* Transition par nuages vectoriels (style papier découpé) : après
-     l'apparition du nom, des nuages surgissent un à un pour remplir
-     l'écran, puis s'effacent un à un pour révéler la page. */
   #cloudTransition { position: fixed; inset: 0; z-index: 10000; display: none; pointer-events: none; overflow: hidden; }
   #cloudTransition.show { display: block; }
-  #cloudTransition::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(165deg, #EAF8FA 0%, #D8EFF4 55%, #CDEAF0 100%);
-    opacity: 0; transition: opacity .55s ease;
-  }
-  #cloudTransition.fill::before { opacity: 1; }
+  /* Chaque nuage couvre le viewport et dessine son blob de coin en
+     coordonnées pixels (taille proportionnelle à l'écran). Ils
+     APPARAISSENT en fondu, l'un après l'autre, à leur taille finale. */
   .lcl {
-    position: absolute; transform-origin: 50% 58%;
-    transform: translate(-50%,-50%) scale(0); opacity: 0;
-    transition: transform .6s cubic-bezier(.34,1.32,.5,1), opacity .45s ease;
-    will-change: transform, opacity;
-    filter: drop-shadow(0 7px 11px rgba(118,164,184,.30));
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; overflow: visible;
+    transition: opacity 0s ease;
+    will-change: opacity;
   }
-  .lcl.in { transform: translate(-50%,-50%) scale(var(--s,1)); opacity: 1; }
+  .lcl.in { opacity: 1; }
 
   /* Each line clips overflow so text slides up from below */
   .l-line { overflow: hidden; }
@@ -187,15 +188,12 @@
     font-size: clamp(3.5rem, 9vw, 8.5rem);
     letter-spacing: -.02em;
     color: var(--tx);
-    transform: translateY(108%);
-    transition: transform .75s cubic-bezier(.22,1,.36,1);
   }
   .l-text.l-first {
     font-style: italic; font-weight: 400;
     color: var(--tx2); margin-bottom: .08em;
   }
   .l-text.l-last { font-weight: 700; }
-  .l-text.up { transform: translateY(0); }
 
   .l-bar {
     width: 0; height: 1.5px; background: var(--acc);
@@ -597,6 +595,22 @@
     <div class="stars s1" id="stars1"></div>
     <div class="stars s2" id="stars2"></div>
     <div class="shooting"></div>
+    <!-- Constellation de la Grande Ourse (apparaît avec la nuit) -->
+    <svg class="dipper" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg">
+      <g class="dipper-lines" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="1.1" stroke-linecap="round">
+        <path d="M210 40 L205 110 L120 120 L140 60 Z"/>
+        <path d="M140 60 L95 55 L55 65 L15 85"/>
+      </g>
+      <g class="dipper-stars">
+        <circle cx="210" cy="40" r="5.5" class="glow"/><circle cx="210" cy="40" r="2.2"/>
+        <circle cx="205" cy="110" r="5" class="glow"/><circle cx="205" cy="110" r="2"/>
+        <circle cx="120" cy="120" r="5" class="glow"/><circle cx="120" cy="120" r="2"/>
+        <circle cx="140" cy="60" r="4.5" class="glow"/><circle cx="140" cy="60" r="1.9"/>
+        <circle cx="95" cy="55" r="5" class="glow"/><circle cx="95" cy="55" r="2"/>
+        <circle cx="55" cy="65" r="5.5" class="glow"/><circle cx="55" cy="65" r="2.3"/>
+        <circle cx="15" cy="85" r="5" class="glow"/><circle cx="15" cy="85" r="2"/>
+      </g>
+    </svg>
   </div>
 </div>
 
@@ -959,28 +973,47 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Nuages vectoriels (style papier découpé) répartis pour couvrir l'écran. */
-  const SHADE = ['#FFFFFF','#EAF8FB','#DBF0F5','#CDE9EF','#C2E2EA'];
-  //          x%,  y%,  largeur px, échelle, teinte
-  const CLOUDS = [
-    [12,16,380,1.05,0],[50,9,440,1.0,1],[88,15,380,1.05,0],
-    [7,52,360,1.1,2],[50,50,500,1.0,3],[93,53,360,1.1,2],
-    [15,90,400,1.05,1],[55,93,430,1.0,0],[88,88,380,1.05,1],
-    [31,38,340,1.0,4],[71,40,340,1.0,4]
-  ];
-  function cloudSVG(fill){
-    return `<svg class="lcl" viewBox="0 0 240 150" fill="${fill}" xmlns="http://www.w3.org/2000/svg">`
-      + `<rect x="20" y="86" width="202" height="52" rx="26"/>`
-      + `<circle cx="58" cy="92" r="42"/><circle cx="116" cy="64" r="54"/>`
-      + `<circle cx="172" cy="86" r="46"/><circle cx="206" cy="102" r="30"/>`
-      + `<circle cx="34" cy="106" r="28"/></svg>`;
+  // Teintes du jour vers la nuit (clair → bleu → turquoise → nuit)
+  const SHADE   = ['#AEDCEC','#6E8FBE','#6FA6B0','#3B4A63'];
+  const CORNERS = ['a','b','c','d'];            // ordre d'apparition a → b → c → d
+
+  /* Nuage de coin dessiné en COORDONNÉES PIXELS : le viewBox épouse la taille
+     RÉELLE de mise en page (document.documentElement.clientWidth/Height, qui
+     correspond exactement à l'élément en width:100%) → cercles parfaitement
+     ronds, aucun étirement, et taille proportionnelle à l'écran (le rayon
+     atteint juste le centre). Reconstruit au resize pour rester correct. */
+  function cornerCloud(corner, fill, big, W, H){
+    const HALF = Math.hypot(W/2, H/2);
+    // Rb ≈ R : les bosses sont centrées sur le bord du cercle et débordent
+    // vers le centre (lobes nets) ; sinon elles resteraient cachées dedans.
+    const R = (big ? 0.98 : 0.82) * HALF, Rb = R * 0.99, br = R * 0.25, ang = [0, 20, 40, 60, 80, 100,120,140,160,180,200,220,240,260,280,300,320,340];
+    let cx, cy, sx, sy;
+    if      (corner === 'a'){ cx = -1; cy = 0; sx = 1;  sy = 1;  }
+    else if (corner === 'b'){ cx = W; cy = 0; sx = -1; sy = 1;  }
+    else if (corner === 'c'){ cx = W; cy = H; sx = -1; sy = -1; }
+    else                    { cx = 0; cy = H; sx = 1;  sy = -1; }
+    let circles = `<circle cx="${cx}" cy="${cy}" r="${R.toFixed(0)}"/>`;
+    ang.forEach(a => {
+      const t = a * Math.PI / 180;
+      circles += `<circle cx="${(cx + sx*Rb*Math.cos(t)).toFixed(0)}" cy="${(cy + sy*Rb*Math.sin(t)).toFixed(0)}" r="${br.toFixed(0)}"/>`;
+    });
+    return `<svg class="lcl c-${corner}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" fill="${fill}" xmlns="http://www.w3.org/2000/svg">${circles}</svg>`;
   }
-  const cloudEls = CLOUDS.map(([x,y,w,s,sh])=>{
-    const box=document.createElement('div'); box.innerHTML=cloudSVG(SHADE[sh]);
-    const el=box.firstElementChild;
-    el.style.left=x+'%'; el.style.top=y+'%'; el.style.width=w+'px';
-    el.style.setProperty('--s', s);
-    trans.appendChild(el); return el;
-  });
+  let cloudEls = [];
+  function makeClouds(){
+    const W = document.documentElement.clientWidth, H = document.documentElement.clientHeight;
+    const wasShown = trans.classList.contains('show');
+    trans.innerHTML = '';
+    cloudEls = CORNERS.map((c, i) => {
+      const box = document.createElement('div');
+      box.innerHTML = cornerCloud(c, SHADE[i], c === 'd', W, H);
+      const el = box.firstElementChild;
+      if (wasShown) el.classList.add('in');   // garde l'état visible si on redimensionne pendant la transition
+      trans.appendChild(el); return el;
+    });
+  }
+  makeClouds();
+  window.addEventListener('resize', makeClouds);
 
   function run(){
     setTimeout(()=> lFirst.classList.add('up'), 200);  // "Téo" monte
@@ -990,23 +1023,22 @@
     if (reduce){ setTimeout(()=> loader.classList.add('hide'), 1500); return; }
 
     setTimeout(()=>{
-      // Remplissage : le fond pastel + les nuages apparaissent un à un.
+      // Remplissage : les nuages apparaissent lentement, dans l'ordre a → b → c → d.
       trans.classList.add('show');
-      requestAnimationFrame(()=> trans.classList.add('fill'));
-      cloudEls.forEach((el,i)=> setTimeout(()=> el.classList.add('in'), 60 + i*55));
-      const fillEnd = 60 + cloudEls.length*55 + 600;
+      cloudEls.forEach((el,i)=> setTimeout(()=> el.classList.add('in'), 60 + i*400));
+      const fillEnd = 60 + (cloudEls.length-1)*400 + 1000;  // dernier nuage + fondu
 
       setTimeout(()=>{
-        loader.classList.add('hide');           // l'écran est couvert → on retire le loader
+        // Révélation : l'écran blanc s'estompe pendant que les nuages se retirent (d → c → b → a).
+        loader.classList.add('hide');
+        const order = cloudEls.slice().reverse();
+        order.forEach((el,i)=> setTimeout(()=> el.classList.remove('in'), i*400));
         setTimeout(()=>{
-          // Effacement : le fond s'estompe et les nuages disparaissent un à un.
-          trans.classList.remove('fill');
-          const order = cloudEls.slice().reverse();
-          order.forEach((el,i)=> setTimeout(()=> el.classList.remove('in'), i*48));
-          setTimeout(()=> trans.classList.remove('show'), order.length*48 + 650);
-        }, 220);
-      }, fillEnd);
-    }, 1450);
+          loader.classList.add('hide');
+          trans.classList.remove('show');
+        }, (order.length-1)*400 + 1100);
+      }, fillEnd + 350);
+    }, 1300);
   }
 
   if (document.fonts && document.fonts.ready) {
@@ -1627,8 +1659,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
   for (let x = 0; x < N_COLS; x++){ EPS.push(.5);  RATE.push(14); } // couleurs : net
   EPS.push(.5, .5, .5, .004);  RATE.push(14,14,14,14);              // ombre
   EPS.push(.002, .002);        RATE.push(7, 7);                     // étoiles, nuages
-  EPS.push(.10, .0018, .10, .0018); RATE.push(4.2, 6, 4.2, 6);      // soleil y/op., lune y/op.
-  EPS.push(.001);              RATE.push(6);                        // progression P
+  EPS.push(.08, .0015, .08, .0015); RATE.push(11, 10, 11, 10);      // soleil y/op., lune y/op. (suivi serré)
+  EPS.push(.001);              RATE.push(9);                        // progression P
 
   function buildTarget(i, j, t, P){
     const A = T[i], B = T[Math.min(j, T.length-1)];
@@ -1691,60 +1723,64 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
       P < .86 ? d['cs.s5'] : d['cs.s6'];
   }
 
-  let projectOpen = false, target = null, cur = null, rafId = null, lastT = 0;
+  let projectOpen = false, target = null, cur = null, running = false, lastT = 0, idle = 0;
 
-  function computeTarget(){
-    if (projectOpen){
-      target = buildTarget(5, 5, 0, 1);
-    } else {
-      const sy = scrollY;
-      const ref = sy + vhC*0.45;
-      let i = 0;
-      while (i < secTops.length-1 && ref >= secTops[i+1]) i++;
-      let t = 0;
-      if (i < secTops.length-1){
-        const local = (ref - secTops[i]) / Math.max(1, secTops[i+1] - secTops[i]);
-        /* la transition de couleurs se joue près de la frontière
-           entre deux sections */
-        t = smooth((local - 0.55) / 0.42);
-      }
-      const P = Math.min(1, Math.max(0, sy / docHC));
-      target = buildTarget(i, i+1, t, P);
-      cubesatStages(P);
+  /* Recalcule la CIBLE à partir du scroll RÉEL (lu à chaque frame, pas
+     seulement sur l'événement scroll) → le soleil et la Lune suivent la
+     position exacte de défilement, image après image, sans saut. */
+  function computeFrame(){
+    if (projectOpen){ target = buildTarget(5, 5, 0, 1); return; }
+    const sy = scrollY;
+    const ref = sy + vhC*0.45;
+    let i = 0;
+    while (i < secTops.length-1 && ref >= secTops[i+1]) i++;
+    let t = 0;
+    if (i < secTops.length-1){
+      const local = (ref - secTops[i]) / Math.max(1, secTops[i+1] - secTops[i]);
+      t = smooth((local - 0.55) / 0.42); // transition de couleurs près des frontières
     }
-    if (rafId === null){ lastT = performance.now(); rafId = requestAnimationFrame(step); }
+    const P = Math.min(1, Math.max(0, sy / docHC));
+    target = buildTarget(i, i+1, t, P);
+    cubesatStages(P);
   }
 
-  function step(now){
-    rafId = null;
-    if (!cur || REDUCE){ cur = target.slice(); render(cur); return; }
+  /* Boucle CONTINUE : tout est recalculé à CHAQUE frame d'affichage
+     (≈ 60–120 Hz) tant qu'il y a du mouvement, puis mise en veille après
+     ~1,6 s d'immobilité, relancée au moindre scroll. */
+  function tick(now){
     const dt = Math.min(.05, Math.max(.001, (now - lastT)/1000));
     lastT = now;
-    let done = true;
+    computeFrame();                       // cible échantillonnée à chaque frame
+    if (!cur || REDUCE){ cur = target.slice(); render(cur); running = false; return; }
+    let moving = false;
     for (let x = 0; x < cur.length; x++){
       const k = 1 - Math.exp(-RATE[x]*dt); // easing par composant, indépendant du framerate
       cur[x] += (target[x] - cur[x]) * k;
-      if (Math.abs(target[x] - cur[x]) > EPS[x]) done = false;
+      if (Math.abs(target[x] - cur[x]) > EPS[x]) moving = true;
     }
-    if (done) cur = target.slice();
+    if (!moving) cur = target.slice();
     render(cur);
-    if (!done) rafId = requestAnimationFrame(step);
+    idle = moving ? 0 : idle + 1;
+    if (idle > 100){ running = false; return; }     // ~1,6 s sans mouvement → veille
+    requestAnimationFrame(tick);
   }
+  function start(){ idle = 0; if (!running){ running = true; lastT = performance.now(); requestAnimationFrame(tick); } }
 
-  window.addEventListener('scroll', computeTarget, { passive:true });
-  window.addEventListener('resize', () => { measure(); computeTarget(); });
+  window.addEventListener('scroll', start, { passive:true });
+  window.addEventListener('resize', () => { measure(); start(); });
   /* les images modifient la hauteur du document → re-mesurer au load */
-  window.addEventListener('load', () => { measure(); computeTarget(); });
+  window.addEventListener('load', () => { measure(); start(); });
 
   /* Vue projet : thème nuit fixe, CubeSat masqué */
   window.__themeProject = function(on){
     projectOpen = on;
     cube.style.display = on ? 'none' : '';
-    computeTarget();
+    start();
   };
 
   measure();
-  computeTarget();
+  computeFrame();
+  start();
 })();
 
 </script>
