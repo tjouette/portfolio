@@ -386,6 +386,11 @@
   .tl-degree { font-size: .91rem; color: var(--tx2); margin-bottom: .15rem; }
   .tl-loc { font-family: var(--fm); font-size: .63rem; color: var(--txm); letter-spacing: .04em; }
 
+  /* ── LIENS EXTERNES ──────────────────── */
+  .ext-link { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; transition: color .2s, border-color .2s; }
+  .ext-link::after { content: ' ↗'; font-size: .7em; opacity: .55; }
+  .ext-link:hover { color: var(--acc); border-bottom-style: solid; }
+
   /* ── EXPÉRIENCES ─────────────────────── */
   #experiences { background: transparent; }
   .xp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.4rem; }
@@ -436,6 +441,12 @@
   .car-btn:hover:not(:disabled) { border-color: var(--acc); color: var(--acc); background: var(--acc2); }
   .car-btn:disabled { opacity: .3; cursor: default; }
   .car-counter { font-family: var(--fm); font-size: .62rem; letter-spacing: .08em; color: var(--txm); min-width: 50px; text-align: center; }
+
+  /* Onglets de filtre du portfolio */
+  .pf-filters { display: flex; gap: .5rem; flex-wrap: wrap; margin: -.8rem 0 1.8rem; }
+  .pf-tab { font-family: var(--fm); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; background: none; border: 1px solid var(--bdr2); color: var(--tx2); padding: .4rem .95rem; border-radius: 100px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .pf-tab:hover { color: var(--tx); }
+  .pf-tab.active { background: var(--acc); border-color: var(--acc); color: #fff; }
 
   /* ── CARROUSEL 3D (coverflow) ── */
   .cf { position: relative; height: 440px; perspective: 1900px; perspective-origin: 50% 44%; touch-action: pan-y; user-select: none; }
@@ -802,17 +813,17 @@
       <div class="tl-item reveal">
         <div class="tl-date" data-i18n="formation.date0">Sept. 2026 – Févr. 2027</div>
         <div class="tl-axis"><div class="tl-dot"></div><div class="tl-conn"></div></div>
-        <div class="tl-body"><div class="tl-school">Università degli Studi di Brescia</div><div class="tl-degree" data-i18n="formation.deg0">Échange Erasmus+ · 3ème année du cycle ingénieur · cours en anglais</div><div class="tl-loc" data-i18n="formation.loc0">Brescia, Italie</div></div>
+        <div class="tl-body"><div class="tl-school"><a class="ext-link" href="https://www.unibs.it/it" target="_blank" rel="noopener">Università degli Studi di Brescia</a></div><div class="tl-degree" data-i18n="formation.deg0">Échange Erasmus+ · 3ème année du cycle ingénieur · cours en anglais</div><div class="tl-loc" data-i18n="formation.loc0">Brescia, Italie</div></div>
       </div>
       <div class="tl-item reveal d1">
         <div class="tl-date" data-i18n="formation.date1">2024 – 2027</div>
         <div class="tl-axis"><div class="tl-dot"></div><div class="tl-conn"></div></div>
-        <div class="tl-body"><div class="tl-school">EIDD — École d'Ingénieurs UPCité</div><div class="tl-degree" data-i18n="formation.deg1">Cycle Ingénieur · Génie Physique</div><div class="tl-loc">Paris, France</div></div>
+        <div class="tl-body"><div class="tl-school"><a class="ext-link" href="https://eidd.u-pariscite.fr/" target="_blank" rel="noopener">EIDD — École d'Ingénieurs UPCité</a></div><div class="tl-degree" data-i18n="formation.deg1">Cycle Ingénieur · Génie Physique</div><div class="tl-loc">Paris, France</div></div>
       </div>
       <div class="tl-item reveal d2">
         <div class="tl-date">2022 – 2024</div>
         <div class="tl-axis"><div class="tl-dot"></div><div class="tl-conn"></div></div>
-        <div class="tl-body"><div class="tl-school">Université Paris Cité</div><div class="tl-degree" data-i18n="formation.deg2">CUPGE — Physique Théorique &amp; Mathématique — Mention Assez Bien</div><div class="tl-loc">Paris, France</div></div>
+        <div class="tl-body"><div class="tl-school"><a class="ext-link" href="https://odf.u-paris.fr/fr/offre-de-formation/licence-XA/sciences-technologies-sante-STS/physique-K1T0IUJ7/licence-physique-cycle-universitaire-preparatoire-aux-grandes-ecoles-cupge-JRM6Q50Z.html" target="_blank" rel="noopener">Université Paris Cité</a></div><div class="tl-degree" data-i18n="formation.deg2">CUPGE — Physique Théorique &amp; Mathématique — Mention Assez Bien</div><div class="tl-loc">Paris, France</div></div>
       </div>
       <div class="tl-item reveal d3">
         <div class="tl-date">2019 – 2022</div>
@@ -829,7 +840,7 @@
 
       <div class="xp-card">
         <span class="xp-badge current" data-i18n="exp.c0.badge">En cours</span>
-        <div class="xp-org">ASTRES · Alliance Stratégique des Étudiants du Spatial</div>
+        <div class="xp-org"><a class="ext-link" href="https://astres-espace.fr/" target="_blank" rel="noopener">ASTRES · Alliance Stratégique des Étudiants du Spatial</a></div>
         <div class="xp-role" data-i18n="exp.c0.role">Co-référent du groupe de travail Développement Durable</div>
         <div class="xp-meta"><span data-i18n="exp.c0.date">Juil. 2026 – Aujourd'hui</span></div>
         <div class="xp-div"></div>
@@ -841,7 +852,7 @@
 
       <div class="xp-card">
         <span class="xp-badge stage" data-i18n="exp.c1.badge">Stage</span>
-        <div class="xp-org">AstroParticule et Cosmologie (APC)</div>
+        <div class="xp-org"><a class="ext-link" href="https://apc.u-paris.fr/" target="_blank" rel="noopener">AstroParticule et Cosmologie (APC)</a></div>
         <div class="xp-role" data-i18n="exp.c1.role">Stagiaire — Ingénierie système nanosatellite, IGOSat</div>
         <div class="xp-meta"><span data-i18n="exp.c1.date">Mai – Juil. 2026</span><span>Paris, France</span></div>
         <div class="xp-div"></div>
@@ -854,7 +865,7 @@
 
       <div class="xp-card">
         <span class="xp-badge stage" data-i18n="exp.c2.badge">Projet ingénieur</span>
-        <div class="xp-org">EIDD · IGOSat</div>
+        <div class="xp-org"><a class="ext-link" href="https://eidd.u-pariscite.fr/" target="_blank" rel="noopener">EIDD</a> · <a class="ext-link" href="https://igosat.in2p3.fr" target="_blank" rel="noopener">IGOSat</a></div>
         <div class="xp-role" data-i18n="exp.c2.role">Coordinateur projet — Simulation orbitale &amp; énergétique, IGOSat</div>
         <div class="xp-meta"><span data-i18n="exp.c2.date">Févr. – Mars 2026</span><span>Paris, France</span></div>
         <div class="xp-div"></div>
@@ -868,7 +879,7 @@
 
       <div class="xp-card">
         <span class="xp-badge stage" data-i18n="exp.c3.badge">Stage</span>
-        <div class="xp-org">Groupe RATP</div>
+        <div class="xp-org"><a class="ext-link" href="https://ratpgroup.com/fr/" target="_blank" rel="noopener">Groupe RATP</a></div>
         <div class="xp-role" data-i18n="exp.c3.role">Stagiaire — Technicien de maintenance des trains, Ligne 1</div>
         <div class="xp-meta"><span data-i18n="exp.c3.date">Mai – Juin 2025</span><span>Fontenay-sous-Bois, France</span></div>
         <div class="xp-div"></div>
@@ -961,6 +972,11 @@
         <span class="car-counter" id="cfCounter">1 / 12</span>
         <button class="car-btn" id="cfNext" aria-label="Suivant">→</button>
       </div>
+    </div>
+    <div class="pf-filters reveal" id="pfFilters">
+      <button type="button" class="pf-tab active" data-filter="all" data-i18n="portfolio.all">Tous</button>
+      <button type="button" class="pf-tab" data-filter="pro" data-i18n="portfolio.pro">Études &amp; pro</button>
+      <button type="button" class="pf-tab" data-filter="perso" data-i18n="portfolio.perso">Centres d'intérêt</button>
     </div>
     <div class="cf reveal" id="cf"><div class="cf-stage" id="cfStage"></div></div>
   </section>
@@ -1094,12 +1110,16 @@
       └── iris.jpg
   (+ une miniature « _minia » par projet)
 
+  CATÉGORIES : chaque projet a un champ cat:
+    'pro'   → onglet « Études & pro »
+    'perso' → onglet « Centres d'intérêt »
   La numérotation (01, 02, …) est attribuée automatiquement
   selon l'ordre du tableau ITEMS ci-dessous.
 */
 const ITEMS=[
+  /* ═════ ÉTUDES & PRO ═════ */
   {
-    id:'filtre-kalman', special:false,
+    id:'filtre-kalman', cat:'pro', special:false,
     minia:'images/filtre-kalman_minia.jpg',
     title:'Filtre de Kalman', type:'Traitement du signal',
     date:'2025–2026', location:'EIDD, Paris',
@@ -1118,7 +1138,7 @@ Pour se rapprocher de conditions réelles, j'ai ajouté un bruit gaussien à deu
 To get closer to real conditions, I added Gaussian noise to two measurements (the angle of attack and a normal acceleration), then implemented a linear Kalman filter to estimate both states. Finally, I studied the effect of tuning the covariances: the higher they are, the more the estimate follows the measurement noise; the lower they are, the smoother and closer to the true state it becomes.`
   },
   {
-    id:'lunar-lander', special:false,
+    id:'lunar-lander', cat:'pro', special:false,
     minia:'images/lunar-lander_minia.jpg',
     title:"Guidage d'un module lunaire", type:'Automatique',
     date:'2025–2026', location:'EIDD, Paris',
@@ -1137,7 +1157,7 @@ Sous Matlab, nous avons simulé la dynamique du module et construit un observate
 In Matlab, we simulated the lander's dynamics and built a state observer whose stability we checked: even with a poorly known initial state, the estimate converges to the true trajectory. Finally, we computed, using a pseudo-inverse, a sequence of commands to guide the lander from orbit down to the landing crater.`
   },
   {
-    id:'objets-caches', special:false,
+    id:'objets-caches', cat:'pro', special:false,
     minia:'images/objets-caches_minia.jpg',
     title:'Objets cachés dans une image', type:"Traitement d'image",
     date:'2025–2026', location:'EIDD, Paris',
@@ -1156,140 +1176,7 @@ Ces traitements ont fait apparaître une comète et sa traînée, des étoiles, 
 These steps revealed a comet and its tail, stars, and two boxes added to the image. A stronger smoothing followed by a local binarisation finally let me read the hidden text: comet NEOWISE, 21 July 2020.`
   },
   {
-    id:'dessins-industriels', special:false,
-    minia:'images/dessins-industriels_minia.jpg',
-    title:'Dessins industriels', type:'Dessin Industriel',
-    date:'Juillet 2025', location:'Paris, France',
-    tags:['Fusion 360','Stage RATP'],
-    title_en:'Industrial drawings', type_en:'Technical Drawing',
-    date_en:'July 2025', location_en:'Paris, France',
-    tags_en:['Fusion 360','RATP internship'],
-    cover:'images/dessins-industriels-1.jpg',
-    images:['images/dessins-industriels-1.jpg','images/dessins-industriels-2.jpg'],
-    carousel:false,
-    desc:`Lors de mon stage à la RATP, j'ai passé une journée aux côtés des dessinateurs-projeteurs qui m'ont initié à Fusion 360. Motivé par cette découverte, j'ai appris à utiliser ce logiciel de façon autonome.
-
-Vous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dessin de coupe d'une clé Allen avec toutes les cotes et annotations techniques requises.`,
-    desc_en:`During my internship at RATP, I spent a day alongside the design draftsmen who introduced me to Fusion 360. Motivated by this discovery, I went on to learn the software on my own.
-
-Below are two of my first industrial drawings, including a sectional drawing of an Allen key with all the required dimensions and technical annotations.`
-  },
-  {
-    id:'extension-chrome', special:false,
-    minia:'images/extension_chrome_minia.png',
-    title:'Extension Google Chrome', type:'Développement Web',
-    date:'Décembre 2025', location:'Projet personnel',
-    tags:['JavaScript','HTML/CSS','Chrome API'],
-    title_en:'Google Chrome Extension', type_en:'Web Development',
-    date_en:'December 2025', location_en:'Personal project',
-    tags_en:['JavaScript','HTML/CSS','Chrome API'],
-    cover:'images/extension-chrome-1.jpg',
-    images:['images/extension-chrome-1.jpg','images/extension-chrome-2.jpg'],
-    carousel:false,
-    desc:`Développement de plusieurs extensions Google Chrome de manière indépendante, répondant à des besoins concrets rencontrés lors de la navigation web.
-
-Ce projet m'a permis de me familiariser avec les APIs Chrome, la communication entre scripts de contenu et d'arrière-plan, ainsi que la gestion du stockage via chrome.storage.`,
-    desc_en:`Independent development of several Google Chrome extensions, addressing concrete needs encountered while browsing the web.
-
-This project let me get familiar with the Chrome APIs, the communication between content and background scripts, and storage management through chrome.storage.`
-  },
-  {
-    id:'vehicule-motorise', special:false,
-    minia:'images/vehicule-motorise_minia.jpg',
-    title:'Véhicule électrique miniature', type:'Projet Personnel',
-    date:'2024', location:'Projet personnel',
-    tags:['Mécanique','Électronique','Fabrication'],
-    title_en:'Miniature electric vehicle', type_en:'Personal Project',
-    date_en:'2024', location_en:'Personal project',
-    tags_en:['Mechanics','Electronics','Fabrication'],
-    cover:'images/vehicule-motorise.jpg',
-    images:['images/vehicule-motorise.jpg'],
-    carousel:false,
-    desc:`Dans le cadre d'un projet personnel en 2024, j'ai conçu et réalisé un petit véhicule électrique avec des moyens très limités.
-
-J'ai dû sélectionner les composants électroniques et mécaniques en fonction de contraintes budgétaires strictes, fabriquer les éléments mécaniques et assurer l'intégration électronique. Ce projet m'a appris à faire des choix techniques dans un environnement contraint, et à trouver des solutions créatives sans disposer d'un atelier équipé.`,
-    desc_en:`As a personal project in 2024, I designed and built a small electric vehicle with very limited means.
-
-I had to select the electronic and mechanical components under strict budget constraints, fabricate the mechanical parts and handle the electronic integration. This project taught me to make technical choices in a constrained environment and to find creative solutions without access to a fully equipped workshop.`
-  },
-  {
-    id:'fiche-technique', special:false,
-    minia:'images/fiche-technique_minia.jpg',
-    title:'Fiche Technique', type:'Documentation Technique',
-    date:'Octobre 2024', location:'EIDD, Paris',
-    tags:['Tech Repair','Électronique','Documentation'],
-    title_en:'Technical Datasheet', type_en:'Technical Documentation',
-    date_en:'October 2024', location_en:'EIDD, Paris',
-    tags_en:['Tech Repair','Electronics','Documentation'],
-    cover:'images/fiche-technique.jpg',
-    images:['images/fiche-technique.jpg'],
-    carousel:false,
-    desc:`Dans le cadre de l'UE Tech Repair à l'EIDD, réalisation d'une fiche technique complète d'un sèche-cheveux : analyse du fonctionnement, démontage, identification des composants et schéma de principe.
-
-Ce projet a renforcé ma capacité à analyser et documenter un système électronique existant.`,
-    desc_en:`As part of the Tech Repair course at EIDD, I produced a complete technical datasheet for a hair dryer: analysis of how it works, disassembly, identification of components and schematic diagram.
-
-This project strengthened my ability to analyse and document an existing electronic system.`
-  },
-  {
-    id:'sudoku', special:false,
-    minia:'images/sudoku_minia.jpg',
-    title:"Résolution d'un Sudoku", type:'Algorithmique Python',
-    date:'2024', location:'CUPGE · Université Paris-Cité',
-    tags:['Python','Backtracking','Contraintes'],
-    title_en:'Sudoku Solver', type_en:'Python Algorithmics',
-    date_en:'2024', location_en:'CUPGE · Université Paris-Cité',
-    tags_en:['Python','Backtracking','Constraints'],
-    cover:'images/sudoku.jpg',
-    images:['images/sudoku.jpg'],
-    carousel:false,
-    desc:`Projet réalisé en 2024 dans le cadre de la CUPGE (Université Paris-Cité). Le délai imparti était d'un mois ; je l'ai rendu en une semaine. Le projet a reçu les félicitations du jury.
-
-Développement d'un programme de résolution automatique de grilles de Sudoku en Python explorant les stratégies de satisfaction de contraintes (CSP). L'implémentation repose sur un algorithme de backtracking avec propagation de contraintes qui réduit l'espace de recherche avant de tester les combinaisons.`,
-    desc_en:`Project carried out in 2024 as part of the CUPGE (Université Paris-Cité). The allotted time was one month; I delivered it in a week. The project received the jury's commendation.
-
-Development of a program that automatically solves Sudoku grids in Python, exploring constraint-satisfaction strategies (CSP). The implementation relies on a backtracking algorithm with constraint propagation that shrinks the search space before testing combinations.`
-  },
-  {
-    id:'modelisation-3d', special:false,
-    minia:'images/modelisation-3d_minia.jpg',
-    title:'Modélisation 3D', type:'Création Personnelle',
-    date:'2024–2026', location:'Projet personnel',
-    tags:['Blender'],
-    title_en:'3D Modelling', type_en:'Personal Creation',
-    date_en:'2024–2026', location_en:'Personal project',
-    tags_en:['Blender'],
-    cover:'images/modelisation-3d-1.jpg',
-    images:['images/modelisation-3d-1.jpg','images/modelisation-3d-2.jpg','images/modelisation-3d-3.jpg','images/modelisation-3d-4.jpg','images/modelisation-3d-5.jpg','images/modelisation-3d-6.jpg','images/modelisation-3d-7.jpg'],
-    carousel:true,
-    desc:`La modélisation 3D est avant tout un exutoire créatif, pas un projet académique. Depuis 2024, je modélise sur Blender dans mes temps libres — scènes, objets, personnages — pour le plaisir de créer et d'explorer les possibilités du logiciel.
-
-Ces créations témoignent d'une progression continue : maîtrise du modélisme polygonal, des matériaux, de l'éclairage et du rendu. Chaque scène est une occasion d'expérimenter.`,
-    desc_en:`3D modelling is above all a creative outlet, not an academic project. Since 2024 I have been modelling in Blender in my free time — scenes, objects, characters — for the pleasure of creating and exploring what the software can do.
-
-These creations reflect continuous progress: mastery of polygonal modelling, materials, lighting and rendering. Each scene is an opportunity to experiment.`
-  },
-  {
-    id:'eurospace-center', special:true,
-    minia:'images/eurospace-center_minia.jpg',
-    title:'EuroSpace Center', type:'Expérience · Formation',
-    date:'2016', location:'Transinne, Belgique',
-    tags:['Aérospatiale','Astronautique','Fusée'],
-    title_en:'EuroSpace Center', type_en:'Experience · Training',
-    date_en:'2016', location_en:'Transinne, Belgium',
-    tags_en:['Aerospace','Astronautics','Rocket'],
-    cover:'images/eurospace-center.jpg',
-    images:['images/eurospace-center.jpg'],
-    carousel:false,
-    desc:`En 2016, j'ai participé à une semaine de "colonie spatiale" à l'EuroSpace Center de Transinne, en Belgique — le plus grand centre spatial éducatif d'Europe.
-
-Cette semaine était une introduction intensive au métier d'astronaute : simulations de missions, initiation aux sciences spatiales et, point fort de l'expérience, construction et lancement d'une petite fusée fonctionnant avec un moteur à poudre (explosion). Cette expérience a été un déclencheur de ma passion pour l'aérospatiale, bien avant mon entrée en cycle ingénieur.`,
-    desc_en:`In 2016 I took part in a week-long "space camp" at the EuroSpace Center in Transinne, Belgium — the largest educational space centre in Europe.
-
-The week was an intensive introduction to the work of an astronaut: mission simulations, an initiation into the space sciences and, the highlight of the experience, building and launching a small rocket powered by a solid-propellant motor. This experience sparked my passion for aerospace, long before I started engineering school.`
-  },
-  {
-    id:'architecture-systeme', special:false,
+    id:'architecture-systeme', cat:'pro', special:false,
     minia:'images/architecture-systeme_minia.jpg',
     title:'Projet Architecture Système', type:'UE Ingénierie Système',
     date:'2025', location:'EIDD, Paris',
@@ -1308,7 +1195,104 @@ Le travail a inclus la rédaction du scénario opérationnel, la réalisation de
 The work included writing the operational scenario, producing the state, context and functional-interaction diagrams, as well as the system requirements analysis. To support the presentation, I also produced a 3D model of the system in Blender.`
   },
   {
-    id:'iris', special:false,
+    id:'dessins-industriels', cat:'pro', special:false,
+    minia:'images/dessins-industriels_minia.jpg',
+    title:'Dessins industriels', type:'Dessin Industriel',
+    date:'Juillet 2025', location:'Paris, France',
+    tags:['Fusion 360','Stage RATP'],
+    title_en:'Industrial drawings', type_en:'Technical Drawing',
+    date_en:'July 2025', location_en:'Paris, France',
+    tags_en:['Fusion 360','RATP internship'],
+    cover:'images/dessins-industriels-1.jpg',
+    images:['images/dessins-industriels-1.jpg','images/dessins-industriels-2.jpg'],
+    carousel:false,
+    desc:`Lors de mon stage à la RATP, j'ai passé une journée aux côtés des dessinateurs-projeteurs qui m'ont initié à Fusion 360. Motivé par cette découverte, j'ai appris à utiliser ce logiciel de façon autonome.
+
+Vous trouverez ci-dessous deux de mes premiers dessins industriels, dont le dessin de coupe d'une clé Allen avec toutes les cotes et annotations techniques requises.`,
+    desc_en:`During my internship at RATP, I spent a day alongside the design draftsmen who introduced me to Fusion 360. Motivated by this discovery, I went on to learn the software on my own.
+
+Below are two of my first industrial drawings, including a sectional drawing of an Allen key with all the required dimensions and technical annotations.`
+  },
+  {
+    id:'fiche-technique', cat:'pro', special:false,
+    minia:'images/fiche-technique_minia.jpg',
+    title:'Fiche Technique', type:'Documentation Technique',
+    date:'Octobre 2024', location:'EIDD, Paris',
+    tags:['Tech Repair','Électronique','Documentation'],
+    title_en:'Technical Datasheet', type_en:'Technical Documentation',
+    date_en:'October 2024', location_en:'EIDD, Paris',
+    tags_en:['Tech Repair','Electronics','Documentation'],
+    cover:'images/fiche-technique.jpg',
+    images:['images/fiche-technique.jpg'],
+    carousel:false,
+    desc:`Dans le cadre de l'UE Tech Repair à l'EIDD, réalisation d'une fiche technique complète d'un sèche-cheveux : analyse du fonctionnement, démontage, identification des composants et schéma de principe.
+
+Ce projet a renforcé ma capacité à analyser et documenter un système électronique existant.`,
+    desc_en:`As part of the Tech Repair course at EIDD, I produced a complete technical datasheet for a hair dryer: analysis of how it works, disassembly, identification of components and schematic diagram.
+
+This project strengthened my ability to analyse and document an existing electronic system.`
+  },
+  {
+    id:'sudoku', cat:'pro', special:false,
+    minia:'images/sudoku_minia.jpg',
+    title:"Résolution d'un Sudoku", type:'Algorithmique Python',
+    date:'2024', location:'CUPGE · Université Paris-Cité',
+    tags:['Python','Backtracking','Contraintes'],
+    title_en:'Sudoku Solver', type_en:'Python Algorithmics',
+    date_en:'2024', location_en:'CUPGE · Université Paris-Cité',
+    tags_en:['Python','Backtracking','Constraints'],
+    cover:'images/sudoku.jpg',
+    images:['images/sudoku.jpg'],
+    carousel:false,
+    desc:`Projet réalisé en 2024 dans le cadre de la CUPGE (Université Paris-Cité). Le délai imparti était d'un mois ; je l'ai rendu en une semaine. Le projet a reçu les félicitations du jury.
+
+Développement d'un programme de résolution automatique de grilles de Sudoku en Python explorant les stratégies de satisfaction de contraintes (CSP). L'implémentation repose sur un algorithme de backtracking avec propagation de contraintes qui réduit l'espace de recherche avant de tester les combinaisons.`,
+    desc_en:`Project carried out in 2024 as part of the CUPGE (Université Paris-Cité). The allotted time was one month; I delivered it in a week. The project received the jury's commendation.
+
+Development of a program that automatically solves Sudoku grids in Python, exploring constraint-satisfaction strategies (CSP). The implementation relies on a backtracking algorithm with constraint propagation that shrinks the search space before testing combinations.`
+  },
+
+  /* ═════ CENTRES D'INTÉRÊT ═════ */
+  {
+    id:'eurospace-center', cat:'perso', special:true,
+    minia:'images/eurospace-center_minia.jpg',
+    title:'EuroSpace Center', type:'Expérience · Formation',
+    date:'2016', location:'Transinne, Belgique',
+    tags:['Aérospatiale','Astronautique','Fusée'],
+    title_en:'EuroSpace Center', type_en:'Experience · Training',
+    date_en:'2016', location_en:'Transinne, Belgium',
+    tags_en:['Aerospace','Astronautics','Rocket'],
+    cover:'images/eurospace-center.jpg',
+    images:['images/eurospace-center.jpg'],
+    carousel:false,
+    desc:`En 2016, j'ai participé à une semaine de "colonie spatiale" à l'EuroSpace Center de Transinne, en Belgique — le plus grand centre spatial éducatif d'Europe.
+
+Cette semaine était une introduction intensive au métier d'astronaute : simulations de missions, initiation aux sciences spatiales et, point fort de l'expérience, construction et lancement d'une petite fusée fonctionnant avec un moteur à poudre (explosion). Cette expérience a été un déclencheur de ma passion pour l'aérospatiale, bien avant mon entrée en cycle ingénieur.`,
+    desc_en:`In 2016 I took part in a week-long "space camp" at the EuroSpace Center in Transinne, Belgium — the largest educational space centre in Europe.
+
+The week was an intensive introduction to the work of an astronaut: mission simulations, an initiation into the space sciences and, the highlight of the experience, building and launching a small rocket powered by a solid-propellant motor. This experience sparked my passion for aerospace, long before I started engineering school.`
+  },
+  {
+    id:'vehicule-motorise', cat:'perso', special:false,
+    minia:'images/vehicule-motorise_minia.jpg',
+    title:'Véhicule électrique miniature', type:'Projet Personnel',
+    date:'2024', location:'Projet personnel',
+    tags:['Mécanique','Électronique','Fabrication'],
+    title_en:'Miniature electric vehicle', type_en:'Personal Project',
+    date_en:'2024', location_en:'Personal project',
+    tags_en:['Mechanics','Electronics','Fabrication'],
+    cover:'images/vehicule-motorise.jpg',
+    images:['images/vehicule-motorise.jpg'],
+    carousel:false,
+    desc:`Dans le cadre d'un projet personnel en 2024, j'ai conçu et réalisé un petit véhicule électrique avec des moyens très limités.
+
+J'ai dû sélectionner les composants électroniques et mécaniques en fonction de contraintes budgétaires strictes, fabriquer les éléments mécaniques et assurer l'intégration électronique. Ce projet m'a appris à faire des choix techniques dans un environnement contraint, et à trouver des solutions créatives sans disposer d'un atelier équipé.`,
+    desc_en:`As a personal project in 2024, I designed and built a small electric vehicle with very limited means.
+
+I had to select the electronic and mechanical components under strict budget constraints, fabricate the mechanical parts and handle the electronic integration. This project taught me to make technical choices in a constrained environment and to find creative solutions without access to a fully equipped workshop.`
+  },
+  {
+    id:'iris', cat:'perso', special:false,
     minia:'images/iris_minia.jpg',
     title:'IRIS — IA Locale', type:'Intelligence Artificielle',
     date:'2025', location:'Projet personnel',
@@ -1325,6 +1309,44 @@ IRIS est capable de se référencer à l'ensemble de mes cours au format PDF et 
     desc_en:`During a personal project, I developed IRIS, a local artificial intelligence pre-trained on the PHI-2 model, which I reshaped into a personal course library.
 
 IRIS can reference all of my courses in PDF format and identify the relevant one by situating it relative to my past courses. It runs entirely locally, with no internet connection, which guarantees data privacy. IRIS is meant to be a true intelligent revision assistant, rooted in my own academic path.`
+  },
+  {
+    id:'extension-chrome', cat:'perso', special:false,
+    minia:'images/extension_chrome_minia.png',
+    title:'Extension Google Chrome', type:'Développement Web',
+    date:'Décembre 2025', location:'Projet personnel',
+    tags:['JavaScript','HTML/CSS','Chrome API'],
+    title_en:'Google Chrome Extension', type_en:'Web Development',
+    date_en:'December 2025', location_en:'Personal project',
+    tags_en:['JavaScript','HTML/CSS','Chrome API'],
+    cover:'images/extension-chrome-1.jpg',
+    images:['images/extension-chrome-1.jpg','images/extension-chrome-2.jpg'],
+    carousel:false,
+    desc:`Développement de plusieurs extensions Google Chrome de manière indépendante, répondant à des besoins concrets rencontrés lors de la navigation web.
+
+Ce projet m'a permis de me familiariser avec les APIs Chrome, la communication entre scripts de contenu et d'arrière-plan, ainsi que la gestion du stockage via chrome.storage.`,
+    desc_en:`Independent development of several Google Chrome extensions, addressing concrete needs encountered while browsing the web.
+
+This project let me get familiar with the Chrome APIs, the communication between content and background scripts, and storage management through chrome.storage.`
+  },
+  {
+    id:'modelisation-3d', cat:'perso', special:false,
+    minia:'images/modelisation-3d_minia.jpg',
+    title:'Modélisation 3D', type:'Création Personnelle',
+    date:'2024–2026', location:'Projet personnel',
+    tags:['Blender'],
+    title_en:'3D Modelling', type_en:'Personal Creation',
+    date_en:'2024–2026', location_en:'Personal project',
+    tags_en:['Blender'],
+    cover:'images/modelisation-3d-1.jpg',
+    images:['images/modelisation-3d-1.jpg','images/modelisation-3d-2.jpg','images/modelisation-3d-3.jpg','images/modelisation-3d-4.jpg','images/modelisation-3d-5.jpg','images/modelisation-3d-6.jpg','images/modelisation-3d-7.jpg'],
+    carousel:true,
+    desc:`La modélisation 3D est avant tout un exutoire créatif, pas un projet académique. Depuis 2024, je modélise sur Blender dans mes temps libres — scènes, objets, personnages — pour le plaisir de créer et d'explorer les possibilités du logiciel.
+
+Ces créations témoignent d'une progression continue : maîtrise du modélisme polygonal, des matériaux, de l'éclairage et du rendu. Chaque scène est une occasion d'expérimenter.`,
+    desc_en:`3D modelling is above all a creative outlet, not an academic project. Since 2024 I have been modelling in Blender in my free time — scenes, objects, characters — for the pleasure of creating and exploring what the software can do.
+
+These creations reflect continuous progress: mastery of polygonal modelling, materials, lighting and rendering. Each scene is an opportunity to experiment.`
   }
 ];
 
@@ -1381,6 +1403,7 @@ const DICT = {
     'tag.signal':'Traitement du signal &amp; image','tag.kalman':'Filtrage de Kalman &amp; observateurs','tag.orbital':'Mécanique orbitale (notions)','tag.relativity':'Relativité générale','tag.telecom':'Télécommunications &amp; bilan de liaison','tag.cst':'CST Studio (simulation électromagnétique)','tag.em':'Électromagnétisme','tag.laser':'Dispositifs LASER','tag.semicond':'Dispositifs Semi-conducteurs','tag.optics':'Optique &amp; Imagerie','tag.electronics':'Électronique','tag.quantum':'Physique Quantique','tag.thermo':'Thermodynamique','tag.mechanics':'Mécanique','tag.chemistry':'Chimie (org. &amp; analytique)','tag.control':'Automatique','tag.noise':'Bruits','tag.algo':'Algorithmique','tag.symreg':'Régression Symbolique','tag.pm':'Management Projet','tag.sysarch':'Architecture Système','tag.quality':'Démarche Qualité','tag.hse':'Hygiène &amp; Sécurité',
     'lang.french':'Français','lang.native':'Langue maternelle','lang.english':'Anglais','lang.german':'Allemand','lang.italian':'Italien',
     'portfolio.label':'05 · Portfolio','portfolio.title':'Projets',
+    'portfolio.all':'Tous','portfolio.pro':'Études &amp; pro','portfolio.perso':"Centres d'intérêt",
     'portfolio.hint':"Cliquez une carte latérale pour la centrer · cliquez la carte centrale pour l'ouvrir",
     'contact.label':'06 · Contact','contact.hed':'Construisons<br><em>quelque chose.</em>',
     'contact.sub':"Disponible pour des opportunités de stage, des collaborations sur des projets scientifiques ou simplement pour échanger.",
@@ -1429,6 +1452,7 @@ const DICT = {
     'tag.signal':'Signal &amp; image processing','tag.kalman':'Kalman filtering &amp; observers','tag.orbital':'Orbital mechanics (fundamentals)','tag.relativity':'General relativity','tag.telecom':'Telecommunications &amp; link budget','tag.cst':'CST Studio (electromagnetic simulation)','tag.em':'Electromagnetism','tag.laser':'LASER devices','tag.semicond':'Semiconductor devices','tag.optics':'Optics &amp; imaging','tag.electronics':'Electronics','tag.quantum':'Quantum physics','tag.thermo':'Thermodynamics','tag.mechanics':'Mechanics','tag.chemistry':'Chemistry (org. &amp; analytical)','tag.control':'Control systems','tag.noise':'Noise','tag.algo':'Algorithmics','tag.symreg':'Symbolic regression','tag.pm':'Project management','tag.sysarch':'System architecture','tag.quality':'Quality management','tag.hse':'Health &amp; safety',
     'lang.french':'French','lang.native':'Native','lang.english':'English','lang.german':'German','lang.italian':'Italian',
     'portfolio.label':'05 · Portfolio','portfolio.title':'Projects',
+    'portfolio.all':'All','portfolio.pro':'Studies &amp; professional','portfolio.perso':'Interests',
     'portfolio.hint':'Click a side card to center it · click the center card to open it',
     'contact.label':'06 · Contact','contact.hed':"Let's build<br><em>something.</em>",
     'contact.sub':'Available for internship opportunities, collaborations on scientific projects, or simply to chat.',
@@ -1453,7 +1477,7 @@ ITEMS.forEach((item,i)=>{
   const card=document.createElement('div');
   card.className='cf-card'+(item.special?' cf-special':'');
   card.innerHTML=`<div class="cf-thumb"><img src="${item.minia}" alt="" loading="lazy" onerror="this.remove()"></div><div class="cf-info"><span class="cf-num">${item.num} ·</span><div class="cf-name"></div><div class="cf-meta"></div><span class="cf-open"><span class="cf-open-label"></span> →</span></div>`;
-  card.addEventListener('click',()=>{ if(Date.now()-lastSwipe<260) return; if(i===active) openItem(item.id); else setActive(i); });
+  card.addEventListener('click',()=>{ if(Date.now()-lastSwipe<260) return; const pos=view.indexOf(i); if(pos===-1) return; if(pos===active) openItem(item.id); else setActive(pos); });
   cfStage.appendChild(card); cfCards.push(card);
 
   const ddItem=document.createElement('div'); ddItem.className='dd-item';
@@ -1480,13 +1504,22 @@ function refreshCardText(){
   mobLinks.forEach((a,i)=> a.textContent=`${ITEMS[i].num}. ${L(ITEMS[i],'title')}`);
 }
 
-/* ── Coverflow 3D ── */
-let active=0, lastSwipe=0;
+/* ── Filtre par catégorie + Coverflow 3D ── */
+let FILTER = 'all';
+let view = ITEMS.map((_,i)=>i);          // indices des projets affichés
+let active = 0, lastSwipe = 0;           // active = position dans `view`
 function layout(){
   const w=cf.clientWidth||800;
   const spacing=Math.min(300,Math.max(150,w*0.32));
   cfCards.forEach((card,i)=>{
-    const off=i-active, ab=Math.abs(off), dir=off<0?-1:1;
+    const pos=view.indexOf(i);
+    if(pos===-1){                          // projet masqué par le filtre
+      card.style.opacity='0'; card.style.pointerEvents='none'; card.style.zIndex='0';
+      card.style.transform='translateX(0) translateZ(-420px) scale(.5)';
+      card.classList.remove('is-active');
+      return;
+    }
+    const off=pos-active, ab=Math.abs(off), dir=off<0?-1:1;
     if(ab>2){
       card.style.opacity='0'; card.style.pointerEvents='none'; card.style.zIndex='0';
       card.style.transform=`translateX(${dir*spacing*2.2}px) translateZ(-320px) rotateY(${-dir*55}deg) scale(.6)`;
@@ -1499,10 +1532,18 @@ function layout(){
     card.style.transform=`translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg) scale(${sc})`;
     card.classList.toggle('is-active', off===0);
   });
-  cfCounter.textContent=`${active+1} / ${total}`;
-  cfPrev.disabled=active===0; cfNext.disabled=active===total-1;
+  cfCounter.textContent=`${view.length?active+1:0} / ${view.length}`;
+  cfPrev.disabled=active===0; cfNext.disabled=active>=view.length-1;
 }
-function setActive(i){ active=Math.max(0,Math.min(total-1,i)); layout(); }
+function setActive(p){ active=Math.max(0,Math.min(view.length-1,p)); layout(); }
+function setFilter(f){
+  FILTER=f;
+  view=ITEMS.map((it,i)=>i).filter(i=>f==='all'||ITEMS[i].cat===f);
+  active=0;
+  document.querySelectorAll('#pfFilters .pf-tab').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
+  layout();
+}
+document.querySelectorAll('#pfFilters .pf-tab').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.filter)));
 cfPrev.addEventListener('click',()=>setActive(active-1));
 cfNext.addEventListener('click',()=>setActive(active+1));
 window.addEventListener('resize',layout);
@@ -1591,7 +1632,11 @@ function openItem(id, rebuildOnly){
   if(!rebuildOnly && window.__themeProject)window.__themeProject(true);
   const descHTML=L(item,'desc').split('\n\n').map(p=>`<p>${p}</p>`).join('');
   const imgsHTML=buildImgsHTML(item);
-  document.getElementById('pdContent').innerHTML=`<button class="back-btn" onclick="showMain('portfolio')">← ${d['pd.back']}</button><p class="pd-crumb">Portfolio <span>/ ${title}</span></p><h1 class="pd-title">${title}</h1><div class="pd-meta"><div class="pd-mi"><span class="pd-mi-label">${d['pd.type']}</span><span class="pd-mi-val">${L(item,'type')}</span></div><div class="pd-mi"><span class="pd-mi-label">${d['pd.date']}</span><span class="pd-mi-val">${L(item,'date')}</span></div>${item.location?`<div class="pd-mi"><span class="pd-mi-label">${d['pd.loc']}</span><span class="pd-mi-val">${L(item,'location')}</span></div>`:''}</div><div class="pd-tags">${ITEM_TAGS(item).map(t=>`<span class="pd-tag">${t}</span>`).join('')}</div><div class="pd-desc">${descHTML}</div><div class="pd-imgs">${imgsHTML}</div><div class="pd-nav"><button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx-1+total)%total].id}')" ${idx===0?'disabled':''}>← ${d['pd.prev']}</button><button class="pd-nav-btn" onclick="openItem('${ITEMS[(idx+1)%total].id}')" ${idx===total-1?'disabled':''}>${d['pd.next']} →</button></div>`;
+  /* Précédent / Suivant : suivent le filtre actif si le projet en fait partie */
+  const list=view.includes(idx)?view:ITEMS.map((_,i)=>i);
+  const p=list.indexOf(idx);
+  const prevItem=p>0?ITEMS[list[p-1]]:null, nextItem=p<list.length-1?ITEMS[list[p+1]]:null;
+  document.getElementById('pdContent').innerHTML=`<button class="back-btn" onclick="showMain('portfolio')">← ${d['pd.back']}</button><p class="pd-crumb">Portfolio <span>/ ${title}</span></p><h1 class="pd-title">${title}</h1><div class="pd-meta"><div class="pd-mi"><span class="pd-mi-label">${d['pd.type']}</span><span class="pd-mi-val">${L(item,'type')}</span></div><div class="pd-mi"><span class="pd-mi-label">${d['pd.date']}</span><span class="pd-mi-val">${L(item,'date')}</span></div>${item.location?`<div class="pd-mi"><span class="pd-mi-label">${d['pd.loc']}</span><span class="pd-mi-val">${L(item,'location')}</span></div>`:''}</div><div class="pd-tags">${ITEM_TAGS(item).map(t=>`<span class="pd-tag">${t}</span>`).join('')}</div><div class="pd-desc">${descHTML}</div><div class="pd-imgs">${imgsHTML}</div><div class="pd-nav"><button class="pd-nav-btn" ${prevItem?`onclick="openItem('${prevItem.id}')"`:'disabled'}>← ${d['pd.prev']}</button><button class="pd-nav-btn" ${nextItem?`onclick="openItem('${nextItem.id}')"`:'disabled'}>${d['pd.next']} →</button></div>`;
   if(rebuildOnly){ initPdCarousel(); return; }
   const main=document.getElementById('view-main'),proj=document.getElementById('view-project');
   main.classList.add('fade-out');
