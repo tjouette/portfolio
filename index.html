@@ -796,7 +796,7 @@
           <div class="stat"><div class="stat-v">EIDD</div><div class="stat-k" data-i18n="about.stat1">École · Paris</div></div>
           <div class="stat"><div class="stat-v">3A</div><div class="stat-k" data-i18n="about.stat2">Cycle ingénieur</div></div>
           <div class="stat"><div class="stat-v">4</div><div class="stat-k" data-i18n="about.stat3">Expériences pro</div></div>
-          <div class="stat"><div class="stat-v" id="statProjects">12</div><div class="stat-k" data-i18n="about.stat4">Projets</div></div>
+          <div class="stat"><div class="stat-v" id="statProjects">13</div><div class="stat-k" data-i18n="about.stat4">Projets</div></div>
         </div>
       </div>
       <div class="reveal d2">
@@ -976,7 +976,7 @@
       <h2 class="s-title" style="margin-bottom:0" data-i18n="portfolio.title">Projets</h2>
       <div class="car-controls">
         <button class="car-btn" id="cfPrev" aria-label="Précédent">←</button>
-        <span class="car-counter" id="cfCounter">1 / 12</span>
+        <span class="car-counter" id="cfCounter">1 / 13</span>
         <button class="car-btn" id="cfNext" aria-label="Suivant">→</button>
       </div>
     </div>
@@ -1106,6 +1106,12 @@
       │   lunar-lander-3.png (commandes), lunar-lander_minia.jpg
       ├── objets-caches-1.png (original), objets-caches-2.png (diagnostic du bruit),
       │   objets-caches-3.png (seuillage), objets-caches_minia.jpg
+      ├── antenne-cornet-1.png (Fig. 3 du TP : mode TE10 dans le guide),
+      │   antenne-cornet-2.png (Fig. 8 p.5 : sans cornet, module en dB),
+      │   antenne-cornet-3.png (Fig. 14 : avec cornet), antenne-cornet-4.png (Fig. 15 : diagramme 3D),
+      │   antenne-cornet-5.png (Fig. 16 : diagramme polaire à 15 GHz),
+      │   antenne-cornet-6.png (Fig. 21 : diagrammes à 10, 15 et 20 GHz superposés),
+      │   antenne-cornet_minia.jpg
       ├── dessins-industriels-1.jpg
       ├── dessins-industriels-2.jpg
       ├── extension-chrome-1.jpg
@@ -1333,6 +1339,109 @@ Ma démarche : (1) examiner les trois canaux de couleur séparément, en commen�
 My approach: (1) examine the three colour channels separately, starting with the red one, to understand the noise and test the processing; (2) check statistically that the noise is Gaussian before choosing a filter; (3) apply a Gaussian filter then stretch the contrast, on the greyscale image (weighted average of the three channels, after clipping the darkest and brightest 0.1% of pixels); (4) isolate the remaining elements with percentile thresholding. This let me spot the comet, stars and several logo-type boxes in the corners of the image, then read a sentence hidden in the sky. The three figures below detail the key steps.`
   },
   {
+    id:'antenne-cornet', cat:'pro', special:false,
+    minia:'images/antenne-cornet_minia.jpg',
+    title:"Guide d'onde et antenne cornet", type:'Télécommunications',
+    date:'2025–2026', location:'EIDD, Paris',
+    tags:['CST Studio',"Guide d'onde",'Antenne cornet','Rayonnement'],
+    title_en:'Waveguide and Horn Antenna', type_en:'Telecommunications',
+    date_en:'2025–2026', location_en:'EIDD, Paris',
+    tags_en:['CST Studio','Waveguide','Horn antenna','Radiation'],
+    cover:'images/antenne-cornet-1.png',
+    images:[],
+    figs:[
+      {
+        src:'images/antenne-cornet-1.png',
+        title:"Figure 1 — Le mode TE10 à l'intérieur du guide",
+        title_en:'Figure 1 — The TE10 mode inside the waveguide',
+        text:`<strong>Ce que montre le graphique.</strong> Composante verticale E<sub>y</sub> du champ électrique sur un plan de coupe, à un instant donné (phase nulle). Dans le guide, des cellules alternativement rouges (champ positif) et bleues (champ négatif) se succèdent le long de l'axe z : c'est une onde qui oscille dans l'espace. Sa longueur d'onde dans le guide, λ<sub>g</sub> = λ / √(1 − (f<sub>c</sub>/f)²) ≈ 2,7 cm, est plus grande que celle du vide (2 cm). Dans la section, le champ est maximal au centre de la grande dimension, nul sur les parois métalliques (variation en demi-sinusoïde) et quasi uniforme sur la petite dimension : c'est la signature du mode TE<sub>10</sub>, où seule la composante E<sub>y</sub> existe.
+
+<strong>Ce qui se passe à l'extrémité.</strong> À l'ouverture du guide, des cercles s'éloignent : une partie de l'onde en sort. Mais d'une phase à l'autre, le champ ne fait pas que se propager, il « clignote » : ce sont des ondes stationnaires, avec des points où le champ est maximal et d'autres où il s'annule. Elles trahissent une onde renvoyée vers l'intérieur par l'extrémité ouverte, ce que la figure suivante permet d'expliquer.`,
+        text_en:`<strong>What the plot shows.</strong> Vertical component E<sub>y</sub> of the electric field on a cutting plane, at a given instant (zero phase). Inside the guide, alternately red (positive field) and blue (negative field) cells follow one another along the z axis: this is a wave oscillating in space. Its wavelength inside the guide, λ<sub>g</sub> = λ / √(1 − (f<sub>c</sub>/f)²) ≈ 2.7 cm, is longer than in vacuum (2 cm). Across the section, the field is maximal at the centre of the wide dimension, zero on the metal walls (half-sine variation) and almost uniform along the narrow dimension: this is the signature of the TE<sub>10</sub> mode, where only the E<sub>y</sub> component exists.
+
+<strong>What happens at the end.</strong> At the opening of the guide, circles move away: part of the wave leaves the guide. But from one phase to the next, the field does not simply propagate, it "flickers": these are standing waves, with points where the field is maximal and others where it vanishes. They reveal a wave sent back into the guide by the open end, which the next figure helps explain.`
+      },
+      {
+        src:'images/antenne-cornet-2.png',
+        title:"Figure 2 — Sans cornet : l'onde s'étale à la sortie du guide",
+        title_en:'Figure 2 — Without horn: the wave spreads out at the guide exit',
+        text:`<strong>Ce que montre le graphique.</strong> Module du champ électrique en dB (0 dB au maximum, −40 dB pour un champ 100 fois plus faible), sur deux plans de coupe, pour le guide seul. À la sortie, l'énergie s'étale en anneaux presque circulaires autour de l'ouverture : le guide se comporte comme une petite source qui rayonne dans un très grand angle, sans faisceau dirigé. C'est attendu, car l'ouverture (15 mm × 5 mm) est du même ordre de grandeur que la longueur d'onde (20 mm) : plus une ouverture est petite devant λ, plus la diffraction étale l'onde.
+
+<strong>Pourquoi l'adaptation est mauvaise.</strong> Dans le guide, l'impédance d'onde du mode TE<sub>10</sub> vaut Z = η<sub>0</sub> / √(1 − (f<sub>c</sub>/f)²) ≈ 505 Ω à 15 GHz, contre η<sub>0</sub> ≈ 377 Ω pour l'espace libre. À ce saut d'impédance s'ajoute un changement brutal de géométrie : l'onde est partiellement renvoyée à l'ouverture, ce qui produit les ondes stationnaires de la figure 1 et limite le couplage vers l'espace libre. Un cornet, qui élargit progressivement la section, va remplacer ce saut par une transition continue.`,
+        text_en:`<strong>What the plot shows.</strong> Magnitude of the electric field in dB (0 dB at the maximum, −40 dB for a field 100 times weaker), on two cutting planes, for the bare guide. At the exit, the energy spreads out in almost circular rings around the opening: the guide behaves like a small source radiating over a very wide angle, with no directed beam. This is expected, because the opening (15 mm × 5 mm) is of the same order as the wavelength (20 mm): the smaller an opening is compared with λ, the more diffraction spreads the wave.
+
+<strong>Why the matching is poor.</strong> Inside the guide, the wave impedance of the TE<sub>10</sub> mode is Z = η<sub>0</sub> / √(1 − (f<sub>c</sub>/f)²) ≈ 505 Ω at 15 GHz, versus η<sub>0</sub> ≈ 377 Ω for free space. On top of this impedance jump comes an abrupt change of geometry: the wave is partly sent back at the opening, which produces the standing waves of figure 1 and limits the coupling to free space. A horn, which widens the section gradually, replaces this jump with a continuous transition.`
+      },
+      {
+        src:'images/antenne-cornet-3.png',
+        title:'Figure 3 — Avec cornet : un faisceau dirigé',
+        title_en:'Figure 3 — With horn: a directed beam',
+        text:`<strong>Ce que montre le graphique.</strong> La même grandeur que la figure précédente (module du champ en dB, même échelle de −40 à 0 dB), mais avec un cornet fixé au guide. L'énergie n'est plus étalée en anneaux : elle sort dans un cône étroit autour de l'axe, avec des fronts d'onde plus plans et quelques lobes latéraux. Le cornet agit comme une transition progressive : plus sa section s'élargit, plus la fréquence de coupure du mode TE<sub>10</sub> baisse et plus son impédance se rapproche de celle de l'espace libre (≈ 378 Ω à l'ouverture, large de 12 cm). L'onde passe doucement du milieu guidé à l'espace libre, au lieu d'être « expulsée » d'un coup.
+
+<strong>Un point de rigueur : champ proche ou champ lointain ?</strong> Cette vue 3D montre le champ proche. La plus grande dimension du cornet vaut D = 12 cm (6λ) : le champ proche réactif s'étend jusqu'à 0,62·√(D³/λ) ≈ 0,18 m, et le champ lointain ne commence qu'à 2D²/λ = 1,44 m. Le domaine de calcul ne s'étend qu'à 0,2 m autour de l'antenne : on est dans la zone de Fresnel (champ proche rayonnant). Les diagrammes de rayonnement des figures suivantes sont, eux, des diagrammes de champ lointain calculés par CST à partir de ce champ proche.`,
+        text_en:`<strong>What the plot shows.</strong> The same quantity as the previous figure (field magnitude in dB, same −40 to 0 dB scale), but with a horn attached to the guide. The energy is no longer spread in rings: it leaves in a narrow cone around the axis, with flatter wavefronts and a few side lobes. The horn acts as a gradual transition: the wider its section, the lower the cutoff frequency of the TE<sub>10</sub> mode and the closer its impedance gets to that of free space (≈ 378 Ω at the 12 cm wide opening). The wave passes smoothly from the guided medium to free space, instead of being "expelled" all at once.
+
+<strong>A point of rigour: near field or far field?</strong> This 3D view shows the near field. The largest dimension of the horn is D = 12 cm (6λ): the reactive near field extends up to 0.62·√(D³/λ) ≈ 0.18 m, and the far field only starts at 2D²/λ = 1.44 m. The computation domain only extends 0.2 m around the antenna: we are in the Fresnel zone (radiating near field). The radiation patterns of the following figures are far-field patterns computed by CST from this near field.`
+      },
+      {
+        src:'images/antenne-cornet-4.png',
+        title:'Figure 4 — Diagramme de rayonnement 3D à 15 GHz',
+        title_en:'Figure 4 — 3D radiation pattern at 15 GHz',
+        text:`<strong>Ce que montre le graphique.</strong> La directivité de l'antenne dans toutes les directions, en dBi (décibels par rapport à une antenne isotrope), représentée comme une surface : plus elle s'éloigne du centre, plus l'antenne rayonne dans cette direction. On voit un lobe principal allongé dans l'axe du cornet (rouge, jusqu'à 20 dBi), entouré de lobes secondaires plus petits (vert et bleu) et de peu de rayonnement vers l'arrière.
+
+<strong>Ce que signifie 20 dBi.</strong> 10<sup>20/10</sup> = 100 : dans sa direction principale, l'antenne concentre la puissance 100 fois plus qu'une antenne isotrope qui rayonnerait la même puissance dans toutes les directions. Le cornet transforme donc un guide peu directif en une antenne nettement directive.`,
+        text_en:`<strong>What the plot shows.</strong> The directivity of the antenna in all directions, in dBi (decibels relative to an isotropic antenna), drawn as a surface: the further it extends from the centre, the more the antenna radiates in that direction. We see a main lobe stretched along the axis of the horn (red, up to 20 dBi), surrounded by smaller side lobes (green and blue) and little radiation towards the back.
+
+<strong>What 20 dBi means.</strong> 10<sup>20/10</sup> = 100: in its main direction, the antenna concentrates the power 100 times more than an isotropic antenna radiating the same power in all directions. The horn thus turns a weakly directive guide into a clearly directive antenna.`
+      },
+      {
+        src:'images/antenne-cornet-5.png',
+        title:'Figure 5 — Lire un diagramme polaire : lobe principal, largeur à −3 dB, lobes secondaires',
+        title_en:'Figure 5 — Reading a polar pattern: main lobe, −3 dB width, side lobes',
+        text:`<strong>Les quatre grandeurs à retenir.</strong> Même résultat que la figure 4, vu en coupe (plan φ = 90°). À 15 GHz, CST relève : une directivité maximale de 20 dBi dans l'axe (θ = 0°), une largeur à mi-puissance (−3 dB) de 16,8° et un premier lobe secondaire à −11,4 dB sous le lobe principal. Ces grandeurs suffisent à juger une antenne : combien le faisceau concentre la puissance, vers où il pointe, quelle est sa finesse, et quelle part de puissance part dans des directions parasites.
+
+<strong>Pourquoi des lobes secondaires ?</strong> À cause de la diffraction à l'ouverture : chaque point de l'ouverture se comporte comme une source secondaire (principe de Huygens-Fresnel), et leurs ondes s'additionnent dans certaines directions (les lobes) et s'annulent dans d'autres (les creux). Pour une ouverture rectangulaire à champ uniforme, le premier lobe secondaire serait à −13,2 dB : le −11,4 dB relevé à 15 GHz est du même ordre, ce qui est cohérent avec un champ quasi uniforme dans ce plan de coupe. Côté polarisation, seul E<sub>y</sub> est non nul pour le mode TE<sub>10</sub> : l'onde émise est polarisée linéairement selon y.`,
+        text_en:`<strong>The four quantities to remember.</strong> Same result as figure 4, seen in cross-section (φ = 90° plane). At 15 GHz, CST reads: a maximum directivity of 20 dBi on axis (θ = 0°), a half-power (−3 dB) width of 16.8° and a first side lobe at −11.4 dB below the main lobe. These quantities are enough to judge an antenna: how much the beam concentrates the power, where it points, how fine it is, and how much power goes into unwanted directions.
+
+<strong>Why side lobes?</strong> Because of diffraction at the aperture: each point of the opening behaves like a secondary source (Huygens-Fresnel principle), and their waves add up in some directions (the lobes) and cancel in others (the nulls). For a rectangular aperture with a uniform field, the first side lobe would be at −13.2 dB: the −11.4 dB measured at 15 GHz is of the same order, which is consistent with a nearly uniform field in this cutting plane. As for polarisation, only E<sub>y</sub> is non-zero for the TE<sub>10</sub> mode: the emitted wave is linearly polarised along y.`
+      },
+      {
+        src:'images/antenne-cornet-6.png',
+        title:"Figure 6 — Étude paramétrique : l'effet de la fréquence (10, 15 et 20 GHz superposés)",
+        title_en:'Figure 6 — Parametric study: the effect of frequency (10, 15 and 20 GHz superimposed)',
+        text:`<strong>Ce que montre le graphique.</strong> Les diagrammes polaires du cornet à 10 GHz (rouge), 15 GHz (vert) et 20 GHz (bleu), superposés sur un même graphique. Quand la fréquence monte, le lobe principal s'affine, atteint un niveau plus élevé, et les lobes secondaires deviennent plus marqués. CST relève : directivité de 18,1 → 20,0 → 21,1 dBi, largeur à −3 dB de 25,4° → 16,8° → 12,3°, et premier lobe secondaire de −12,4 → −11,4 → −9,6 dB.
+
+<strong>Pourquoi ?</strong> À taille d'ouverture fixe, la longueur d'onde diminue quand la fréquence augmente : l'ouverture vaut davantage de longueurs d'onde, donc le faisceau se resserre. Pour une ouverture idéale, la directivité croîtrait comme f², soit +6 dB entre 10 et 20 GHz. On n'observe que +3 dB, vraisemblablement parce que, avec une longueur de cornet fixe, l'écart de phase entre le centre et les bords de l'ouverture augmente avec la fréquence et éloigne le cornet de son fonctionnement idéal. À noter : 10 GHz et 20 GHz sont aussi les bornes de la bande monomode du guide d'alimentation (coupure de TE<sub>10</sub> et de TE<sub>20</sub>).
+
+<strong>Longueur du cornet (4, 8, 12 et 16 cm, à 15 GHz).</strong> La directivité passe de 12,4 à 17,7, 20,0 puis 20,9 dBi, et la largeur à −3 dB de 52,2° à 17,7°, 16,8° puis 16,3°. Un cornet plus long s'évase moins : l'écart de phase dans l'ouverture diminue, donc le fonctionnement se rapproche de l'idéal. Le gain est rapide au début puis sature (+0,9 dB seulement entre 12 et 16 cm). Le premier lobe secondaire reste entre −10,2 et −11,7 dB sans tendance nette : allonger le cornet n'élimine pas les lobes secondaires.
+
+<strong>Ouverture (à longueur constante, 12 cm).</strong> Trois ouvertures sont comparées : 2×4 cm, le cornet de référence (12 cm de large) et 8×16 cm. La directivité passe de 13,1 à 20,0 puis redescend à 18,2 dBi, alors que le faisceau continue de s'affiner (52,6° → 16,8° → 14,0°) et que le premier lobe secondaire remonte de −13,1 à −11,4 puis −7,0 dB. Agrandir l'ouverture n'est donc utile que jusqu'à un optimum : au-delà, avec une longueur fixe, l'évasement du cornet crée de grands écarts de phase entre le centre et les bords de l'ouverture, une part importante de la puissance part dans les lobes latéraux (−7,0 dB) et la directivité baisse. Un repère : la directivité maximale d'une ouverture uniforme, 4πA/λ², vaut 14,0 dBi pour la plus petite ouverture et 26,0 dBi pour la plus grande ; la petite atteint environ 80 % de ce plafond, la grande environ 16 % seulement.
+
+<strong>Conclusion.</strong> Pour obtenir un cornet directif, la longueur et l'ouverture doivent être choisies ensemble : au-delà d'un optimum, agrandir l'ouverture sans allonger le cornet dégrade la directivité et les lobes secondaires.`,
+        text_en:`<strong>What the plot shows.</strong> The polar patterns of the horn at 10 GHz (red), 15 GHz (green) and 20 GHz (blue), superimposed on one plot. As the frequency rises, the main lobe narrows and reaches a higher level, and the side lobes become more pronounced. CST reads: directivity of 18.1 → 20.0 → 21.1 dBi, −3 dB width of 25.4° → 16.8° → 12.3°, and first side lobe of −12.4 → −11.4 → −9.6 dB.
+
+<strong>Why?</strong> With a fixed aperture size, the wavelength decreases as the frequency increases: the aperture measures more wavelengths, so the beam tightens. For an ideal aperture, directivity would grow as f², i.e. +6 dB between 10 and 20 GHz. Only +3 dB is observed, probably because, with a fixed horn length, the phase difference between the centre and the edges of the aperture grows with frequency and moves the horn away from its ideal operation. Note that 10 GHz and 20 GHz are also the edges of the single-mode band of the feeding guide (cutoff of TE<sub>10</sub> and TE<sub>20</sub>).
+
+<strong>Horn length (4, 8, 12 and 16 cm, at 15 GHz).</strong> Directivity goes from 12.4 to 17.7, 20.0 then 20.9 dBi, and the −3 dB width from 52.2° to 17.7°, 16.8° then 16.3°. A longer horn flares less: the phase difference across the aperture decreases, so the operation gets closer to the ideal. The gain rises fast at first, then saturates (only +0.9 dB between 12 and 16 cm). The first side lobe stays between −10.2 and −11.7 dB with no clear trend: lengthening the horn does not remove the side lobes.
+
+<strong>Aperture (at constant length, 12 cm).</strong> Three apertures are compared: 2×4 cm, the reference horn (12 cm wide) and 8×16 cm. Directivity goes from 13.1 to 20.0 then drops back to 18.2 dBi, while the beam keeps narrowing (52.6° → 16.8° → 14.0°) and the first side lobe rises from −13.1 to −11.4 then −7.0 dB. Enlarging the aperture is therefore only useful up to an optimum: beyond it, with a fixed length, the flare of the horn creates large phase differences between the centre and the edges of the aperture, a significant share of the power goes into the side lobes (−7.0 dB) and the directivity drops. For reference: the maximum directivity of a uniform aperture, 4πA/λ², is 14.0 dBi for the smallest aperture and 26.0 dBi for the largest; the small one reaches about 80% of this ceiling, the large one only about 16%.
+
+<strong>Conclusion.</strong> To obtain a directive horn, length and aperture must be chosen together: beyond an optimum, enlarging the aperture without lengthening the horn degrades directivity and side lobes.`
+      }
+    ],
+    carousel:false,
+    desc:`TP de Systèmes de télécommunications 1 à l'EIDD, réalisé en binôme avec le logiciel de simulation électromagnétique CST Studio. Objectif : comprendre comment une onde se propage dans un guide d'onde rectangulaire, pourquoi un guide nu rayonne mal vers l'espace libre, et comment une antenne cornet corrige ce défaut.
+
+Le guide étudié mesure a = 3λ/4 par b = λ/4 à 15 GHz (λ = 2 cm), soit 15 mm × 5 mm. Ses fréquences de coupure valent 10 GHz pour le mode TE<sub>10</sub>, 20 GHz pour TE<sub>20</sub> et 30 GHz pour TE<sub>01</sub> : entre 10 et 20 GHz, seul le mode TE<sub>10</sub> peut se propager, ce qui garantit un champ simple et connu à l'intérieur du guide.
+
+Le TP suit quatre étapes. (1) Alléger la simulation : les deux plans de symétrie du guide permettent de n'en simuler qu'un quart, et avec un maillage ajusté le nombre de cellules passe de 86 526 à 23 256. (2) Visualiser le champ dans le guide et à sa sortie. (3) Ajouter un cornet et analyser son diagramme de rayonnement : lobe principal, lobes secondaires, polarisation, limite entre champ proche et champ lointain. (4) Étudier l'influence de la fréquence, de la longueur et de l'ouverture du cornet. Les six figures ci-dessous détaillent les résultats.`,
+    desc_en:`Telecommunications Systems 1 lab at EIDD, done in pairs with the electromagnetic simulation software CST Studio. Goal: understand how a wave propagates in a rectangular waveguide, why a bare guide radiates poorly into free space, and how a horn antenna fixes this.
+
+The guide studied measures a = 3λ/4 by b = λ/4 at 15 GHz (λ = 2 cm), i.e. 15 mm × 5 mm. Its cutoff frequencies are 10 GHz for the TE<sub>10</sub> mode, 20 GHz for TE<sub>20</sub> and 30 GHz for TE<sub>01</sub>: between 10 and 20 GHz, only the TE<sub>10</sub> mode can propagate, which guarantees a simple, well-known field inside the guide.
+
+The lab follows four steps. (1) Lighten the simulation: the two symmetry planes of the guide allow simulating only a quarter of it, and with an adjusted mesh the number of cells goes from 86,526 to 23,256. (2) Visualise the field in the guide and at its exit. (3) Add a horn and analyse its radiation pattern: main lobe, side lobes, polarisation, boundary between near field and far field. (4) Study the influence of the frequency, length and aperture of the horn. The six figures below detail the results.`
+  },
+  {
     id:'architecture-systeme', cat:'pro', special:false,
     minia:'images/architecture-systeme_minia.jpg',
     title:'Projet Architecture Système', type:'UE Ingénierie Système',
@@ -1507,7 +1616,7 @@ These creations reflect continuous progress: mastery of polygonal modelling, mat
   }
 ];
 
-const total=ITEMS.length; // 12
+const total=ITEMS.length; // 13
 /* Numérotation automatique selon l'ordre du tableau + compteur de projets */
 ITEMS.forEach((it,i)=>{ it.num=String(i+1).padStart(2,'0'); });
 document.getElementById('statProjects').textContent=total;
