@@ -1743,7 +1743,7 @@ ITEMS.forEach((item,i)=>{
   const card=document.createElement('div');
   card.className='cf-card'+(item.special?' cf-special':'');
   card.innerHTML=`<div class="cf-thumb"><img src="${item.minia}" alt="" loading="lazy" onerror="this.remove()"></div><div class="cf-info"><span class="cf-num">${item.num} ·</span><div class="cf-name"></div><div class="cf-meta"></div><span class="cf-open"><span class="cf-open-label"></span> →</span></div>`;
-  card.addEventListener('click',()=>{ if(Date.now()-lastSwipe<260) return; const pos=view.indexOf(i); if(pos===-1) return; if(pos===active) openItem(item.id); else setActive(pos); });
+  /* Le clic sur une carte est géré globalement sur #cf (voir plus bas) */
   cfStage.appendChild(card); cfCards.push(card);
 
   const ddItem=document.createElement('div'); ddItem.className='dd-item';
@@ -1810,8 +1810,31 @@ function setFilter(f){
   layout();
 }
 document.querySelectorAll('#pfFilters .pf-tab').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.filter)));
-cfPrev.addEventListener('click',()=>setActive(active-1));
-cfNext.addEventListener('click',()=>setActive(active+1));
+
+/* Flèches : un même clic ne peut déclencher qu'un seul pas, même si l'écouteur est doublé */
+let lastNavEvt = -1;
+function navOnce(e){ if(e.timeStamp===lastNavEvt) return false; lastNavEvt=e.timeStamp; return true; }
+cfPrev.addEventListener('click',e=>{ if(navOnce(e)) setActive(active-1); });
+cfNext.addEventListener('click',e=>{ if(navOnce(e)) setActive(active+1); });
+
+/* Clic sur une carte : on choisit la carte d'après la position du clic,
+   sans dépendre du « hit-testing » 3D du navigateur */
+cf.addEventListener('click',e=>{
+  if(Date.now()-lastSwipe<260) return;      // ignore le clic qui suit un glissement
+  let best=-1, bestAb=99;
+  cfCards.forEach((card,i)=>{
+    const pos=view.indexOf(i); if(pos===-1) return;
+    const ab=Math.abs(pos-active); if(ab>2) return;
+    const r=card.getBoundingClientRect();
+    if(e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom && ab<bestAb){
+      best=pos; bestAb=ab;                  // en cas de recouvrement, la carte la plus proche du centre gagne
+    }
+  });
+  if(best===-1) return;
+  if(best===active) openItem(ITEMS[view[best]].id);
+  else setActive(best);
+});
+
 window.addEventListener('resize',layout);
 /* glisser pour naviguer (mobile / trackpad) */
 let cfDownX=null;
