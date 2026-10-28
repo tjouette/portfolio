@@ -800,7 +800,7 @@
           <div class="stat"><div class="stat-v">EIDD</div><div class="stat-k" data-i18n="about.stat1">École · Paris</div></div>
           <div class="stat"><div class="stat-v">3A</div><div class="stat-k" data-i18n="about.stat2">Cycle ingénieur</div></div>
           <div class="stat"><div class="stat-v">4</div><div class="stat-k" data-i18n="about.stat3">Expériences pro</div></div>
-          <div class="stat"><div class="stat-v" id="statProjects">13</div><div class="stat-k" data-i18n="about.stat4">Projets</div></div>
+          <div class="stat"><div class="stat-v" id="statProjects">18</div><div class="stat-k" data-i18n="about.stat4">Projets</div></div>
         </div>
       </div>
       <div class="reveal d2">
@@ -980,7 +980,7 @@
       <h2 class="s-title" style="margin-bottom:0" data-i18n="portfolio.title">Projets</h2>
       <div class="car-controls">
         <button class="car-btn" id="cfPrev" aria-label="Précédent">←</button>
-        <span class="car-counter" id="cfCounter">1 / 13</span>
+        <span class="car-counter" id="cfCounter">1 / 18</span>
         <button class="car-btn" id="cfNext" aria-label="Suivant">→</button>
       </div>
     </div>
@@ -1121,6 +1121,10 @@
       │   laser-he-ne_minia.png
       ├── diffraction-young-1.png (ajustement 1/a), diffraction-young-2.png (ajustement sinc²),
       │   diffraction-young_minia.png
+      ├── optoelectronique-1.png (L-I), optoelectronique-2.png (spectres LED / laser),
+      │   optoelectronique-3.png (λ en fonction de T), optoelectronique_minia.jpg
+      ├── pmodtmp3-1.jpg (carte 23,2 °C / 27,0 °C), pmodtmp3-2.jpg (schéma fonctionnel),
+      │   pmodtmp3-3.jpg (persistance rétinienne), pmodtmp3_minia.jpg
       ├── dessins-industriels-1.jpg
       ├── dessins-industriels-2.jpg
       ├── extension-chrome-1.jpg
@@ -1601,6 +1605,150 @@ Les deux figures ci-dessous présentent le résultat phare (la loi de la diffrac
 The two figures below present the key result (the diffraction law verified by a linear fit), then the fit of a complete diffraction pattern, followed by the conclusion.`
   },
   {
+    id:'optoelectronique', cat:'pro', special:false,
+    minia:'images/optoelectronique_minia.jpg',
+    title:'Émetteurs et récepteurs de lumière', type:'Optoélectronique',
+    date:'2025–2026', location:'EIDD, Paris',
+    tags:['Python','Diode laser','Photodiode','Spectromètre CCD'],
+    title_en:'Light Emitters and Receivers', type_en:'Optoelectronics',
+    date_en:'2025–2026', location_en:'EIDD, Paris',
+    tags_en:['Python','Laser diode','Photodiode','CCD spectrometer'],
+    cover:'images/optoelectronique-1.png',
+    images:[],
+    figs:[
+      {
+        src:'images/optoelectronique-1.png',
+        title:"Figure 1 — Puissance émise en fonction du courant : la signature du seuil laser",
+        title_en:'Figure 1 — Emitted power versus current: the signature of the laser threshold',
+        text:`<strong>Ce que montre le graphique.</strong> La puissance optique émise par la diode laser en fonction du courant d'alimentation, pour deux températures (la puissance est déduite du courant de la photodiode interne, étalonnée à 0,057 ± 0,001 mA/mW). Deux régimes se distinguent nettement. Sous le seuil, la puissance est quasi nulle : la diode se comporte comme une LED et émet de la lumière spontanée, non cohérente. Au-dessus, elle croît linéairement avec le courant : c'est le régime laser. Comme un barrage, tant que l'eau n'a pas atteint la crête rien ne déborde ; dès qu'elle la dépasse, tout s'écoule d'un coup.
+
+<strong>Ce que l'on en tire.</strong> Une régression linéaire sur la partie au-dessus du seuil donne un courant de seuil de 35,5 ± 0,6 mA à 25,2 °C et de 34,1 ± 0,2 mA à 21,1 °C, pour des pentes de 0,437 ± 0,005 et 0,444 ± 0,002 mW/mA. L'efficacité différentielle est d'environ 21 % (efficacité totale de 4,8 à 5,5 % à 46 mA). Le seuil augmente avec la température : l'agitation thermique favorise les recombinaisons non radiatives (électrons et trous se recombinent sans émettre de photon), et il faut plus de courant pour atteindre le régime laser. C'est pourquoi le contrôle en température est indispensable dans les applications réelles.
+
+<strong>Ce qui reste imparfait.</strong> La tension de seuil de la caractéristique I-V (V<sub>s</sub> = 2,092 V, résistance interne de 143 ± 3 Ω) donne une longueur d'onde de 594 nm, contre 635 nm annoncés par le constructeur : même ordre de grandeur, mais la résistance série du montage, les pertes non radiatives et l'imprécision des mesures décalent l'estimation.`,
+        text_en:`<strong>What the plot shows.</strong> The optical power emitted by the laser diode as a function of the supply current, for two temperatures (the power is deduced from the current of the internal photodiode, calibrated at 0.057 ± 0.001 mA/mW). Two regimes stand out clearly. Below the threshold, the power is almost zero: the diode behaves like an LED and emits spontaneous, incoherent light. Above it, the power grows linearly with the current: this is the laser regime. Like a dam, as long as the water has not reached the crest nothing overflows; as soon as it passes it, everything pours out at once.
+
+<strong>What we get from it.</strong> A linear regression on the part above the threshold gives a threshold current of 35.5 ± 0.6 mA at 25.2 °C and 34.1 ± 0.2 mA at 21.1 °C, with slopes of 0.437 ± 0.005 and 0.444 ± 0.002 mW/mA. The differential efficiency is about 21% (total efficiency of 4.8 to 5.5% at 46 mA). The threshold rises with temperature: thermal agitation favours non-radiative recombinations (electrons and holes recombine without emitting a photon), so more current is needed to reach the laser regime. This is why temperature control is essential in real applications.
+
+<strong>What remains imperfect.</strong> The threshold voltage of the I-V characteristic (V<sub>s</sub> = 2.092 V, internal resistance of 143 ± 3 Ω) gives a wavelength of 594 nm, against the 635 nm announced by the manufacturer: same order of magnitude, but the series resistance of the setup, non-radiative losses and measurement imprecision shift the estimate.`
+      },
+      {
+        src:'images/optoelectronique-2.png',
+        title:"Figure 2 — Spectre d'une LED face à celui de la diode laser",
+        title_en:'Figure 2 — Spectrum of an LED versus that of the laser diode',
+        text:`<strong>Ce que montre le graphique.</strong> Deux spectres enregistrés avec le spectromètre à réseau et barrette CCD (2048 pixels de 14 µm), à la même échelle : en haut une LED, en bas la diode laser injectée dans une fibre. L'étalonnage de la barrette (0,0458 ± 0,0008 nm par pixel, soit un pouvoir de résolution d'environ 14 000) a été obtenu en envoyant le pic laser d'un bord à l'autre de la CCD (597,4 puis 691,2 nm).
+
+<strong>Ce que l'on en tire.</strong> La LED émet un pic large et arrondi, centré à 672,5 nm, d'une largeur à mi-hauteur de 26,2 ± 1,9 nm, soit environ 17 THz : ses photons sont émis spontanément, sans cohérence, avec une distribution étalée autour du gap. Le laser concentre son énergie dans un pic très fin (0,92 ± 0,04 nm, soit environ 670 GHz), environ 26 fois plus étroit en fréquence. Rapportée à la largeur spectrale, la puissance du laser (0,72 mW) donne une densité de 1,1 × 10<sup>−15</sup> W/Hz, environ dix fois celle d'une LED (de l'ordre de 10<sup>−16</sup> W/Hz), alors que les puissances totales sont comparables.
+
+<strong>Le détail qui compte.</strong> Le pic laser est en réalité double : ce sont deux modes longitudinaux consécutifs de la cavité. Leur écart (0,33 ± 0,04 nm) donne, avec un indice n = 3,5, la longueur de la cavité L = λ² / (2nΔλ) ≈ 180 ± 22 µm, cohérente avec la taille d'une diode laser.`,
+        text_en:`<strong>What the plot shows.</strong> Two spectra recorded with the grating spectrometer and CCD array (2048 pixels of 14 µm), on the same scale: an LED at the top, the laser diode injected into a fibre at the bottom. The array was calibrated (0.0458 ± 0.0008 nm per pixel, i.e. a resolving power of about 14,000) by sending the laser peak from one edge of the CCD to the other (597.4 then 691.2 nm).
+
+<strong>What we get from it.</strong> The LED emits a broad, rounded peak centred at 672.5 nm, with a full width at half maximum of 26.2 ± 1.9 nm, i.e. about 17 THz: its photons are emitted spontaneously, without coherence, with a distribution spread around the gap. The laser concentrates its energy in a very narrow peak (0.92 ± 0.04 nm, i.e. about 670 GHz), about 26 times narrower in frequency. Divided by the spectral width, the laser power (0.72 mW) gives a density of 1.1 × 10<sup>−15</sup> W/Hz, about ten times that of an LED (of the order of 10<sup>−16</sup> W/Hz), even though the total powers are comparable.
+
+<strong>The detail that matters.</strong> The laser peak is actually double: these are two consecutive longitudinal modes of the cavity. Their spacing (0.33 ± 0.04 nm) gives, with a refractive index n = 3.5, the cavity length L = λ² / (2nΔλ) ≈ 180 ± 22 µm, consistent with the size of a laser diode.`
+      },
+      {
+        src:'images/optoelectronique-3.png',
+        title:"Figure 3 — Longueur d'onde du laser en fonction de la température : dérive lente et sauts de mode",
+        title_en:'Figure 3 — Laser wavelength versus temperature: slow drift and mode hops',
+        text:`<strong>Ce que montre le graphique.</strong> La longueur d'onde du laser en fonction de la température, à courant constant (45 mA). Trois segments presque rectilignes sont séparés par des sauts brusques d'environ 0,4 nm vers le bas. La régression globale (pointillés rouges) est très mauvaise (R² = 0,37), alors que chaque segment est très bien ajusté (R² entre 0,97 et 0,999).
+
+<strong>Pourquoi cette forme.</strong> Entre deux sauts, un même mode longitudinal de la cavité reste actif et sa longueur d'onde dérive lentement avec l'indice du matériau : dλ/dT = (λ/n)(dn/dT). La pente moyenne entre les sauts vaut 89 pm/°C (86, 91 et 90 pm/°C sur les trois segments). À chaque saut, le laser passe brusquement d'un mode longitudinal au suivant, ce qui compense la dérive : sur toute la plage, la pente moyenne n'est plus que de 21 pm/°C. Travailler en mode courant constant est essentiel : augmenter le courant chauffe localement la jonction et produit le même effet que la température, ce qui brouillerait l'analyse.
+
+<strong>Conclusion du TP.</strong> Ce TP m'a permis de relier directement les modèles du cours à des mesures sur des composants réels : seuil laser et efficacité, cohérence spectrale, mode longitudinal et dérive thermique. Deux parties n'ont pas pu être réalisées en séance et sont traitées qualitativement dans le compte rendu : la divergence du faisceau sans optique de collimation, et la spectroscopie d'absorption d'une cellule d'iode, où la diode laser balaye les raies de la molécule.`,
+        text_en:`<strong>What the plot shows.</strong> The wavelength of the laser as a function of temperature, at constant current (45 mA). Three almost straight segments are separated by sudden downward jumps of about 0.4 nm. The global regression (red dotted line) is very poor (R² = 0.37), whereas each segment is fitted very well (R² between 0.97 and 0.999).
+
+<strong>Why this shape.</strong> Between two jumps, the same longitudinal mode of the cavity stays active and its wavelength drifts slowly with the refractive index of the material: dλ/dT = (λ/n)(dn/dT). The average slope between jumps is 89 pm/°C (86, 91 and 90 pm/°C on the three segments). At each jump, the laser switches abruptly from one longitudinal mode to the next, which compensates the drift: over the whole range, the average slope is only 21 pm/°C. Working in constant-current mode is essential: raising the current heats the junction locally and has the same effect as temperature, which would blur the analysis.
+
+<strong>Conclusion of the lab.</strong> This lab let me connect the course models directly to measurements on real components: laser threshold and efficiency, spectral coherence, longitudinal modes and thermal drift. Two parts could not be carried out during the session and are treated qualitatively in the report: the divergence of the beam without collimating optics, and the absorption spectroscopy of an iodine cell, where the laser diode scans the lines of the molecule.`
+      }
+    ],
+    carousel:false,
+    desc:`TP d'Optoélectronique du cours de Semi-conducteurs à l'EIDD, avec traitement des données en Python (régressions orthogonales et propagation des incertitudes). Objectif : caractériser expérimentalement des composants qui émettent et reçoivent de la lumière, au cœur des télécommunications par fibre optique et des capteurs industriels.
+
+<strong>Introduction.</strong> Le TP suit la chaîne d'un lien optique : (1) la diode laser, avec sa courbe puissance-courant, sa caractéristique courant-tension et sa sensibilité à la température (mesurée par une thermistance) ; (2) la photodiode qui reçoit la lumière ; (3) la modulation du laser par un signal créneau puis en dent de scie, qui fait apparaître la caractéristique P = f(I) directement sur l'oscilloscope ; (4) l'analyse spectrale avec un spectromètre à barrette CCD, pour comparer une LED et le laser et suivre le spectre en fonction de la température et du courant.
+
+<strong>Le compromis gain et bande passante.</strong> Une photodiode polarisée en inverse, en série avec une résistance de charge R, forme avec sa capacité parasite (environ 24 pF) un circuit RC qui filtre les signaux rapides. En passant de 1 kΩ à 100 kΩ, le signal mesuré est multiplié par environ 80 (de 12 mV à 968 mV) tandis que la bande passante chute d'un facteur 50 (de 4,4 MHz à 0,09 MHz) : on ne peut pas avoir les deux à la fois. C'est le volume et les aigus d'un amplificateur audio simple : plus de volume, moins de fidélité sur les aigus.
+
+Les trois figures ci-dessous présentent le résultat phare (le seuil laser et ses variations avec la température), la comparaison spectrale entre la LED et le laser, puis la dérive de la longueur d'onde avec la température, suivie de la conclusion.`,
+    desc_en:`Optoelectronics lab of the Semiconductors course at EIDD, with data processing in Python (orthogonal regressions and uncertainty propagation). Goal: experimentally characterise components that emit and receive light, at the heart of fibre-optic telecommunications and industrial sensors.
+
+<strong>Introduction.</strong> The lab follows the chain of an optical link: (1) the laser diode, with its power-current curve, its current-voltage characteristic and its sensitivity to temperature (measured with a thermistor); (2) the photodiode that receives the light; (3) the modulation of the laser with a square signal then a sawtooth, which makes the P = f(I) characteristic appear directly on the oscilloscope; (4) spectral analysis with a CCD-array spectrometer, to compare an LED and the laser and to follow the spectrum as a function of temperature and current.
+
+<strong>The gain and bandwidth trade-off.</strong> A reverse-biased photodiode in series with a load resistor R forms, with its parasitic capacitance (about 24 pF), an RC circuit that filters fast signals. Going from 1 kΩ to 100 kΩ, the measured signal is multiplied by about 80 (from 12 mV to 968 mV) while the bandwidth drops by a factor of 50 (from 4.4 MHz to 0.09 MHz): one cannot have both at the same time. It is the volume and the treble of a simple audio amplifier: more volume, less fidelity on the high notes.
+
+The three figures below present the key result (the laser threshold and its variation with temperature), the spectral comparison between the LED and the laser, then the drift of the wavelength with temperature, followed by the conclusion.`
+  },
+  {
+    id:'pmodtmp3', cat:'pro', special:false,
+    minia:'images/pmodtmp3_minia.jpg',
+    title:'Thermomètre numérique sur FPGA', type:'Introduction au VHDL',
+    date:'2025–2026', location:'EIDD, Paris',
+    tags:['VHDL','FPGA Basys3','Vivado','Bus I²C'],
+    title_en:'Digital Thermometer on FPGA', type_en:'Introduction to VHDL',
+    date_en:'2025–2026', location_en:'EIDD, Paris',
+    tags_en:['VHDL','Basys3 FPGA','Vivado','I²C bus'],
+    cover:'images/pmodtmp3-1.jpg',
+    images:[],
+    figs:[
+      {
+        src:'images/pmodtmp3-1.jpg',
+        title:"Figure 1 — La température s'affiche en temps réel : 23,2 °C au repos, 27,0 °C avec les doigts sur le capteur",
+        title_en:'Figure 1 — The temperature is displayed in real time: 23.2 °C at rest, 27.0 °C with fingers on the sensor',
+        text:`<strong>Ce que montre le graphique.</strong> La carte Basys3, avec le capteur PmodTMP3 branché sur son connecteur JA, affiche la température avec une décimale. À gauche, 23,2 °C : la température de la salle, relativement élevée à cause des ordinateurs voisins. À droite, les doigts posés sur le capteur : par transfert de chaleur, la température grimpe à 27,0 °C, ce qui confirme que le capteur et toute la chaîne de traitement fonctionnent. Le quatrième afficheur (à gauche) est éteint tant que la température est positive ; il affiche un « − » dans le cas contraire.
+
+<strong>Ce que le système fait.</strong> Le capteur TCN75A convertit la température en un entier signé sur 16 bits (pas de 0,0625 °C, soit 1/16 °C) et le transmet par I²C, un bus à deux fils (horloge SCL et données SDA), à une IP fournie qui gère le protocole. Mon code VHDL prend ensuite le relais : détection du signe (complément à 2) et valeur absolue, séparation de la partie entière (décalage de 4 bits) et de la fraction, conversion de la fraction en dixième décimal ((fraction × 10) / 16), puis découpage en chiffres dizaine, unité et dixième. Exemple de bout en bout : −12,3 °C est quantifié à −12,3125 °C, ce qui donne la valeur brute −197, codée 1111 1111 0011 1011 en complément à 2, puis affichée « −12,3 ».
+
+<strong>Les fonctions ajoutées.</strong> Un point décimal fixe sur l'afficheur des unités ; une LED qui s'allume quand le capteur ne répond plus (le maître I²C n'a reçu aucun accusé de réception, ce que j'ai testé en débranchant le capteur) ; et un bouton reset qui remet l'affichage à 00,0 °C. Ce bouton m'a servi lors des tests : en rebranchant le capteur, la décimale était parfois instable, et le reset la rétablissait.`,
+        text_en:`<strong>What the plot shows.</strong> The Basys3 board, with the PmodTMP3 sensor plugged into its JA connector, displays the temperature with one decimal. On the left, 23.2 °C: the room temperature, relatively high because of the neighbouring computers. On the right, with fingers on the sensor: through heat transfer, the temperature climbs to 27.0 °C, which confirms that the sensor and the whole processing chain work. The fourth display (on the left) stays off while the temperature is positive; it shows a "−" otherwise.
+
+<strong>What the system does.</strong> The TCN75A sensor converts the temperature into a signed 16-bit integer (steps of 0.0625 °C, i.e. 1/16 °C) and sends it over I²C, a two-wire bus (SCL clock and SDA data), to a provided IP that handles the protocol. My VHDL code then takes over: sign detection (two's complement) and absolute value, separation of the integer part (4-bit shift) and the fraction, conversion of the fraction into a decimal tenth ((fraction × 10) / 16), then splitting into tens, units and tenths digits. An end-to-end example: −12.3 °C is quantised to −12.3125 °C, giving the raw value −197, coded 1111 1111 0011 1011 in two's complement, then displayed as "−12.3".
+
+<strong>The added functions.</strong> A fixed decimal point on the units display; an LED that lights up when the sensor stops answering (the I²C master received no acknowledgement, which I tested by unplugging the sensor); and a reset button that sets the display back to 00.0 °C. This button was useful during testing: when plugging the sensor back in, the decimal was sometimes unstable, and the reset restored it.`
+      },
+      {
+        src:'images/pmodtmp3-2.jpg',
+        title:"Figure 2 — Schéma fonctionnel du système complet, du bus I²C aux segments",
+        title_en:'Figure 2 — Functional diagram of the complete system, from the I²C bus to the segments',
+        text:`<strong>Ce que montre le schéma.</strong> Deux chaînes qui travaillent en parallèle. À gauche, le traitement de la température : contrôleur I²C (IP fournie), détection du signe, séparation entier et fraction, conversion en chiffres. À droite, l'affichage : diviseur d'horloge (100 MHz), compteur à 2 bits, décodeur d'anodes et multiplexeur 4 vers 1 qui choisit le chiffre à montrer, puis décodeur 7 segments. Le signal d'erreur I²C alimente la LED d'erreur.
+
+<strong>À quoi il sert.</strong> Établi avant d'écrire la moindre ligne de VHDL, il fixe les blocs et les signaux échangés, et sert de plan au code : le module de plus haut niveau instancie simplement deux composants, le capteur et l'afficheur. Chaque bloc a ensuite été validé par un testbench avant l'assemblage. Un esclave I²C simulé redonne bien les 23,0 °C injectés, en résolution 9 bits (46 × 0,5 °C) comme en 12 bits (368 × 0,0625 °C), sans aucune erreur d'acquittement ; l'afficheur est testé sur des valeurs positives et négatives (par exemple −3,25 °C, affiché −03,2 : la décimale est tronquée à un chiffre).`,
+        text_en:`<strong>What the diagram shows.</strong> Two chains working in parallel. On the left, the temperature processing: I²C controller (provided IP), sign detection, integer and fraction separation, conversion into digits. On the right, the display: clock divider (100 MHz), 2-bit counter, anode decoder and 4-to-1 multiplexer that selects the digit to show, then a 7-segment decoder. The I²C error signal feeds the error LED.
+
+<strong>What it is for.</strong> Drawn before writing a single line of VHDL, it fixes the blocks and the signals exchanged, and serves as the plan for the code: the top-level module simply instantiates two components, the sensor and the display. Each block was then validated by a testbench before assembly. A simulated I²C slave returns the injected 23.0 °C correctly, in 9-bit resolution (46 × 0.5 °C) as in 12-bit (368 × 0.0625 °C), with no acknowledgement error; the display is tested on positive and negative values (for example −3.25 °C, displayed −03.2: the decimal is truncated to one digit).`
+      },
+      {
+        src:'images/pmodtmp3-3.jpg',
+        title:"Figure 3 — Un seul chiffre à la fois : le multiplexage rendu visible",
+        title_en:'Figure 3 — One digit at a time: multiplexing made visible',
+        text:`<strong>Ce que montre la photo.</strong> Prise dans la pénombre, donc avec un long temps d'exposition, elle ne capte qu'un seul chiffre allumé alors que l'œil en voit quatre. Les quatre afficheurs de la carte partagent les mêmes lignes de segments : il est impossible de les allumer ensemble avec des valeurs différentes. Le circuit les allume donc l'un après l'autre (les anodes sont actives à 0), chacun pendant environ 2,5 ms, soit bien au-delà du seuil de scintillement d'environ 45 Hz indiqué par le manuel.
+
+<strong>Ce que l'on en tire.</strong> C'est un projecteur de théâtre qui éclaire les acteurs à tour de rôle : assez vite, et le public voit une scène continue. Ici, c'est la persistance rétinienne qui donne l'illusion d'un affichage stable. La photo à long temps d'exposition montre l'envers du décor : à un instant donné, un seul digit est actif.
+
+<strong>Conclusion du projet.</strong> Ce projet m'a fait parcourir toute la méthode de conception numérique : cahier des charges, schéma fonctionnel, code VHDL, simulation par testbench, fichier de contraintes, bitstream et test sur carte. Les difficultés (prise en main du VHDL, protocole I²C, hexadécimal, logique active à l'état bas) étaient presque toutes décrites dans le manuel, ce qui m'a rappelé l'importance de le lire attentivement.`,
+        text_en:`<strong>What the photo shows.</strong> Taken in dim light, hence with a long exposure time, it captures only one lit digit whereas the eye sees four. The four displays of the board share the same segment lines: it is impossible to light them all at once with different values. The circuit therefore lights them one after the other (the anodes are active low), each for about 2.5 ms, well above the flicker threshold of about 45 Hz given in the manual.
+
+<strong>What we get from it.</strong> It is a theatre spotlight lighting the actors in turn: fast enough, and the audience sees a continuous scene. Here, persistence of vision gives the illusion of a stable display. The long-exposure photo shows the backstage: at any given instant, only one digit is active.
+
+<strong>Conclusion of the project.</strong> This project took me through the whole digital design method: specifications, functional diagram, VHDL code, testbench simulation, constraints file, bitstream and test on the board. The difficulties (getting started with VHDL, the I²C protocol, hexadecimal, active-low logic) were almost all described in the manual, which reminded me how important it is to read it carefully.`
+      }
+    ],
+    carousel:false,
+    desc:`Projet d'Introduction au VHDL à l'EIDD, réalisé sous Vivado sur une carte FPGA Basys3. Objectif : lire un capteur de température (PmodTMP3) et afficher la valeur en temps réel sur les afficheurs 7 segments de la carte. Il fait suite à un TP de conception de circuits combinatoires (un multiplexeur 2 vers 1 sur 5 bits) qui m'a fait parcourir toute la chaîne de conception numérique, jusqu'au test sur carte.
+
+<strong>Introduction.</strong> Le capteur TCN75A contient un convertisseur analogique-numérique et stocke la température (de −55 à +125 °C, au 1/16 °C près) dans un registre de 16 bits. La carte, maître du bus I²C, vient la lire grâce à une IP fournie. Mon travail porte sur tout ce qui suit : décoder cette valeur signée, la mettre en forme (signe, dizaines, unités, dixième) et la présenter sur quatre afficheurs, auxquels j'ai ajouté un point décimal, une LED d'erreur I²C et un bouton reset.
+
+<strong>Le multiplexage.</strong> Les quatre chiffres partagent les mêmes fils de segments. Le FPGA les allume donc à tour de rôle, assez vite pour que l'œil perçoive un affichage continu : un projecteur de théâtre qui éclaire quatre acteurs successivement. Cela suppose un diviseur d'horloge (100 MHz), un compteur à 2 bits, un multiplexeur 16 vers 4 et un décodeur 7 segments, le tout piloté par un reset qui garantit un démarrage dans un état connu.
+
+Les figures ci-dessous présentent le résultat final sur la carte, le schéma fonctionnel du système, puis une photo qui rend visible le multiplexage, suivie de la conclusion.`,
+    desc_en:`Introduction to VHDL project at EIDD, carried out in Vivado on a Basys3 FPGA board. Goal: read a temperature sensor (PmodTMP3) and display the value in real time on the board's 7-segment displays. It follows a lab on combinational circuit design (a 2-to-1 multiplexer on 5 bits) that took me through the whole digital design flow, up to testing on the board.
+
+<strong>Introduction.</strong> The TCN75A sensor contains an analogue-to-digital converter and stores the temperature (from −55 to +125 °C, to the nearest 1/16 °C) in a 16-bit register. The board, acting as I²C bus master, reads it through a provided IP. My work covers everything that follows: decoding this signed value, formatting it (sign, tens, units, tenth) and showing it on four displays, to which I added a decimal point, an I²C error LED and a reset button.
+
+<strong>Multiplexing.</strong> The four digits share the same segment wires. The FPGA therefore lights them in turn, fast enough for the eye to perceive a continuous display: a theatre spotlight lighting four actors one after the other. This requires a clock divider (100 MHz), a 2-bit counter, a 16-to-4 multiplexer and a 7-segment decoder, all driven by a reset that guarantees a start in a known state.
+
+The figures below present the final result on the board, the functional diagram of the system, then a photo that makes the multiplexing visible, followed by the conclusion.`
+  },
+  {
     id:'architecture-systeme', cat:'pro', special:false,
     minia:'images/architecture-systeme_minia.jpg',
     title:'Projet Architecture Système', type:'UE Ingénierie Système',
@@ -1775,7 +1923,7 @@ These creations reflect continuous progress: mastery of polygonal modelling, mat
   }
 ];
 
-const total=ITEMS.length; // 13
+const total=ITEMS.length; // 18
 /* Numérotation automatique selon l'ordre du tableau + compteur de projets */
 ITEMS.forEach((it,i)=>{ it.num=String(i+1).padStart(2,'0'); });
 document.getElementById('statProjects').textContent=total;
